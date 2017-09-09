@@ -1,6 +1,2 @@
 # INTM3D
-<<<<<<< HEAD
-=======
-# INTM3D
-# INTM3D
->>>>>>> fe0def17b5394cbcd0b1df8e977e7c6b53c5980b
+Class notes for the 3D Modelling & Animation INTM-2016-001 course in OCAD University 2017/2018

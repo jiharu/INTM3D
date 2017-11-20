@@ -20,237 +20,193 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Global Illumination 
-## Goals
-- Understanding concepts, differences, and uses of Global Illumination (GI), Final Gather (FG), and Caustics, and their application, often for a more photorealistic scene.
+# Rendering for composition
 
-________________________
+Rendering is the final step of the 3D animation pipeline and its quality is crucial to the strong completion of your project. 
 
-## Indirect (Global) illumination
+## Ambient Occlusion 
 
-In reality, when a ray of light hits an opaque surface, it is **either absorbed or reflected (or a little of both) by the surface**. If the light ray is reflected, it reenters the environment and continues to bounce off reflected surfaces until it is absorbed by another surface. Bounced light rays are **indirect illumination**.
+**Ambient occlusion** refers to the attenuation of indirect or diffuse light on an object. It refers to the darker areas of the object such as in creases, cracks, and crevices. Ambient occlusion is caused by indirect light's inability to bounce around and illuminate areas that are blocked by nearby features, that instead absorb the light rays. **These subtle variations in lighting are visual clues for our eyes to detect surface details and distinctions** that would otherwise be washed out and unnoticeable. Ambient occlusion adds realism to your scene by adding shadows in crevices, nooks and crannies, and so on. For each surface point, it calculates how much light is blocked by other geometry.
 
-Perhaps **80 percent of the illumination** in an environment is contributed by indirect (global) illumination, and simulating its effect is critical to creating realistic rendering.
+In the example below, the ice blocks stand out because of the shadowing between them. The cracks between the ice bricks appear darker because the light is blocked by the ice bricks' local geometry. 
 
-![glw02](img/maya/rendering/gl/gi_methods_00.jpg)   
-Image from [aversis.be/tutorials/vray/](http://www.aversis.be/tutorials/vray/vray-20-gi-methods.htm)
+![ao01](img/maya/rendering/comp_igloo_amb_occl_resized.png)
 
-### Ambient occlusion
-As light rays bounce around in an environment, fewer light rays reach the parts that are hidden in corners, cracks, and crevices. The lack of light in these areas creates a type of shadowing known as **ambient occlusion**. 
+![amb](img/maya/rendering/Show_how_3D_real_time_ambient_occlusion_works.jpeg)  
+Applying normal map, © CC BY-SA 3.0
 
-### Color bleeding
-Color bleeding is a global illumination effect where reflected light projects some of the object’s diffusely (as opposed to specularly or glossily) reflected color onto a nearby surface.   
+When ambient light is used, objects in your scene may appear to be too bright and geometric detail may become lost. Ambient occlusion solves this problem by subtracting ambient light and thus adding shadowing.
 
-For example, a bright red apple on a pure white table cloth ‘spills’ red onto the table cloth.
+![ao02](img/maya/rendering/comp_occlusion_2.png)![ao03](img/maya/rendering/comp_beautyHead_2.png)![ao03](img/maya/rendering/comp_beauty_occlusion_2.png)
+![ao01](img/maya/rendering/comp_occlusion_rays_2.png)
 
-[Maya help: color bleed](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-A9C09CAF-2594-472B-A01A-B06458915C73)
+-----------------
 
-![gl06](img/maya/rendering/gl/colorbleed.png) 
+## Baking a texture
+### Batch rendering
+A batch file is a set of commands given to the computer to do, one after another. Using batch files, you can queue several rendering tasks at the same time, so that once one is finished, the next begins. Batch rendering often occurs as a different thread or process, as if it were a different program running in the background, so Maya allows you to keep working while the batch is rendering. 
 
-### Mental Ray 
+### Related tutorials
 
-To use Global Illumination in Maya, you must use the Mental Ray renderer.  **Mental Ray for Maya** offers all the features traditionally expected of **photorealistic rendering** and includes functionality not found in most rendering software. Mental Ray for Maya allows interactive and batch Mental Ray rendering from within the Maya user interface. 
+- [How to bake ambient occlusion.](https://www.youtube.com/watch?v=n65LBCncCG4)
+- [Ambient Occlusion render pass.](https://www.youtube.com/watch?v=hFOTDEjVDmE)
 
-### Comparison between direct (local) and indirect (global) illumination
+### Test image
+![ao_com01](img/maya/rendering/comp.png)  
+Image by Haru Ji.
 
-![glw01](img/maya/rendering/gl/Local_illumination.JPG)     
+______________________
+## Creating textures with the Transfer Maps tool
+Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
 
-- Rendering with local illumination (with Raytracing). Areas that lie outside of the ceiling lamp's direct light lack definition. For example, the lamp's housing appears completely uniform. Without the ambient light added into the render, it would appear uniformly black.    
+The Transfer Maps tool can create normal maps and displacement maps by **comparing surfaces**. In addition, the tool can bake lighting and texturing information.
 
-![glw00](img/maya/rendering/gl/Global_illumination.JPG)    
+### Normal map
+![trnsm02](img/maya/rendering/normal_ref.png) 
 
-- Rendering with global illumination. Light is reflected by surfaces, and colored light transfers from one surface to another. Notice how color from the red wall and green wall (not visible) reflects onto other surfaces in the scene. Also notable is the caustic projected onto the red wall from light passing through the glass sphere.       
+### Displacement map
+![trnsm02](img/maya/rendering/disp_ref.png) 
 
-The above examples are described in more detail here: [Global Illumination from wikipedia](http://en.wikipedia.org/wiki/Global_illumination)
+### Baking lighting and shading information
 
---------------------------------------
+You can "bake" lighting, texturing, and shadow information with the Transfer Maps tool. In this situation, a textured source creates a color bitmap for a target surface. The Transfer Maps tool provides several attributes to choose from for this operation: Diffuse Color Map, Lit And Shaded Color Map, and Alpha Map. 
 
-## Cornell Box
+![trnsm03](img/maya/rendering/shade_ref.png) 
 
-**The Cornell box** is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box)
+### Transfer Map window editor
 
-![cl01](img/maya/shading/cornell.png) 
+![trn](img/lab/transfer.png) 
 
-- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)
-- [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
-- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  
+![normal](img/lab/sampledNormals.jpg)  
+Baked normal map 
 
-### Different Cornell box render images:
-![goal](img/maya/shading/raytr.png)
+-------------------------------------------------
 
-## Glass & mirror ball
+## Creating textures for composition
 
-![escher](img/maya/shading/escher_ball.jpg)     
-Three spheres II, M.C.Escher, lithograph, 1946. 
+![ao05](img/lab/skin.png), ![ao02](img/lab/toad_bake.jpg)   
+Initial skin map for the color map & ambient / bump map   
 
-### Homage to Three spheres II
-
-- [link 1](http://www.butchgraphics.com/3d/3Spheres.html),    
-- [link 2](http://blenderartists.org/forum/showthread.php?216683-Modern-take-on-an-Escher-classic),  
-- [link 3](http://www.hdrlabs.com/cgi-bin/forum/YaBB.pl?num=1264525246). 
-
-_________________________________
-
-## Global illumination, caustics, and final gather in Maya
-
-Global illumination is often assumed to encompass all of global illumination, caustics and final gather. However, the definition of global illumination is different in Mental Ray for Maya. **In Mental Ray for Maya, global illumination, caustics and final gather are three separate techniques.** Global illumination simulates diffuse light bouncing multiple times over an area until it is completely absorbed.
-
-Global illumination, caustics, and final gather all contribute to indirect illumination. When global illumination or caustics are incorporated in your scene, the Mental Ray for Maya renderer uses **photons** to simulate light inter-reflection and caustic effects. When final gather is incorporated in your scene, however, Mental Ray for Maya does not use photons but instead **samples** the semi-hemispherical area above every point in the scene to calculate the direct and indirect illumination. Since photons are not used for final gather, final gather requires the least rendering time out of the three options.
+![ao03](img/lab/toad_color.jpg), ![ao04](img/lab/toad_specular.jpg)   
+Color map & specular map.
 
 
-### Final Gather 
+![ao_com02](img/lab/toad_com01.jpg) 
+Texturing on the high-res Toad geometry. All images by Haru Ji.
 
-Final Gather employs a specialized variation of raytracing in which each camera eye ray intersection creates sets of Final Gather rays. The Final Gather rays are sent out in a random direction within a hemisphere. The end result is a render that is able to include bounced light and **color bleed**.
 
-![gl05](img/maya/rendering/gl/fg01.png) 
+### Applying baked maps to a lower resolution surface.
 
-You can find more details from the [Autodesk Knowledge Network.](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-6A540E28-CBE6-405D-8627-0E2E8E2F2F61-htm.html)
+![ao_com03](img/lab/toad_com02.jpg) 
+Texturing on the low-res Toad geometry.
 
-### Using global illumination with final gather
+-------------------------------------------------
+## Final gathering rendering
 
-Use final gather to add fine details to your scene. When global illumination is used, photons usually miss cracks and crevices in objects and therefore these areas may appear artificially dark. Final gather adds details by adding light to the scene; brightening and softening it and making the final render more realistic.
-If details are washed out by global illumination because your scene is too bright, use ambient occlusion to add detail to your scene by subtracting light.
+#### Comparison of high and low res modelings (with final gathering).
+![high01](img/lab/low_high01.jpg) 
+![high02](img/lab/low_high02.jpg)   
 
-_____________________________
+You can test your scene:
 
->### Final Gather vs. Global Illumination
->This explanation is drawn from [blog.digitaltutors](http://blog.digitaltutors.com/indirect-illumination-final-gather-vs-global-illumination/)
->
-Global Illumination (GI) and Final Gather (FG) are the key algorithms to simulating realistic indirect illumination. Without these two techniques the lighting in CG environments looks unrealistic and extremely flat. 
->
-Despite the fact that both methods are there to achieve relatively the same goal, there are actually differences between the two and may be times when you would want to use one over the other. 
->
->#### The Benefits of GI
->
-Global illumination can work in different ways depending on your rendering engine. In Mental Ray it works by **the use of photons cast out into the scene**. 
->
-Global illumination gives you a lot of control over your scene and creates results very close to what you would see in the real world. It’s great to use when you have physical lights in your scene like a light bulb, torch, etc. It’s vital for architectural lighting because it produces very natural results and GI allows the light to inter-reflect between different surfaces.
->
->#### The Benefits of FG
->
-Final gather works a little differently than Global Illumination in that it uses **rays to sample the scene instead of photons**. It casts these rays out based on the camera view rather than from the light sources. You can think of it as the faked method for simulating indirect illumination. However, faked doesn’t always mean bad.
->
-**Final gather is extremely fast** to set up, and while it doesn’t give you the control of casting the rays from a particular light source, it makes up for it **with ease of use**. 
->
-If you’re using an **image-based light setup** for your scene then Final Gather is a must because without Final Gather the image-based light won’t be calculated in the scene.
->
-Another benefit to using FG is that you actually don’t even need a light source in your scene. **Final Gather will simulate indirect illumination based on the colors and materials in the scene**.
->
->#### The Downsides to GI
->
-The biggest downside to GI is **simply render time**. 
->
-GI also requires more **fine tuning and tweaking** to get the results you want. You may notice if you begin to emit photons from a light source in your scene it probably doesn’t produce the results you want, and the rendered scene will likely be dark and splotchy. These splotches are actually the photons that are cast out into the scene. To reduce the splotches you need to increase the amount of photons, which means increasing the render time as well.
->
-![glsp](img/maya/rendering/gl_splotch.png)  
-Dark and splotchy render image.
->
->### The Downsides to FG
->
-In Final Gather, by default, the rays only bounce once in the scene, whereas with GI the photons bounce multiple times giving you more realistic results. You can increase the number of bounces in the FG settings, but increasing this number means increasing the render time significantly.
+- Click **physical sun and sky** in the Scene tab in the Mental ray render setting.   
+- Check **emit environment light.** 
 
-### Caustics
-Global illumination simulates light reflected from diffuse surfaces. Caustics simulate light reflected from glossy and reflective surfaces as well as light that passes through refractive transparent materials. Caustics are calculated completely independently from global illumination; however, the workflow is very similar.
+![mia](img/lab/test.jpg)  
+Rendering regions to check out parameter values.
 
-![gl06](img/maya/rendering/gl/cst.png) 
+- Tweak parameters of attributes including ground color from **mia_physicalsky1** node.  
 
-#### Using global illumination with caustics
-
-Global illumination is not used for the focusing of light (that is, reflection and refraction). It is generally used with diffuse materials or for simple transparency. If you need to add refractions, then incorporate caustics in your scene.
-
+All images by Haru Ji.
 
 _________________________
-### Maya help documents (Autodesk knowledge center)
+## Depth of Field
+Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
 
-- [Global illumination, caustics, and final gather in Maya](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-6FBC6DDF-D727-4A4C-ABD7-3A94E4D70461)
+Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
 
-- [Render with Global Illumination](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-143A087B-FB09-4554-B53F-2A5C476D4406)
+You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab. 
 
-- [Render with Final Gather](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-683F30E9-B158-4AEE-8D1D-87369D6F1186-htm.html)
+![dof00](img/maya/rendering/dof.png)    
+[View the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)   
 
-- [Final Gather](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-6A540E28-CBE6-405D-8627-0E2E8E2F2F61-htm.html)
+![dof01](img/maya/rendering/dof01.png)  
 
-- [Photon tracing, Conditions for photon storage](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-2A05BF61-2A60-4CE8-8F54-43E362C06982)
+The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
+ 
+![dof02](img/maya/rendering/dof02.png)  
+The Distance tool used to determine the focus distance.
+   
+![dof03](img/maya/rendering/dof03.png)   
+An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
 
-- [Mental Ray 2016 Render Settings: Legacy Mental Ray tabs](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-67B3D408-76A5-43FA-BC4B-1E1F2243C1F6)
-__________________________
-<!--## Rendering
-Rendering is the final stage in the 3D computer graphics production process.
-Though the wider context of rendering begins with shading and texturing objects and lighting your scene, the rendering process ends when surfaces, materials, lights, and motion are processed into a final image or image sequence.
+______________________
+## Advanced topic: render layers and passes  
 
-As you build your scenes (shade and texture objects, light scenes, position cameras, and so on), you’ll want to visualize your scene many times before you produce the final rendered image or image sequence. This process may involve (depending on your particular project) creating and setting up additional cameras.
+There are many techniques to create better quality  rendering. In particular, you can save time and energy and control your rendering result in detail by splitting up renders based on objects or shading components. You can even separate shadows from the rest of the scene or temporarily assign objects to specialized materials through the Render Layer Editor.
 
-The key to rendering is finding a balance between the visual complexity required and the rendering speed that determines how many frames can be rendered in a given period of time.-->
+When a shot is animated in a 3D program for a professional production, it is rarely rendered out as is. Instead, the shot is divided into layers and/or render passes. In Maya, the Render Layer Editor allows you to create and manage various render layers and render passes.
 
+### Render layer editor
+Render layers can be used to separate the elements of a single scene into different versions or into different layers of a composite. Each layer can have its own shaders, lights, and settings. Using overrides, you can change the way each layer renders.
 
-______________________________
-# Applying global illumination in Maya
-## Creating photons
+You can create and manage render layers using the Layer Editor in Render mode (called the Render Layer Editor). With render layers, you can assign any object to multiple layers with a different material on each layer. This lets you create multiple images for each frame, from any combination of Maya's four renderers, third party plug-in renderers, and post-processes such as Fur and Paint Effects.     
 
-To use Global Illumination or Caustics, you must employ **virtual [photons](http://en.wikipedia.org/wiki/Photon)**. In Maya, **spot, point, area,** and **directional** lights generate photons when the **light's *Emit Photons* attribute** is selected.
+**A system of per layer and per object overrides** means that objects can have different shading and rendering attributes on different layers.    
+With **render layers**, you can assign any object to multiple layers with a different material on each layer. This lets you create multiple images for each frame, from any combination of Maya's four renderers, third party plug-in renderers, and post- processes such as Fur and Paint Effects. Rendered images can be efficiently organized for output to a compositor. Render layers can be also be rendered to Adobe® Photoshop® (PSD) format, which supports multiple image layers.     
 
-When a scene is rendered, photons are traced from each photon-emitting light to surfaces in the scene. If a photon “hits” a surface, that photon is absorbed, reflected, and/or transmitted (refracted) based on the qualities of the material assigned to the surface. If a photon is reflected or transmitted, it survives with only a portion of its original energy. 
+![rp01](img/maya/rendering/comp_car_luminance.png), ![rp02](img/maya/rendering/comp_car_shadow.png)
+![rp03](img/maya/rendering/comp_car_reflection.png), 
 
-> The amount of energy is determined by the attributes that establish the surface's **diffuse color, reflection coefficient**, and **various specular highlight qualities.**
+Final realistic render image:
 
-## In the light attribute editor
+![ex01](img/maya/rendering/GUID-59AF3E15-AFFB-4ABE-BDCC-EED3B16B0B2F-low.png)
 
-![gl02](img/maya/rendering/gl/lid.png) 
+Another powerful tool to use in conjunction with this is the ability to hide objects from the renderer. This lets you use very high-quality settings for only some parts of the image. 
 
-### Light's Global Illum Photons attribute
-You can lower or raise the default value of 10,000 to decrease or increase quality. 
+![layer01](img/maya/rendering/layer01.png)  
+(Upper left) Diffuse layer render. (Upper right) Shadow layer render. (Middle left) Specular layer render. (Middle right) Blended layers result. (Bottom) Render Layer Editor. Diffuse layer Blending Mode is set to Normal. Shadow layer Blending mode is set to Multiply. Specular layer Blending Mode is set to Screen. 
 
-### Light's Caustic And Global Illumination subsection  
-- **Photon Color** represents the red, green, and blue components of a photon's energy. 
-The RGB values of its color swatch are multiplied by the Photon Intensity attribute to produce Energy R, Energy G, and Energy B attributes.
+### Z-depth map
+  
+![layer02](img/maya/rendering/layer02.png)   
+(Clockwise, from upper left) Master render layer, Luminance Depth preset, Geometry Matte preset, and Shadow preset.
+Images from Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
 
-- **Photon Intensity** is a scaling factor used to determine the intensity of photons produced by a light. A value of 0 will turn off photon tracing for the light.
+Using Z-depth maps, you can recomposite the image back together. You can use it to fake the depth of field by blurring some parts of the image and not others; render bubbles drifting in a scene; or render an object with motion blur moving behind glass – the transparency makes motion blur effects take a long time, but if you render the glass on a different layer that problem is solved. Many special effects such as particles are also more efficient to render separately. Computer-generated effects are incorporated into live footage using layers.
 
-- **Exponent** simulates light falloff over distance. The default value of 2 replicates natural, quadratic decay. A value of 1 effectively prevents falloff from occurring. Values higher than 2 create a more rapid falloff by artificially decreasing photon energy with distance.
-## In the Render setting window
+![ren](img/maya/rendering/renpss.png)  
+It shows overlapping of two render layers.
 
-### Max Trace Depth
-If a photon survives a hit and is reflected or transmitted, it continues through the scene until it hits another surface. Once again, the photon is absorbed, reflected, or transmitted. This process continues until the surviving photons are stopped by the **Max Trace Depth attribute**, which defines the number of hits permitted per photon. (Max Trace Depth is located in the **Render Settings window // Mental Ray / Quality /Trace Depth**)
+### Render passes
+Render passes allow you to separate material properties into different images. These passes are derived from calculations stored in the frame buffer. Each pass can be used in compositing software to rebuild the rendered scene efficiently. Render pass contribution maps define which objects and lights are included in a render pass.
 
-![gl01](img/maya/rendering/gl/rtd.png) 
+### Related references
+- [Render layer overview](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-BADD9FC7-C463-4D8B-AC69-36BDEF6EBCCE)  
+- [Render layers example: automotive preview](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-6F235D42-CE2F-4E13-9592-A86C4FA5A0D2) 
+- [Working with render layers: different layer examples](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-6AB13266-3C59-4CA2-BAF2-DA60F912A340)  
+- [Using render layers with your re-combination](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-D883390E-8293-439E-9DC4-A0DF4A28977F)   
+- [Render Passes in Maya 2016](http://www.cgmeetup.net/home/render-passes-in-maya-2016/)
+- [Introduction to multi-render passes: a simple workflow example](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-8F8347C8-7BCE-488E-A9C9-8FBBAB4CE050)  
+- [Appendix B: Work with render passes](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-FA411DD5-E54D-45EB-ADAD-BD638342FC6C)  
+- [Maya tutorial: Setting up render passes | lynda.com](https://www.youtube.com/watch?v=LdUpTK94G4M)  
 
-- **Reflection** defines the maximum number of times a photon will reflect in a scene. This attribute is overridden by the Max Trace Depth attribute. The first surface encountered is not included in the count. 	
-
-### Photon map
-The photons that are absorbed by a surface (and are thereby culled in a process known as *Russian Roulette*), have their position, incident direction, and energy stored in a special photon map.
-
-To save a photon map, type a name for the map in the **Photon Map File** field (found in the Photon Map section on the Indirect Lighting tab of the Render Settings window) and create a render (do not add a file extension to the name). When you want to reuse the same map, deselect Rebuild Photon Map. The map is stored in the renderData\mentalray\photonMap directory with the .pmap extension. When you want to overwrite the map, simply select Rebuild Photon Map. Reusing a photon map can speed up rendering.
-
-The map Visualizer allows you to see how the photons are cast in the scene.
-
-![gl01_01](img/maya/rendering/gl/phm.png)   
-The above image shows Maya 2014. In Maya 2016, you can find the same attribute at the **Quality/Legacy Options/Photon Map.**   
-(If the **Legacy Options** attribute tab is not visible, check the **'show advanced settings'** options box at the top of Quality tab to show it.) 
-
-### The Global Illumination attributes in the Render Settings window. 
-
-![gl_w01](img/maya/rendering/gl/renderset.png)   
-Maya 2016. 
-
-- **Radius** controls the maximum distance from a surface point that the renderer will seek out photon hits to determine the color of the point in question. If photons hits are within the search region, their energies are averaged. The search regions render as colored discs when the Radius is inappropriately small for a scene or there are an insufficient number of photons present. The default value of 0 allows Maya to automatically pick a Radius based on the scene size.
-
-- **Accuracy** sets the maximum number of neighboring photon hits included in the color estimate of a single rendered point. The search for neighboring photon hits is limited to the region established by the Radius attribute. In general, the higher the Accuracy value, the smoother the result. However, Accuracy affects only photon hits that are in close proximity. That is, if the photon count is low or the Radius value is small so that the photon hits are not discovered in the search region, the Accuracy attribute will have no effect on the render.
-
-- **Scale** serves as a multiplier for the Photon Intensity attribute of all lights in the scene. If the slider is set to 50 percent gray, all the photons in the scene will be at half intensity.
-
-- **Merge Distance** specifies a distance in world space within which overlapping photons are merged. The option is used to reduce the size of photon maps and decrease render times. You should raise this setting by very small increments, as it can also introduce blotchiness in the render. 
-	
 __________
 ## Reference
 
 [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)    
 
-- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)  
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf) 
 
-_______________
+## Inspiration
+- 3D animated short films for your inspiration: 
+	- [link 1](http://webneel.com/25-best-and-award-winning-3d-animated-short-films-your-inspiration)  
+	- [link 2](https://www.shortoftheweek.com/channels/3d-animation/) 
+ 
+_____________
 
-# Review
-## Assignment
+## Review
+### Assignment
 - [Lab 1](http://2016datt2500.tumblr.com)
 - [Lab 2](http://2016datt2500lab2.tumblr.com/)     
 - [Lab 3](http://2016datt2500lab3.tumblr.com/)  
@@ -260,127 +216,129 @@ _______________
 
 # Lab
 ## To do list
-- Lab practice A: Glass and mirror balls in the Cornell box 
-- Lab practice B: Global Illumination
-- Lab practice C: Global Illumination and Final Gathering    
+- Lab practice A: Using Batch Bake to bake an ambient occlusion texture  
+- Lab practice B: Creating a normal map and an ambient occlusion map using the Transfer maps editor from high to low res models  
+	- Lab practice B_a: Creating texture with your the occlusion map using Photoshop	
+- Lab practice C: Final gather
 
 -----------------------
-## Practice A: Glass and mirror balls in the Cornell box 
+## Ambient Occlusion shading
+There are several ways to apply ambient occlusion.  
 
-![cr01](img/maya/shading/goal.png)
+You can download the toad object files from here: [toad high resolution](obj/toad.obj), [toad low resolution](obj/toad_low.obj)
+
+## Lab practice A: Using Batch Bake to bake an ambient occlusion texture 
+Let's create ambient occlusion map by using Batch Bake (mental ray).  
+Where: Rendering // Lighting/Shading / Batch Bake (Mental ray)  
+
+![bake01](img/maya/rendering/bake01.png)
+
+![ao01](img/lab/toad_ao.jpg)    
+Ambient occlusion surface shading. 
  
-  
-### Glass material
+## Lab practice B: Creating a normal map and an ambient occlusion map using the Transfer maps editor from high to low res models  
+Please check out: Maya help [Create texture maps with the Transfer Maps editor](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-B011A4BC-1B7A-4EC3-9B73-BCF744886C84)   
 
-![glass01](img/maya/shading/teapotGlass.png)
+Where to create your normal map:   
+Command: Rendering // Lighting/Shading / Transfer Maps... 
 
-### Creating a Cornell box
-1. Make a box for a room and a camera
-2. Apply materials to the faces of the box respectively (especially at the side walls, apply strong contrasted color such as red/blue, red/green, orange/green or such.  
-3. Create basic objects (including two spheres)
+![bake02](img/maya/rendering/bake02.png)
 
-### Download
-- [Cornell box mb file](gl_cornell01.mb)
+## Lab practice B_a: Creating texture with your the occlusion map using Photoshop
+- Once the bake is completed open the project file that you specified earlier.     
+- In that folder, select RenderData > MentalRay > lightmap > select your baked texture file and open this with Photoshop.      
+- Drag the Occlusion bake on top of your model's texture layer(s) and select Multiply as the layer blending mode. You may also want to apply a slight Gaussian blur to your occlusion layer, especially if it being used on an organic surface. For hard sharp edged surfaces like this one no blur was applied.
 
-### Glass & mirror materials
+## Lab practice C: Final gather
+1. Turn off Maya default lights from the Render Setting/Common/Render Option. If you have any light sources in the scene, turn off their *Illuminates by Default* attribute. 
 
-1. **Research references** such as photographs of physical glass.	
-	[Example of a glass material reference](http://www.thisiscolossal.com/2012/08/a-glass-sphere-solar-energy-generator-capable-of-converting-sun-and-moonlight-into-usable-power/)
-	
-2. In the **Hypershade editor**:     
-assign **Blinn** shader. Then open & change its attributes as follows:
-	- Color: black
-	- Transparency: Value 0.9
-	- Specular: Eccentricity 0.05, Specular Roll off 1.5, Color white, Reflectivity 0.2
-	- Raytracing: check Refractions, Refractive Index 1.33, Refraction Limit more than 2
-	
-	![glass02](img/maya/shading/glass.png)
+2. You can turn on Final Gather from the **Render Settings/Mental ray/Quality tab**. You can either choose **Advanced Light Sampling / Indirect Diffuse (Gl) Mode** or **Legacy Options/Final Gathering.** 
 
-* **Refractive Index:** in optics, the refractive index or index of refraction of a substance (optical medium) is a dimensionless number that describes how light, or any other radiation, propagates through that medium. For example, the refractive index of water is 1.33, meaning that light travels 1.33 times slower in water than it does in vacuum. [Wikipedia](http://en.wikipedia.org/wiki/Refractive_index)
+>Change any of the following optional settings, which can have an effect:
+>
+- The camera background color: You can change background color or attach a environment texture to the image plane. You can also turn on the **Physical Sun and Sky** to simulate sun and shadow without adding any light in the scene. (from **Render Settings/Mental ray/Scene/Cameras/Environment)
+- The object material’s colored Incandescence or Ambient color attributes.
+- Irradiance contributions from shaders.
+- Irradiance color mapping contributions from shaders.
+- The number and location of lights in the scene.
 
-3. Render Settings: turn on the Raytracing attribute
+![fg01](img/maya/rendering/gl/fg.jpg)
+![fg02](img/maya/rendering/gl/phy.jpg)
 
-### Review: Camera Settings / Camera Attribute Editor / Render setting
-Make a close-up camera
+Render image with no actual light but with turning on the 'Physical Sun and Sky' attribute from the Mental Ray render setting. 
 
-![cr](img/maya/shading/camera_render.png)
+![ibl01](img/maya/rendering/gl/ibl.jpg)
+![ibl02](img/maya/rendering/gl/ibl_close.jpg)
 
-Lighting & Soft Shadow
+Render image using IBL. Image-based lighting (IBL) uses an image to create lighting in a scene. High dynamic range images (HDRIs) are usually the most effective sources for IBL. 
 
-![shadow](img/maya/shading/softshadow.png)	
+### Related tutorial
 
----------------------------------------------------------------
+- [MR Basic Final Gather using Image Based Lighting](http://wiki.bk.tudelft.nl/toi-pedia/MR_Basic_Final_Gather_using_Image_Based_Lighting_(IBL)
+- [IBL Tutorial Maya - IMAGE BASED LIGHTING EASY SETUP](https://www.youtube.com/watch?v=AyWEKvIUImU&feature=youtu.be) 
+- [Maya tutorial: Setting up image-based lighting | lynda.com](https://www.youtube.com/watch?v=YXor6gDoVvc)  
 
-## Practice B: Global Illumination
+### High dynamic image 
+ 
+- [A light probe image by Paul Debevec and Dan Lemmon](http://ict.debevec.org/~debevec/Probes/)   
+You can find hdr files here to download.
 
-![gl00](img/maya/rendering/gl/gl.png)
+------------------------------------------------------------------------
 
-1. Make sure at least one light source in your scene emits photons.
+## Optional - Lab practice: Using a surface shader to bake an ambient occlusion texture in the Hypergraph 
+Related tutorial: [Ambient Occlusion in Maya - by Alchemist101 (2011).](http://www.game-artist.net/forums/spotlight-articles/1317-tutorial-ambient-occlusion-maya-alchemist101.html) 
+### Setting up the shader network
+- First open the hypershade window and from the Maya nodes list MMB drag **a Surface Shader node** into the work area.   
 
-2. You can turn on Global Illumination from the **Render Settings/Mental ray/Quality tab. You can either choose **Advanced Light Sampling / Indirect Diffuse (Gl) Mode** or **Legacy Options/Global Illumination.** 
+![aop01](img/maya/rendering/sshd.png)
 
->If the default settings are not sufficient to achieve the look you want (or to reduce render speed), tweak the global illumination settings until you achieve the look you want. 
+- Change it to MentalRay nodes, then under the textures tab MMB drag an '**mib\_amb\_occlusion**' node onto the work area.
 
-- Please check **how to create photons** from the lecture notes.
+![aop02](img/maya/rendering/mib.png)
 
-___________________________
+- **Connect the 'OutValue' of the Occlusion node to the 'OutColor' of the surface shader**. This is the default connection between these 2 nodes so you can do this by simply holding down Ctrl and MMB dragging the occlusion node over the shader node. 
 
-## Practice C: Global Illumination, Final Gathering, and Caustics
+![aop03](img/maya/rendering/mib_link.png)
+       
+### Setting up your scene
+- In order to get good results from Ambient Occlusion the scene environment must be white. To do this open the Outliner window and select the Persp camera. In the attribute editor under the Environment tab slide the Background Color to 100% white.
+- If you use the occlusion render pass, you don't need to change the Background color. 
 
-After you load the Mental Ray plug-in (and select Mental Ray as the renderer), the Render menu lists available menu items for Mental Ray for Maya. As well, the Attribute Editor contains a Mental Ray section in which you can edit attributes that are used exclusively when rendering with Mental Ray for Maya.
+![aop11](img/maya/rendering/cam.png)
 
-### Prepare the scene in the correct project directory.
-- Let's use the Cornell box and its area light setup.
+- Now open the Render Globals window and **select MentalRay** as your renderer and Production as the quality preset. Now change the multipixel filter to "Lanczos". 
 
-### Render Settings window
-- Choose Mental Ray renderer.
-- In the **Global Illumination** section, select the Global Illumination check box. 
-- In the **Final Gathering** section, temporarily deselect Final Gathering: temporarily disabling Final Gathering will speed up the render as you adjust the various Global Illumination settings.
+![aop12](img/maya/rendering/lanz.png)
 
-### the Attribute Editor tab for the area light
-- In the **Caustic And Global Illumination** section, select **Emit Photons**. Render a test. Each dot represents a photon hit. 
+- Now close the render Globals window and assign the 'Surface Shader' you have setup to your model. It should turn the model completely black.
 
-- The dot indicates the area of influence the photon has when combining the photon's indirect illumination information with the direct illumination calculation. 
+### Tweaking
+- Frame your model and hit render. It can look grainy.
+- Now we need to tweak the settings a little. Open the attribute editor of the Ambient Occlusion node. 
+- The **'Spread'** setting affects how far the occlusion shadow spreads over the surface. 
+- The **'Samples'** setting will remove the grainy look but will drastically increase render times. 
 
-- The dots are colored, indicating that their energy has been influenced by a surface they have bounced off. For example, the red dots indicate a bounce off a nearby red wall. Hence, a major advantage of Global Illumination is the ability to produce **color bleed**. Although Final Gathering is also used to produce bleed, it is generally more subtle.
+![aop13](img/maya/rendering/ae.png)  
 
-- Adjust the **Radius** attribute, found in the Global Illumination section of the Render Settings window. By default, Radius is set to 0, which means that Maya automatically selects a Radius value based on the scene size. 
-
-- It's important to adjust **the total number of photons** in the scene at the same time. To do so, adjust the Global Illum Photons value in the Caustic And Global Illumination section of the light's Attribute Editor tab. When raising the Global Illum Photons value, do so incrementally. The more photons that are being traced, the longer the render will take.
-
-- Reactivate **Final Gathering** by selecting the Final Gathering check box. Final Gathering provides additional smoothing to the Global Illumination indirect illumination and helps hide unblended photon hits.
-
-![gl04](img/maya/rendering/gl/fg.png) 
-![gl05](img/maya/rendering/gl/gl.jpg) 
-
-- If you have a refractive object, try to make a Caustic effect.
 ________________________
-
 ## Lab work to do
 - Review & practice based on today's lecture & lab class material.  
-- Let's prepare project 2 & 3 
+- Let's work on project 2 & 3, if you have questions, you can bring them. 
 	- Project 2: the completion of project 1
 	- Project 3: free theme modeling & rendering. 
 	- [Project link](project.html)
-
-____________________________
-
+	
 ## Assignment
-- By **Monday Nov 28th** midnight, please complete your two assignments and upload the **rendering images** to the class Tumblr with simple descriptions: **"a11 by your name, date"**.	
-	- A Cornell box with raytracing describing a glass and a mirror surfaces.  
-	- A Cornell box with GL photons. FG is optional.
 
-## Attendance
-- Next week, we will check your attendances so, if you skip the class with a proper reason, don't forget to submit related documentation to Haru or Yifat such as a doctor's note. 
-
--------------------------------------
-
+- [Please fill in the final survey](https://goo.gl/forms/O52nkm5ty3YneYof1)
+- By **Monday Dec 5th** midnight, please complete one assignment and upload the **rendering image** to the class Tumblr with simple descriptions: **"a12 by your name, date"**.	
+	- Choose one geometry and create its low poly version and high poly version. Then create a Normal map and an Ambient occlusion map and attach them into the shader for the geometry you worked on. Then apply final gather rendering. Basically this is a sum of today's lab practices. If it is too difficult to create two versions of your polygon geometry, you can use toad geometries. 
+	
 ## Office hour
-Haru Ji's shared office location: 229 Goldfarb Centre for Fine Arts  
-Hours: Tue - 1:30 to 4:30
+- Haru Ji's shard office location: 229 Goldfarb Centre for Fine Arts or 020 3D printing room.   
+- Hours: Tue - 1:30 to 4:30 & Wed - 1:30 to 3:30
 
 __________________________________
-
 
 
 </div>

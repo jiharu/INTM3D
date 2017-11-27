@@ -81,13 +81,42 @@ do." Bill Tytla at the Walt Disney Studio, June 28, 1937. [14]
 The Animator’s Survival Kit by Richard Williams. The first lesson: concentration!
 
 - [www.theanimatorssurvivalkit.com](http://www.theanimatorssurvivalkit.com/biography.html)
-- [blog 1](https://yckcyouth.wordpress.com/2011/06/01/god-is-pure-concentrationanimation-is-second/)  
-- [blog 2](http://blog.ishback.com/?p=468)
+<!--- [blog 1](https://yckcyouth.wordpress.com/2011/06/01/god-is-pure-concentrationanimation-is-second/)  
+- [blog 2](http://blog.ishback.com/?p=468)-->
 
-## Animation in Maya
+# Animation in Maya
+
+## Maya interface related to Animation
+
+[Maya help: interface overview](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-F4FCE554-1FA5-447A-8835-63EB43D2690B)   
+
+#### Menu Sets
+Maya's first seven menus are always available, the remaining menus change depending on the Menu Set you choose.
+
+#### Time Slider
+The Time Slider shows you the time range as defined by the range slider, the current time, and the keys on selected objects or characters. You can also use it to "scrub" through animation.
+
+#### Range Slider
+The Range Slider lets you set the start and end time of the scene's animation and a playback range if you want to focus on a smaller portion of time.
+
+#### Playback
+The Playback Controls let you move around in time and preview your animation as defined by the Time Slider range.
+
+### Video tutorial 
+- [Maya 1-Minute Startup Movies](http://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-1-minute-videos-html.html)
+	- Discover secret menus  
+	- Keyframe animation
+	
+- [Exploring Maya 2016 video tutorial](https://www.youtube.com/watch?v=dbg3eCfOwXM)
+	- The basics of animation	
+	
+- [Exploring Maya's Animation Preferences](https://www.youtube.com/watch?v=888hRJRwVG8)	
+
+___________________________
+
 
 ## References
-- [Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)
+- [Maya 2018 online Help](http://help.autodesk.com/view/MAYAUL/2018/ENU//)
 - Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf): P.35~38 : Animation techniques  
 
 >When 3D artists animate, they paint with motion instead of color. As an object
@@ -141,6 +170,7 @@ mocapdata.com provides 933 premium and 4671 free motion datasets and is advertis
 
 Blend Shapes are essentially copies of your main character geometry with specific, focused changes to a small part of the geometry. e.g., facial expressions.
 
+### Maya tutorials
 - [Non-linear deformer](https://www.youtube.com/watch?v=tI2zSsKGmQM)
 - [Lattice Deformer](https://www.youtube.com/watch?v=jviQSB6quJY)  
 - [Creating and Animating Facial Blendshapes by Andrew Silke](https://www.youtube.com/watch?v=YpBsWuPvbFo)
@@ -154,7 +184,7 @@ An animatic is a film industry term referring to a rough animation designed to h
 
 - ['The Grand Budapest Hotel' Storyboard Animatics](https://www.youtube.com/watch?v=rxqp2msGOhQ)
 
-## Post in Tumblr
+## Info: post a movie file in Tumblr
 There are some restrictions to follow when uploading your animation. 
 
 1. size: 100 mb per day, and lesser than 500 * 700 pixels.  
@@ -164,34 +194,7 @@ There are some restrictions to follow when uploading your animation.
 
 You can check more from [how to post in Tumblr](https://www.tumblr.com/docs/en/posting).  
 
-
-## Maya Interface related to Animation
-
-[Maya help: interface overview](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-F4FCE554-1FA5-447A-8835-63EB43D2690B)   
-
-#### Menu Sets
-Maya's first seven menus are always available, the remaining menus change depending on the Menu Set you choose.
-
-#### Time Slider
-The Time Slider shows you the time range as defined by the range slider, the current time, and the keys on selected objects or characters. You can also use it to "scrub" through animation.
-
-#### Range Slider
-The Range Slider lets you set the start and end time of the scene's animation and a playback range if you want to focus on a smaller portion of time.
-
-#### Playback
-The Playback Controls let you move around in time and preview your animation as defined by the Time Slider range.
-
-### Video tutorial 
-- [Maya 1-Minute Startup Movies](http://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-1-minute-videos-html.html)
-	- Discover secret menus  
-	- Keyframe animation
-	
-- [Exploring Maya 2016 video tutorial](https://www.youtube.com/watch?v=dbg3eCfOwXM)
-	- The basics of animation	
-	
-- [Exploring Maya's Animation Preferences](https://www.youtube.com/watch?v=888hRJRwVG8)	
-
-___________________________
+_________________________________
 
 ## Creating a simple keyframe animation
 1. Let's make a simple object and the simplest keyframe animation.  
@@ -204,10 +207,64 @@ ___________________________
 	
 3. [Playblast an animation](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-1C6EDC8D-DA67-490E-81F1-1205336DEBD9); Playblasting performs a screen grab of the animation in the active view at each frame during playback, then “blasts” the resulting images to the specified image viewer. The images can be saved either as a movie file or as a sequence of images in various formats.
 	- Playback > Playblast in the Animation menu set.
+	
+_______________________	
+	
+## Graph editor: controlling splines 
+### How it works:
+- Display and navigate animation curves
+- Select keys and change times and values
+- Select keys and move or scale them
+- Controlling tangets
 
+### Navigation
+The standard Viewport navigation shortcut keys and transform tools can be used while working in the Graph Editor.
 
+- **Dolly** (Alt + RMB or scrolling)/ **Track** (Alt + MMB) – This can be used to Dolly and track around the Graph Editor to change the view of the scenes motion graphs.
 
-## Set Driven Animation
+- You can also use the standard Viewport shortcuts to frame selected keys (**F**) or frame all keys (**A**).
+
+- When you control keys and tangents, use select keys (**Q**) and move (**W**) or scale (**R**)  them.
+
+### Splines
+![grp01](img/maya/graph.png)
+
+### Acceleration (ease-in), Deceleration (ease-out)        
+![grp02](img/maya/acel.png), ![grp03](img/maya/deac.png)   
+
+### Spline techniques
+1. Keys at *the extremes*.  It makes things clear, easy to edit, and the values can't be changed without you knowing.  
+2. Use flat or linear tangents at extremes.
+3. Only use the number of keys you need and make sure the tangents are the way you want them. Too many keys makes changes very difficult. 
+
+____________________
+
+## Creating bouncing ball animation 
+- Select the project and save a scene.  
+
+### Step 1: Preparing the scene for the most efficient work environment. 
+- Create ***a ball animation hierarchy***: make a sphere and create two to three group nodes:
+	
+### Step 2: Timing
+
+- Decide how many bounces will occur - and do keyframing 
+	- keyframing of the transformation node.
+	- Use your notes to capture the timing.	
+
+### Step 3: Spacing
+
+- Using the Graph Editor to alter the graph, applying spacing
+
+![break](img/lab/break.png)   
+
+![tan](img/lab/tangent.png) 
+
+### Step 4
+- Squashing and stretching.
+	- keyframing of the scale node.
+_____________________________	
+
+## Creating set driven animation
 [Set Driven Key example](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-8B9D9C60-DF7D-45EC-A278-56DBE07935A5-htm.html) 
 
 1. Select the driven object, then select Key > Set Driven Key > Set.
@@ -232,6 +289,9 @@ Set driven example image.
 
 - When you prepare the target model, you need to work on the component mode not on the object mode to deform the shape to apply the blend shaping.
 
+- In Maya 2018, you can control the blend shaping in the Shape Editor.
+	- [Maya 2018 help: shape editor](http://help.autodesk.com/view/MAYAUL/2018/ENU//?guid=GUID-3C92402C-B24E-4874-AC8D-EADF976A19DC)  
+
 ------------------------------------------------
 
 ## Path animation
@@ -240,14 +300,14 @@ Animate > Motion Paths > Attach to Motion Path > [option](http://help.autodesk.c
 ### Lattice deformation
 ![path](img/maya/deformer/path.png)   
 
-- Prepare bevel applied text objects and curve for a path animation.  
+- Prepare an object (Create/Type) and a curve for a path animation.  
 - To create a flying text animation, select text objects and a curve and apply 'Constrain / Motion Paths / Attach to Motion Path'. Then you can apply 'Flow path object' to make your object flexibly follow the path.  
 
 ![path03](img/lab/motionpath01.png) 
 
 - Later, you can select the lattice and deform it.
 	
-
+<!--
 ### Camera or airplane animation
 When you add a camera or airplane to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
 
@@ -318,70 +378,17 @@ if (ball.translateX < 20){
 - [SineBounce](http://www.cs.uni.edu/~jacobson/maya/mel/SineBounce.html)  
 - [Related expression](http://www.utdallas.edu/atec/midori/Handouts/expressions.htm)
 
+
 ### Camera crane animation
 
 ![crane](img/maya/deformer/crane.png) 
-
-## Graph editor: controlling splines 
-### How it works:
-- Display and navigate animation curves
-- Select keys and change times and values
-- Select keys and move or scale them
-- Controlling tangets
-
-### Navigation
-The standard Viewport navigation shortcut keys and transform tools can be used while working in the Graph Editor.
-
-- **Dolly** (Alt + RMB or scrolling)/ **Track** (Alt + MMB) – This can be used to Dolly and track around the Graph Editor to change the view of the scenes motion graphs.
-
-- You can also use the standard Viewport shortcuts to frame selected keys (**F**) or frame all keys (**A**).
-
-- When you control keys and tangents, use select keys (**Q**) and move (**W**) or scale (**R**)  them.
-
-### Splines
-![grp01](img/maya/graph.png)
-
-### Acceleration (ease-in), Deceleration (ease-out)        
-![grp02](img/maya/acel.png), ![grp03](img/maya/deac.png)   
-
-### Spline techniques
-1. Keys at *the extremes*.  It makes things clear, easy to edit, and the values can't be changed without you knowing.  
-2. Use flat or linear tangents at extremes.
-3. Only use the number of keys you need and make sure the tangents are the way you want them. Too many keys makes changes very difficult. 
-
---------------------------
-
-## Creating bouncing ball animation 
-- Select the project and save a scene.  
-
-### Step 1: Preparing the scene for the most efficient work environment. 
-- Create ***a ball animation hierarchy***: make a sphere and create two to three group nodes:
-	
-### Step 2: Timing
-
-- Decide how many bounces will occur - and do keyframing 
-	- keyframing of the transformation node.
-	- Use your notes to capture the timing.	
-
-### Step 3: Spacing
-
-- Using the Graph Editor to alter the graph, applying spacing
-
-![break](img/lab/break.png)   
-
-![tan](img/lab/tangent.png) 
-
-### Step 4
-- Squashing and stretching.
-	- keyframing of the scale node.
-_____________________________
 
 ### Criteria of evaluation
 1. Showing convincing physics relationships.  
 2. Aesthetically pleasing actions. 
 3. Presenting action to viewers effectively.
 
---------
+______________
 ## Digital Cinematography: optional
 ### Hardware rendering options for Playblast
 
@@ -417,6 +424,39 @@ Or
 		camera1.translateZ = 0;  
 	}  
 ```
+-->
+_______________________
+## Announcement
+There will be no assignments from now. Please start early to work on your final project. 
+
+# Project 3 - free theme modeling & rendering.
+## Due date: Dec 11th midnight (11:59pm).
+
+- Please collect your final work and related files into one folder:
+
+	1. The name of folder: ```your school id_your name``` (e.g., 123456_your name)
+	
+	2. Include in the folder: 
+		1. Your final render image: at least one side should be 1k pixel size, saved as JPG or PNG. 
+		2. Your playblast animation - size: full HD (1024 * 768), length: 10~20 seconds, extension: mov or avi.  
+		3. Your Maya project folder including only the ***final*** Maya file (.mb or ma file) with related materials such as textures. (Don't submit with all of your Maya files. Once the project is done, delete unused files so that the file size of your final submission is not too large: recommended file size is less than 30 mb.)  
+		4. One page documentation PDF file, showing a - a description of your choice and focus, b - a process of making and problem solving, and c - your discoveries and achievement. 
+	4. Where to submit: Canvas assignment project 3 section.
+	
+	5. Consider the technical and aesthetic challenges plus the level of completion. 
+	
+----------------------
+## General guide for the final project
+
+- Cleaning the file: proper naming, and delete the history once it is ready.
+
+- Modeling details: Work on good proportion. Adding bevels to smooth edges. Apply smoothing if it is a curved surface. If it is NURBS surface, rebuild it by increasing number of spans, or if it is polygon, either do smooth or smooth proxy, or by manually adding more divisions or edges.
+
+- Cinematography: redefine your camera set-up (file gate) and match it to the render setting (resolution gate). Check that your lighting shows good balance and overall contrast, helps viewers to focus on the main objects, and reveals important details in your scene. Finally try to create good soft shadows.
+
+- Shading & rendering: define and reveal proper material characteristics and when you do render, properly apply ray tracing, direct or indirect illumination if it fits, and most of all don't forget to apply anti-aliasing. Try to use photoshop in order to utilize multiple render passes too.
+
+Overall, work on it until you are pleased with your final render result. 
 
 </div>
 <div id="wrapper">

@@ -20,13 +20,13 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Global Illumination 
+# Arnold: Physically Based Renderer
 ## Goals
-- Understanding concepts, differences, and uses of Global Illumination (GI), Final Gather (FG), and Caustics, and their application, often for a more photorealistic scene.
+- Understanding concepts of physically based approaches including Global Illumination (GI), and use of the Arnold renderer including its workflow, often for a more photorealistic scene.
 
 ________________________
 
-## Indirect (Global) illumination
+## Indirect (global) illumination
 
 In reality, when a ray of light hits an opaque surface, it is **either absorbed or reflected (or a little of both) by the surface**. If the light ray is reflected, it reenters the environment and continues to bounce off reflected surfaces until it is absorbed by another surface. Bounced light rays are **indirect illumination**.
 
@@ -39,7 +39,7 @@ Image from [aversis.be/tutorials/vray/](http://www.aversis.be/tutorials/vray/vra
 As light rays bounce around in an environment, fewer light rays reach the parts that are hidden in corners, cracks, and crevices. The lack of light in these areas creates a type of shadowing known as **ambient occlusion**. 
 
 ### Color bleeding
-Color bleeding is a global illumination effect where reflected light projects some of the object’s diffusely (as opposed to specularly or glossily) reflected color onto a nearby surface.   
+Color bleeding is a global illumination effect where reflected light projects some of the object’s primarily diffusely (as opposed to specularly or glossily) reflected color onto a nearby surface.   
 
 For example, a bright red apple on a pure white table cloth ‘spills’ red onto the table cloth.
 
@@ -47,15 +47,11 @@ For example, a bright red apple on a pure white table cloth ‘spills’ red ont
 
 ![gl06](img/maya/rendering/gl/colorbleed.png) 
 
-### Mental Ray 
-
-To use Global Illumination in Maya, you must use the Mental Ray renderer.  **Mental Ray for Maya** offers all the features traditionally expected of **photorealistic rendering** and includes functionality not found in most rendering software. Mental Ray for Maya allows interactive and batch Mental Ray rendering from within the Maya user interface. 
-
 ### Comparison between direct (local) and indirect (global) illumination
 
 ![glw01](img/maya/rendering/gl/Local_illumination.JPG)     
 
-- Rendering with local illumination (with Raytracing). Areas that lie outside of the ceiling lamp's direct light lack definition. For example, the lamp's housing appears completely uniform. Without the ambient light added into the render, it would appear uniformly black.    
+- Rendering with local illumination (with raytracing). Areas that lie outside of the ceiling lamp's direct light lack definition. For example, the lamp's housing appears completely uniform. Without the ambient light added into the render, it would appear uniformly black.    
 
 ![glw00](img/maya/rendering/gl/Global_illumination.JPG)    
 
@@ -63,33 +59,148 @@ To use Global Illumination in Maya, you must use the Mental Ray renderer.  **Men
 
 The above examples are described in more detail here: [Global Illumination from wikipedia](http://en.wikipedia.org/wiki/Global_illumination)
 
---------------------------------------
+## Physically Based Rendering
+
+Physically based techniques attempt to simulate reality by using principles of physics to model the interaction of light and matter. Rendered scenes are based on physically accurate lights, materials, and light transport (i.e., Global Illumination). 
+In physically based rendering, realism is usually the primary goal. There is less tweaking and fewer parameters to get the correct results. However the computational cost usually becomes a lot more expensive and we need to understand physical lighting phenomena.  
+
+## Physically Based Rendering in Arnold
+
+Arnold is **a physically based renderer**, but it also lets you break the rules and create materials and lights that do not obey the laws of physics if you wish.  
+
+Designing materials based on physical laws can tremendously simplify shading and lighting, even when we do not necessarily strive for realism or physical accuracy. **By understanding and applying a few principles** we can make images that are more believable, and create materials that behave more predictably in different lighting setups.
+
+### Arnold references
+- [Linda.com: Maya 2018 Essential Training](https://www.lynda.com/Maya-tutorials/Maya-2018-Essential-Training/604210-2.html?srchtrk=index%3a3%0alinktypeid%3a2%0aq%3aArnold+%2b+maya%0apage%3a1%0as%3arelevance%0asa%3atrue%0aproducttypeid%3a2)  
+
+	- 9: Create Materials  
+		- Work with Arnold materials
+		- Opacity and refraction in Arnold
+	- 12: Render in Arnold  
+
+- [Arnold for maya user guide 4](https://support.solidangle.com/display/AFMUG/Understanding+Physically+Based+Rendering+in+Arnold)  
+	- [Learning seans](https://support.solidangle.com/display/AFMUG/Learning+Scenes)  
+	- [Light](https://support.solidangle.com/display/AFMUG/Lights)  
+	- [Material library](https://support.solidangle.com/display/A5AFMUG/Material+Library)  
+	
+![arnold](https://support.solidangle.com/download/attachments/40111562/image2017-4-6%2017-24-1.png?version=2&modificationDate=1496129452000&api=v2)  	
+
+This material library is meant as a beginners guide for the type of material effects that are possible when using the Standard Surface shader. Bear in mind that the values used here are not based on any physical, real world values and are meant only as a starting point for beginners to explore. It is embedded as presets for AiStandardSurface material.  
+
+The **Arnold Standard Surface** shader is a physically-based shader capable of producing many types of materials. It includes a diffuse layer, a specular layer with complex Fresnel for metals, specular transmission for glass, subsurface scattering for skin, thin scattering for water and ice, a secondary specular coat, and light emission.
+
+![arnold](https://support.solidangle.com//download/attachments/25363362/escher-table2.jpg?api=v2)  
+
+### Three spheres
+
+![escher](img/maya/shading/escher_ball.jpg)     
+Three spheres II, M.C.Escher, lithograph, 1946. 
+
+- [link 1](http://www.butchgraphics.com/3d/3Spheres.html),    
+- [link 2](http://www.hdrlabs.com/cgi-bin/forum/YaBB.pl?num=1264525246). 
+
+__________________
 
 ## Cornell Box
 
 **The Cornell box** is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box)
 
 ![cl01](img/maya/shading/cornell.png) 
-
-- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)
+<!--
+- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)-->
 - [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
 - [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  
 
 ### Different Cornell box render images:
 ![goal](img/maya/shading/raytr.png)
 
-## Glass & mirror ball
-
-![escher](img/maya/shading/escher_ball.jpg)     
-Three spheres II, M.C.Escher, lithograph, 1946. 
-
-### Homage to Three spheres II
-
-- [link 1](http://www.butchgraphics.com/3d/3Spheres.html),    
-- [link 2](http://blenderartists.org/forum/showthread.php?216683-Modern-take-on-an-Escher-classic),  
-- [link 3](http://www.hdrlabs.com/cgi-bin/forum/YaBB.pl?num=1264525246). 
-
 _________________________________
+
+## IBL: Image Based Lighting
+
+[Wikipedia: IBL](https://en.wikipedia.org/wiki/Image-based_lighting)
+
+Image-based lighting (IBL) is a 3D rendering technique which involves capturing an omnidirectional representation of real-world light information as an image, typically using a specialized camera. This image is then projected onto a dome or sphere analogously to environment mapping, and this is used to simulate the lighting for the objects in the scene. This allows highly detailed real-world lighting to be used to light a scene, instead of trying to accurately model illumination using an existing rendering technique.
+
+Image-based lighting often uses high dynamic range imaging for greater realism, though this is not universal.
+
+### HDRI: High Dynamic Range Image
+
+[Wikipedia: HDRI](https://en.wikipedia.org/wiki/High-dynamic-range_imaging)
+
+High-dynamic-range imaging (HDRI) is a high dynamic range (HDR) technique used in imaging and photography to reproduce a greater dynamic range of luminosity that is possible with standard digital imaging or photographic techniques. The aim is to present a similar range of luminance to that experienced through the human visual system. 
+
+### Comparison with traditional digital images
+Information stored in high-dynamic-range images typically corresponds to the physical values of luminance or radiance that can be observed in the real world. This is different from traditional digital images, which represent colors as they should appear on a monitor or a paper print. Therefore, HDR image formats are often called scene-referred, in contrast to traditional digital images, which are device-referred or output-referred. 
+
+HDR images often don't use fixed ranges per color channel—other than traditional images—to represent many more colors over a much wider dynamic range. For that purpose, they don't use integer values to represent the single color channels (e.g., 0-255 in an 8 bit per pixel interval for red, green and blue) but instead use a floating point representation. Common are 16-bit (half precision) or 32-bit floating point numbers to represent HDR pixels. 
+
+### Using Arnold SkyDome Light
+- To obtain HDRI   
+	- [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html)  
+Licence: All sIBL-sets on this page, including the images within, are licensed under the Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.
+Remember: always mention where you got them from.  
+
+ - [hdrihaven](https://hdrihaven.com/hdris/category/?c=all)
+
+### Using Arnold Photometric Light
+- To obtain IES   
+	- [Visual Photometric Tool™](http://www.visual-3d.com/tools/photometricviewer/)
+	
+_________________________
+# Class evaluation
+
+Please participate in the class evaluation on Canvas for productive feedback. 
+	
+_________________________
+
+# Lab: Rendering using Arnold
+## Practice A: Three sphere and Image Based Rendering using HDRI 
+### Glass material
+
+![glass01](img/maya/shading/teapotGlass.png)
+
+### Scene preparation
+- Modeling: Creating three spheres and one plane - check sphere tessellation to obtain smooth curvature.   
+- Shading: Apply AiStandardSurface to each ball. From its attributes, start from Presets: Glass preset for two balls, Rubber preset for one ball and tweak them. For the glass, turn off Opaque from its geometry. [Arnold manual: Transmission](https://support.solidangle.com/display/A5AFMUG/Transmission)  
+- Rendering: In the Rendering setup, open Arnold/ArnoldRenderView. Run Render/Run IPR(Interactive Photorealistic Rendering).    
+- Lighting: Creating Arnold SkyDome Light. Arnold creates a sphere geometry as a SkyDome.
+	- From its color tab, link to a HDRI image you chose using the File utility. To obtain HDRI; [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html) 
+	- You can transform the SkyDome sphere to find the best background as well as light conditions.  
+	- You can change variable attributes (intensity for brightness, samples for smooth shadow, visibility for overall lighting effect) to find the best result.  
+- Render Setting: Balance render quality & computational time at Arnold Renderer/Sampling, and control ray depth. [Arnold manual: Samples](https://support.solidangle.com/display/AFMUG/Samples), [Arnold manual: Ray Depth](https://support.solidangle.com/display/AFMUG/Ray+Depth)  
+
+![arnold](img/maya/rendering/arnold/threeSphere.png)	  
+HDRI image from sIBL Archive. H Ji.
+
+## Practice B: Cornell box and global illumination
+- Modeling: Make a camera and a box for a room. Create a ball and a cylinder. Properly transform them to have the Cornell box setup.  
+- Shading: Apply AiStandardSurface to the faces of the box (room) respectively (especially at the side walls, apply strong contrasting color such as red/blue, red/green, orange/green or such. You can start from the Rubber preset. Apply AiStandardSurface materials to other objects and make one with a glassy look.    
+- Rendering: In the Rendering setup, open Arnold/ArnoldRenderView. Run Render/Run IPR(Interactive Photorealistic Rendering). 
+- Lighting: Creating a plane and let's make it as AiAreaLight. Locate the plane near the ceiling. While choosing the plane geometry in the outliner, create Arnold/Lights/Mesh Light. (In the Rendering module). In the outliner, you can find the light under defaultLightSet. Open its attribute and make the intensity increase to more than 1000 to find the right brightness.   
+- GI control related attributes: from the light-Visibility/Indirect, from the shading-Advanced/Indirect Diffuse, from the Render Setting-Arnold Renderer/Sampling & Ray depth both to Diffuse tab. 
+- Render Setting: Balance render quality & computational time at Arnold Renderer/Sampling, and control ray depth.
+
+
+![arnold](img/maya/rendering/arnold/ai_cornell01.png)  
+Arnold rendering. H Ji.
+
+#### Comparison to Mental Ray rendering
+![gl00](img/maya/rendering/gl/gl.png)  
+![gl04](img/maya/rendering/gl/fg.png)   
+
+
+	
+
+
+<!--
+
+![gl05](img/maya/rendering/gl/gl.jpg) 
+
+### Mental Ray 
+
+To use Global Illumination in Maya, you must use the Mental Ray renderer.  **Mental Ray for Maya** offers all the features traditionally expected of **photorealistic rendering** and includes functionality not found in most rendering software. Mental Ray for Maya allows interactive and batch Mental Ray rendering from within the Maya user interface. 
+
 
 ## Global illumination, caustics, and final gather in Maya
 
@@ -158,7 +269,6 @@ Global illumination simulates light reflected from diffuse surfaces. Caustics si
 
 Global illumination is not used for the focusing of light (that is, reflection and refraction). It is generally used with diffuse materials or for simple transparency. If you need to add refractions, then incorporate caustics in your scene.
 
-
 _________________________
 ### Maya help documents (Autodesk knowledge center)
 
@@ -173,16 +283,6 @@ _________________________
 - [Photon tracing, Conditions for photon storage](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-2A05BF61-2A60-4CE8-8F54-43E362C06982)
 
 - [Mental Ray 2016 Render Settings: Legacy Mental Ray tabs](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-67B3D408-76A5-43FA-BC4B-1E1F2243C1F6)
-__________________________
-<!--## Rendering
-Rendering is the final stage in the 3D computer graphics production process.
-Though the wider context of rendering begins with shading and texturing objects and lighting your scene, the rendering process ends when surfaces, materials, lights, and motion are processed into a final image or image sequence.
-
-As you build your scenes (shade and texture objects, light scenes, position cameras, and so on), you’ll want to visualize your scene many times before you produce the final rendered image or image sequence. This process may involve (depending on your particular project) creating and setting up additional cameras.
-
-The key to rendering is finding a balance between the visual complexity required and the rendering speed that determines how many frames can be rendered in a given period of time.-->
-
-
 ______________________________
 # Applying global illumination in Maya
 ## Creating photons
@@ -239,45 +339,18 @@ Maya 2016.
 - **Scale** serves as a multiplier for the Photon Intensity attribute of all lights in the scene. If the slider is set to 50 percent gray, all the photons in the scene will be at half intensity.
 
 - **Merge Distance** specifies a distance in world space within which overlapping photons are merged. The option is used to reduce the size of photon maps and decrease render times. You should raise this setting by very small increments, as it can also introduce blotchiness in the render. 
-	
+
+
+
+__________________________
+## Rendering
+Rendering is the final stage in the 3D computer graphics production process.
+Though the wider context of rendering begins with shading and texturing objects and lighting your scene, the rendering process ends when surfaces, materials, lights, and motion are processed into a final image or image sequence.
+
+As you build your scenes (shade and texture objects, light scenes, position cameras, and so on), you’ll want to visualize your scene many times before you produce the final rendered image or image sequence. This process may involve (depending on your particular project) creating and setting up additional cameras.
+
+The key to rendering is finding a balance between the visual complexity required and the rendering speed that determines how many frames can be rendered in a given period of time.	
 __________
-## Reference
-
-[Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)    
-
-- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)  
-
-_______________
-
-# Review
-## Assignment
-- [Lab 1](http://2016datt2500.tumblr.com)
-- [Lab 2](http://2016datt2500lab2.tumblr.com/)     
-- [Lab 3](http://2016datt2500lab3.tumblr.com/)  
-- [Lab 4]((http://2016datt2500lab4.tumblr.com/) 
-
------------------
-
-# Lab
-## To do list
-- Lab practice A: Glass and mirror balls in the Cornell box 
-- Lab practice B: Global Illumination
-- Lab practice C: Global Illumination and Final Gathering    
-
------------------------
-## Practice A: Glass and mirror balls in the Cornell box 
-
-![cr01](img/maya/shading/goal.png)
- 
-  
-### Glass material
-
-![glass01](img/maya/shading/teapotGlass.png)
-
-### Creating a Cornell box
-1. Make a box for a room and a camera
-2. Apply materials to the faces of the box respectively (especially at the side walls, apply strong contrasted color such as red/blue, red/green, orange/green or such.  
-3. Create basic objects (including two spheres)
 
 ### Download
 - [Cornell box mb file](gl_cornell01.mb)
@@ -308,8 +381,6 @@ Make a close-up camera
 Lighting & Soft Shadow
 
 ![shadow](img/maya/shading/softshadow.png)	
-
----------------------------------------------------------------
 
 ## Practice B: Global Illumination
 
@@ -354,34 +425,8 @@ After you load the Mental Ray plug-in (and select Mental Ray as the renderer), t
 ![gl05](img/maya/rendering/gl/gl.jpg) 
 
 - If you have a refractive object, try to make a Caustic effect.
-________________________
 
-## Lab work to do
-- Review & practice based on today's lecture & lab class material.  
-- Let's prepare project 2 & 3 
-	- Project 2: the completion of project 1
-	- Project 3: free theme modeling & rendering. 
-	- [Project link](project.html)
-
-____________________________
-
-## Assignment
-- By **Monday Nov 28th** midnight, please complete your two assignments and upload the **rendering images** to the class Tumblr with simple descriptions: **"a11 by your name, date"**.	
-	- A Cornell box with raytracing describing a glass and a mirror surfaces.  
-	- A Cornell box with GL photons. FG is optional.
-
-## Attendance
-- Next week, we will check your attendances so, if you skip the class with a proper reason, don't forget to submit related documentation to Haru or Yifat such as a doctor's note. 
-
--------------------------------------
-
-## Office hour
-Haru Ji's shared office location: 229 Goldfarb Centre for Fine Arts  
-Hours: Tue - 1:30 to 4:30
-
-__________________________________
-
-
+-->
 
 </div>
 <div id="wrapper">
@@ -397,13 +442,13 @@ __________________________________
 				<a href="week03.html">3: NURBS modeling</a><br/>
 				<a href="week04.html">4: Polygon modeling</a><br/>
 				<a href="week05.html">5: Shading</a><br/>								
-				<a href="week06.html"></a>6: Texturing</a><br/>  
+				<a href="week06.html">6: Texturing</a><br/>  
 				<a href="week07.html">7: Cinematography</a><br/>
-				<a href="week08.html"></a>8: Global Illumination</a><br/>
-				<a href="week09.html"></a>9: 3D modeling I</a><br/>
-				<a href="week10.html"></a>10: 3D modeling II</a><br/>		
-				<a href="week11.html"></a>11: Basic animation I</a><br/>
-				<a href="week12.html"></a>12: Basic animation II</a><br/>	
+				<a href="week08.html">8: Modeling techniques</a><br/>
+				<a href="week09.html">9: Animation production</a><br/>
+				<a href="week10.html">10: Basic animation</a><br/>		
+				<a href="week11.html">11: Arnold: Physically Based Renderer</a><br/>
+				<a href="week12.html"></a>12: Rendering</a><br/>
 	</div>
 	<div class="section">
 		<script type="text/javascript">

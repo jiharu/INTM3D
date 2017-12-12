@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset='utf-8'>
-<title>Introduction to 3D Modeling</title>
+<title>3D Modelling & Animation</title>
     
 <link href="css/site.css" media="all" rel="stylesheet" type="text/css" />
 <link href="css/highlight.default.css" media="all" rel="stylesheet" type="text/css" />
@@ -20,11 +20,11 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Rendering for composition
+# Rendering
 
-Rendering is the final step of the 3D animation pipeline and its quality is crucial to the strong completion of your project. 
+Rendering is the final step of the 3D animation pipeline and its quality is crucial to the strong completion of your project. Let's check out some more techniques which can make your final image distinguished.
 
-## Ambient Occlusion 
+## Ambient occlusion 
 
 **Ambient occlusion** refers to the attenuation of indirect or diffuse light on an object. It refers to the darker areas of the object such as in creases, cracks, and crevices. Ambient occlusion is caused by indirect light's inability to bounce around and illuminate areas that are blocked by nearby features, that instead absorb the light rays. **These subtle variations in lighting are visual clues for our eyes to detect surface details and distinctions** that would otherwise be washed out and unnoticeable. Ambient occlusion adds realism to your scene by adding shadows in crevices, nooks and crannies, and so on. For each surface point, it calculates how much light is blocked by other geometry.
 
@@ -40,49 +40,45 @@ When ambient light is used, objects in your scene may appear to be too bright an
 ![ao02](img/maya/rendering/comp_occlusion_2.png)![ao03](img/maya/rendering/comp_beautyHead_2.png)![ao03](img/maya/rendering/comp_beauty_occlusion_2.png)
 ![ao01](img/maya/rendering/comp_occlusion_rays_2.png)
 
------------------
+## Creating ambient occlusion textures
+There are several ways to apply ambient occlusion.  
+
+### Toad objects
+You can download the toad object files from here: [toad high resolution](obj/toad.obj), [toad low resolution](obj/toad_low.obj)
+
+### Ambient occulusion using Arnold in Maya
+ 
+- [Tutorial: Ambient occlusion using render layer.](https://www.youtube.com/watch?v=75JFUwA5XL0)
+
+Or, you can apply the ***aiAmbientOcclusion*** Arnold shader directly to your object.
+
+ ![ao01](img/maya/rendering/arnold/ao_01.png)
+ 
+When you tweak ambient occlusion parameters, please check the [Arnold manual: ambient_occulson](https://support.solidangle.com/display/NodeRef/ambient_occlusion).   
+
+ ![ao01](img/maya/rendering/arnold/ao_02.png)
+
+ ![ao01](img/lab/toad_ao.jpg)   
+Comparison: ambient occlusion surface shading using Mental Ray. 
 
 ## Baking a texture
-### Batch rendering
-A batch file is a set of commands given to the computer to do, one after another. Using batch files, you can queue several rendering tasks at the same time, so that once one is finished, the next begins. Batch rendering often occurs as a different thread or process, as if it were a different program running in the background, so Maya allows you to keep working while the batch is rendering. 
 
-### Related tutorials
+You can "bake" lighting, texturing, and shadow information. Command location: in the "Rendering" module, go to Arnold/Utilities/Render Selection To Texture. 
 
-- [How to bake ambient occlusion.](https://www.youtube.com/watch?v=n65LBCncCG4)
-- [Ambient Occlusion render pass.](https://www.youtube.com/watch?v=hFOTDEjVDmE)
+ ![bk](img/maya/rendering/arnold/bk01.png) 
 
 ### Test image
 ![ao_com01](img/maya/rendering/comp.png)  
 Image by Haru Ji.
 
-______________________
-## Creating textures with the Transfer Maps tool
-Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
+## Creating textures with an occlusion map using Photoshop
+- Once the bake is completed open the project file that you specified earlier.     
+- In that folder, select your baked texture file and open this with Photoshop.      
+- Drag the Occlusion bake on top of your model's texture layer(s) and select Multiply as the layer blending mode. You may also want to apply a slight Gaussian blur to your occlusion layer, especially if it being used on an organic surface. For hard sharp edged surfaces like this one no blur was applied.
 
-The Transfer Maps tool can create normal maps and displacement maps by **comparing surfaces**. In addition, the tool can bake lighting and texturing information.
+### Creating textures for composition
 
-### Normal map
-![trnsm02](img/maya/rendering/normal_ref.png) 
-
-### Displacement map
-![trnsm02](img/maya/rendering/disp_ref.png) 
-
-### Baking lighting and shading information
-
-You can "bake" lighting, texturing, and shadow information with the Transfer Maps tool. In this situation, a textured source creates a color bitmap for a target surface. The Transfer Maps tool provides several attributes to choose from for this operation: Diffuse Color Map, Lit And Shaded Color Map, and Alpha Map. 
-
-![trnsm03](img/maya/rendering/shade_ref.png) 
-
-### Transfer Map window editor
-
-![trn](img/lab/transfer.png) 
-
-![normal](img/lab/sampledNormals.jpg)  
-Baked normal map 
-
--------------------------------------------------
-
-## Creating textures for composition
+You can download these images for your rendering practices. 
 
 ![ao05](img/lab/skin.png), ![ao02](img/lab/toad_bake.jpg)   
 Initial skin map for the color map & ambient / bump map   
@@ -90,57 +86,43 @@ Initial skin map for the color map & ambient / bump map
 ![ao03](img/lab/toad_color.jpg), ![ao04](img/lab/toad_specular.jpg)   
 Color map & specular map.
 
+### Applying baked maps to a high resolution surface.
 
 ![ao_com02](img/lab/toad_com01.jpg) 
 Texturing on the high-res Toad geometry. All images by Haru Ji.
 
 
-### Applying baked maps to a lower resolution surface.
+### Applying baked maps to a low resolution surface to create ***Level of Details***.
 
 ![ao_com03](img/lab/toad_com02.jpg) 
 Texturing on the low-res Toad geometry.
 
--------------------------------------------------
-## Final gathering rendering
+### Blending different shaders in Arnold
 
-#### Comparison of high and low res modelings (with final gathering).
-![high01](img/lab/low_high01.jpg) 
-![high02](img/lab/low_high02.jpg)   
+The ***Mix Shader*** shader is used to blend or add two shaders (including light AOVs). It returns a linear interpolation of Shader1 and Shader2 according to the Mix Weight attribute. A Mix Weight value of 0 outputs Shader1, a value of 1 outputs Shader2, and a value of 0.5 mixes evenly between Shader1 and Shader2. 
 
-You can test your scene:
+![mx](img/maya/rendering/arnold/mx01.png)  
+![mx](img/maya/rendering/arnold/mx02.png) 
+Applying a chequer texture to the ***Mix Weight*** attribute of the ***aiMixShader***.
 
-- Click **physical sun and sky** in the Scene tab in the Mental ray render setting.   
-- Check **emit environment light.** 
-
-![mia](img/lab/test.jpg)  
-Rendering regions to check out parameter values.
-
-- Tweak parameters of attributes including ground color from **mia_physicalsky1** node.  
-
-All images by Haru Ji.
-
-_________________________
-## Depth of Field
-Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
-
-Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
-
-You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab. 
-
-![dof00](img/maya/rendering/dof.png)    
-[View the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)   
-
-![dof01](img/maya/rendering/dof01.png)  
-
-The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
+#### Blending examples 
+![mx](img/maya/rendering/arnold/mx03.png) 
+aiWireFrame + aiAmbientOcclusion  
  
-![dof02](img/maya/rendering/dof02.png)  
-The Distance tool used to determine the focus distance.
-   
-![dof03](img/maya/rendering/dof03.png)   
-An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
+![mx](img/maya/rendering/arnold/mx04.png)
+aiWireFrame + aiStandardSurface (Jade preset)    
 
-______________________
+- [Arnold manual: mix shader](https://support.solidangle.com/display/A5AFMUG/Mix+Shader)  
+- [Arnold manual: AOVs](https://support.solidangle.com/display/A5AFMUG/AOVs)  
+
+### AOVs
+
+AOVs (Arbitrary Output Variables) provide a way to render any arbitrary shading network component into different images. For example, an artist might find it convenient to separate direct and indirect lighting contributions and later recombine them during compositing. Arnold provides built-in AOVs for outputting depth, position, and motion vectors.   
+
+ ![aovs](https://support.solidangle.com/download/attachments/65111838/image2017-9-19%2012%3A23%3A32.png?version=1&modificationDate=1505816612000&api=v2)  
+ 
+- [Arnold manual: Light Path Expression AOVs](https://support.solidangle.com/display/A5ARP/Light+Path+Expression+AOVs)    
+
 ## Advanced topic: render layers and passes  
 
 There are many techniques to create better quality  rendering. In particular, you can save time and energy and control your rendering result in detail by splitting up renders based on objects or shading components. You can even separate shadows from the rest of the scene or temporarily assign objects to specialized materials through the Render Layer Editor.
@@ -162,39 +144,171 @@ Final realistic render image:
 
 ![ex01](img/maya/rendering/GUID-59AF3E15-AFFB-4ABE-BDCC-EED3B16B0B2F-low.png)
 
-Another powerful tool to use in conjunction with this is the ability to hide objects from the renderer. This lets you use very high-quality settings for only some parts of the image. 
+_________________________
+# Visual effects
 
-![layer01](img/maya/rendering/layer01.png)  
-(Upper left) Diffuse layer render. (Upper right) Shadow layer render. (Middle left) Specular layer render. (Middle right) Blended layers result. (Bottom) Render Layer Editor. Diffuse layer Blending Mode is set to Normal. Shadow layer Blending mode is set to Multiply. Specular layer Blending Mode is set to Screen. 
+## Maya classic dynamics
+Dynamics is a branch of physics that describes how objects move. Dynamic animation uses rules of physics to simulate natural forces. You specify the actions you want the object to take, then let the software figure out how to animate the object.
 
-### Z-depth map
-  
-![layer02](img/maya/rendering/layer02.png)   
-(Clockwise, from upper left) Master render layer, Luminance Depth preset, Geometry Matte preset, and Shadow preset.
-Images from Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
+Dynamic animation lets you create realistic motion that's hard to achieve with traditional keyframe animation. For instance, you can make effects such as tumbling dice, waving flags, and exploding fireworks.
 
-Using Z-depth maps, you can recomposite the image back together. You can use it to fake the depth of field by blurring some parts of the image and not others; render bubbles drifting in a scene; or render an object with motion blur moving behind glass – the transparency makes motion blur effects take a long time, but if you render the glass on a different layer that problem is solved. Many special effects such as particles are also more efficient to render separately. Computer-generated effects are incorporated into live footage using layers.
+The Maya Dynamics guide, which provides information about creating dynamic simulations in Maya, is available at [http://www.autodesk.com/maya-docs-archive](http://www.autodesk.com/maya-docs-archive).
 
-![ren](img/maya/rendering/renpss.png)  
-It shows overlapping of two render layers.
+## nDynamics simulation framework
+nDynamics is a dynamic simulation framework powered by Maya® Nucleus™ technology. A Maya Nucleus system is composed of a series of Nucleus objects, which consists of nCloth, nParticle, nHair, Soft Bodies, and passive collision objects, as well as dynamic constraints, and the Maya Nucleus solver.
 
-### Render passes
-Render passes allow you to separate material properties into different images. These passes are derived from calculations stored in the frame buffer. Each pass can be used in compositing software to rebuild the rendered scene efficiently. Render pass contribution maps define which objects and lights are included in a render pass.
+## Effects Assets in the Visor
+Effects Assets provides a number of preset effects that are organized as Maya assets. Effects Assets are available in the Visor window and can be quickly imported into your scene, applied to objects, then played and rendered with little or no modification. Effects Assets include 3D fluid effects, nParticles, nParticle emitters, and Maya fields, and provide effects such as explosions, fire, smoke, rain, and fireworks.
 
-### Related references
-- [Render layer overview](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-BADD9FC7-C463-4D8B-AC69-36BDEF6EBCCE)  
-- [Render layers example: automotive preview](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-6F235D42-CE2F-4E13-9592-A86C4FA5A0D2) 
-- [Working with render layers: different layer examples](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-6AB13266-3C59-4CA2-BAF2-DA60F912A340)  
-- [Using render layers with your re-combination](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-D883390E-8293-439E-9DC4-A0DF4A28977F)   
-- [Render Passes in Maya 2016](http://www.cgmeetup.net/home/render-passes-in-maya-2016/)
-- [Introduction to multi-render passes: a simple workflow example](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-8F8347C8-7BCE-488E-A9C9-8FBBAB4CE050)  
-- [Appendix B: Work with render passes](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-FA411DD5-E54D-45EB-ADAD-BD638342FC6C)  
-- [Maya tutorial: Setting up render passes | lynda.com](https://www.youtube.com/watch?v=LdUpTK94G4M)  
+![ess](img/lab/esset.png)
 
+Effects Assets are advanced assets, which allow them to be parented to objects outside the asset. For example, some assets, such as a fire asset, can be parented to a polygon object or applied as a surface emitter. Depending on the effect, selecting Effects Assets > Apply Effect from the FX menu set either parents the effect to an object, or applies it to a surface. Effects with Point or Volume emitters are parented while Surface emitter are applied. Free-standing effects, such as the Bomb.ma, do not need to be applied to objects in the scene. - [Maya help](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-235C9A6C-42C9-4132-81BE-727B4A43AB1B)
+
+![effect02](img/lab/effect01.png) 
+Rendering image of Visor/nCloth Examples/PartyStreamers.ma
+![effect03](img/lab/effect02.png) 
+Rendering image of Visor/Fluid Examples/Nuke.ma
+
+- [Maya help: Simulation and Effects](http://help.autodesk.com/view/MAYAUL/2016/ENU//index.html?guid=GUID-04EA8AE9-5081-426F-8122-D56461A69B0A)
+
+## Ocean Shader & Bifrost
+
+- [Maya Ocean shader test by LTKY823](https://www.youtube.com/watch?v=8fqUvntiuSw)  
+
+### Bifröst
+
+**Bifröst** is a procedural framework that can create simulated liquid effects using a FLIP (fluid implicit particle) solver. You can generate liquid from emitters and have it fall under gravity, interact with colliders to direct the flow and create splashes, and use accelerators to create jets and other effects.
+
+![bifro](img/maya/rendering/bifrost.png)
+
+- [bifrost simulation](http://www.igorfx.com/bifrost/)
+- [knowledge.autodesk.com](http://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2015/ENU/Maya/files/GUID-43D655E2-45A3-4FD8-847C-6622AF22995C-htm.html?v=2016)
+- [simple tutorial](https://www.youtube.com/watch?v=ZrVW1Izzb7c)
+
+
+---------------
+## Paint effect
+
+- [Maya Paint Effects Tutorial: Growing Animated Vines](https://www.youtube.com/watch?v=Y1ignag-NmY) 
+
+**Paint Effects** is a powerful tool that allows you to interactively paint specialized strokes that create complex geometry as a post-process. Numerous Paint Effects brushes are included with Maya and are grouped in such categories as trees, flowers, weather, and fire.
+
+![pe01](img/maya/pe/comp_butterflyhill.png)
+
+You can use Paint Effects as a traditional paint program to paint images on a canvas, or to paint repeatable textures that you can apply to geometry in your scenes.
+
+### Paint Effect attributes
+After you create a Paint Effects stroke, you can edit the look and movement of the effect through the Attribute Editor. There are a large number of attributes to edit with Paint Effects.
+
+- Select the stroke, and open the Attribute Editor. Switch to the stroke’s tab to the brush attributes.
+
+-----------------------
+
+## Post processing in Maya
+### Depth of Field
+Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
+
+Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
+
+You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab. 
+
+![dof00](img/maya/rendering/dof.png)    
+[View the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)   
+
+![dof01](img/maya/rendering/dof01.png)  
+
+The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
+ 
+![dof02](img/maya/rendering/dof02.png)  
+The Distance tool used to determine the focus distance.
+   
+![dof03](img/maya/rendering/dof03.png)   
+An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
+
+______________________
+### Batch rendering
+A batch file is a set of commands given to the computer to do, one after another. Using batch files, you can queue several rendering tasks at the same time, so that once one is finished, the next begins. Batch rendering often occurs as a different thread or process, as if it were a different program running in the background, so Maya allows you to keep working while the batch is rendering. 
+
+Note that if you want to use Arnold batch rendering without watermarks in Maya, you need to purchase an Arnold license. Or alternatively you can render a sequence in Maya with the Render > Render Sequence command in the Render setting window; however you will not be able to use Maya while it is rendering.
+
+__________________________
+
+
+### Camera or airplane animation
+When you add a camera or airplane to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
+
+![path01](img/lab/motionpath03.png)
+![path02](img/lab/motionpath02.png)  
+
+- You can animate the camera using the 'Attach motion path' method, and keyframing on the 'aim vector' of the camera.  
+- Or you can animate the camera and use the 'Set motion path key' method to make a motion path animation. 
+
+### Using MEL (Maya Embedded Language) to create objects:
+
+```
+int $i;
+int $j;
+int $k;
+int $n = 8; // decide the iteration number
+int $d = 5; // control the distance
+float $r = 4; // change the random value
+
+for ($k = 0; $k < $n; $k++){ 
+    for ($j = 0; $j < $n; $j++){
+        for ($i = 0; $i < $n; $i++){
+           polyCube -w 1 -h 1 -d 1 -name "poly"; //polySphere -r 1
+           move -x ($i*$d+rand($r)) -y ($j*$d+rand($r)) -z ($k*$d+rand($r));
+        }
+    }
+}
+```
+
+How to apply: write the MEL in the script editor, select them, and 'command + enter' to execute. 
+
+### Camera crane animation
+
+![crane](img/maya/deformer/crane.png) 
+
+______________
+## Digital Cinematography: optional
+### Hardware rendering options for Playblast
+
+![render](img/lab/hardwarerender.png)
+
+### Camera	
+
+![camera](img/maya/film/camera.png)
+
+### Camera animation video tutorial
+- [4 Tips for Camera Animation (for Maya or any other 3D software) by Bloop Animation](https://www.youtube.com/watch?v=b3PHRNvwl4A&t=3s) 
+
+
+- [Camera Shake by Henry Medhurst](https://www.youtube.com/watch?v=6AS1PJlcHAE)    
+	MEL expression for a simple shaking camera: 
+
+```	
+cameraShape1.horizontalShake = noise(frame*0.7)/30; 
+```
+	
+Or 
+
+```	
+float $min = rand (-0.1, -0.3);  
+float $max = rand (0.1, 0.3);  
+if (frame <= 60){  
+	camera1.translateX = rand($min, $max);  
+	camera1.translateY = rand($min, $max);  
+	camera1.translateZ = rand($min, $max);  
+} else {  
+	camera1.translateX = 0;  
+	camera1.translateY = 0;  
+	camera1.translateZ = 0;  
+}  
+```
 __________
 ## Reference
 
-[Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)    
+[Maya 2018 online Help](http://help.autodesk.com/view/MAYAUL/2018/ENU//)    
 
 - Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf) 
 
@@ -202,143 +316,17 @@ __________
 - 3D animated short films for your inspiration: 
 	- [link 1](http://webneel.com/25-best-and-award-winning-3d-animated-short-films-your-inspiration)  
 	- [link 2](https://www.shortoftheweek.com/channels/3d-animation/) 
- 
-_____________
 
-## Review
-### Assignment
-- [Lab 1](http://2016datt2500.tumblr.com)
-- [Lab 2](http://2016datt2500lab2.tumblr.com/)     
-- [Lab 3](http://2016datt2500lab3.tumblr.com/)  
-- [Lab 4]((http://2016datt2500lab4.tumblr.com/) 
+______________________________________________
 
------------------
-
-# Lab
-## To do list
-- Lab practice A: Using Batch Bake to bake an ambient occlusion texture  
-- Lab practice B: Creating a normal map and an ambient occlusion map using the Transfer maps editor from high to low res models  
-	- Lab practice B_a: Creating texture with your the occlusion map using Photoshop	
-- Lab practice C: Final gather
-
------------------------
-## Ambient Occlusion shading
-There are several ways to apply ambient occlusion.  
-
-You can download the toad object files from here: [toad high resolution](obj/toad.obj), [toad low resolution](obj/toad_low.obj)
-
-## Lab practice A: Using Batch Bake to bake an ambient occlusion texture 
-Let's create ambient occlusion map by using Batch Bake (mental ray).  
-Where: Rendering // Lighting/Shading / Batch Bake (Mental ray)  
-
-![bake01](img/maya/rendering/bake01.png)
-
-![ao01](img/lab/toad_ao.jpg)    
-Ambient occlusion surface shading. 
- 
-## Lab practice B: Creating a normal map and an ambient occlusion map using the Transfer maps editor from high to low res models  
-Please check out: Maya help [Create texture maps with the Transfer Maps editor](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-B011A4BC-1B7A-4EC3-9B73-BCF744886C84)   
-
-Where to create your normal map:   
-Command: Rendering // Lighting/Shading / Transfer Maps... 
-
-![bake02](img/maya/rendering/bake02.png)
-
-## Lab practice B_a: Creating texture with your the occlusion map using Photoshop
-- Once the bake is completed open the project file that you specified earlier.     
-- In that folder, select RenderData > MentalRay > lightmap > select your baked texture file and open this with Photoshop.      
-- Drag the Occlusion bake on top of your model's texture layer(s) and select Multiply as the layer blending mode. You may also want to apply a slight Gaussian blur to your occlusion layer, especially if it being used on an organic surface. For hard sharp edged surfaces like this one no blur was applied.
-
-## Lab practice C: Final gather
-1. Turn off Maya default lights from the Render Setting/Common/Render Option. If you have any light sources in the scene, turn off their *Illuminates by Default* attribute. 
-
-2. You can turn on Final Gather from the **Render Settings/Mental ray/Quality tab**. You can either choose **Advanced Light Sampling / Indirect Diffuse (Gl) Mode** or **Legacy Options/Final Gathering.** 
-
->Change any of the following optional settings, which can have an effect:
->
-- The camera background color: You can change background color or attach a environment texture to the image plane. You can also turn on the **Physical Sun and Sky** to simulate sun and shadow without adding any light in the scene. (from **Render Settings/Mental ray/Scene/Cameras/Environment)
-- The object material’s colored Incandescence or Ambient color attributes.
-- Irradiance contributions from shaders.
-- Irradiance color mapping contributions from shaders.
-- The number and location of lights in the scene.
-
-![fg01](img/maya/rendering/gl/fg.jpg)
-![fg02](img/maya/rendering/gl/phy.jpg)
-
-Render image with no actual light but with turning on the 'Physical Sun and Sky' attribute from the Mental Ray render setting. 
-
-![ibl01](img/maya/rendering/gl/ibl.jpg)
-![ibl02](img/maya/rendering/gl/ibl_close.jpg)
-
-Render image using IBL. Image-based lighting (IBL) uses an image to create lighting in a scene. High dynamic range images (HDRIs) are usually the most effective sources for IBL. 
-
-### Related tutorial
-
-- [MR Basic Final Gather using Image Based Lighting](http://wiki.bk.tudelft.nl/toi-pedia/MR_Basic_Final_Gather_using_Image_Based_Lighting_(IBL)
-- [IBL Tutorial Maya - IMAGE BASED LIGHTING EASY SETUP](https://www.youtube.com/watch?v=AyWEKvIUImU&feature=youtu.be) 
-- [Maya tutorial: Setting up image-based lighting | lynda.com](https://www.youtube.com/watch?v=YXor6gDoVvc)  
-
-### High dynamic image 
- 
-- [A light probe image by Paul Debevec and Dan Lemmon](http://ict.debevec.org/~debevec/Probes/)   
-You can find hdr files here to download.
-
-------------------------------------------------------------------------
-
-## Optional - Lab practice: Using a surface shader to bake an ambient occlusion texture in the Hypergraph 
-Related tutorial: [Ambient Occlusion in Maya - by Alchemist101 (2011).](http://www.game-artist.net/forums/spotlight-articles/1317-tutorial-ambient-occlusion-maya-alchemist101.html) 
-### Setting up the shader network
-- First open the hypershade window and from the Maya nodes list MMB drag **a Surface Shader node** into the work area.   
-
-![aop01](img/maya/rendering/sshd.png)
-
-- Change it to MentalRay nodes, then under the textures tab MMB drag an '**mib\_amb\_occlusion**' node onto the work area.
-
-![aop02](img/maya/rendering/mib.png)
-
-- **Connect the 'OutValue' of the Occlusion node to the 'OutColor' of the surface shader**. This is the default connection between these 2 nodes so you can do this by simply holding down Ctrl and MMB dragging the occlusion node over the shader node. 
-
-![aop03](img/maya/rendering/mib_link.png)
-       
-### Setting up your scene
-- In order to get good results from Ambient Occlusion the scene environment must be white. To do this open the Outliner window and select the Persp camera. In the attribute editor under the Environment tab slide the Background Color to 100% white.
-- If you use the occlusion render pass, you don't need to change the Background color. 
-
-![aop11](img/maya/rendering/cam.png)
-
-- Now open the Render Globals window and **select MentalRay** as your renderer and Production as the quality preset. Now change the multipixel filter to "Lanczos". 
-
-![aop12](img/maya/rendering/lanz.png)
-
-- Now close the render Globals window and assign the 'Surface Shader' you have setup to your model. It should turn the model completely black.
-
-### Tweaking
-- Frame your model and hit render. It can look grainy.
-- Now we need to tweak the settings a little. Open the attribute editor of the Ambient Occlusion node. 
-- The **'Spread'** setting affects how far the occlusion shadow spreads over the surface. 
-- The **'Samples'** setting will remove the grainy look but will drastically increase render times. 
-
-![aop13](img/maya/rendering/ae.png)  
-
-________________________
-## Lab work to do
-- Review & practice based on today's lecture & lab class material.  
-- Let's work on project 2 & 3, if you have questions, you can bring them. 
-	- Project 2: the completion of project 1
-	- Project 3: free theme modeling & rendering. 
-	- [Project link](project.html)
 	
-## Assignment
+## One-on-one critique schedule
+- Office location: 701G 205 Richmond.   
+- Hours: [schedule link](https://docs.google.com/spreadsheets/d/1KsF1EU4VDf9GvXhQGYCOwKRV1lVfnV3EW_lT8WZUz10/edit?usp=sharing)  
 
-- [Please fill in the final survey](https://goo.gl/forms/O52nkm5ty3YneYof1)
-- By **Monday Dec 5th** midnight, please complete one assignment and upload the **rendering image** to the class Tumblr with simple descriptions: **"a12 by your name, date"**.	
-	- Choose one geometry and create its low poly version and high poly version. Then create a Normal map and an Ambient occlusion map and attach them into the shader for the geometry you worked on. Then apply final gather rendering. Basically this is a sum of today's lab practices. If it is too difficult to create two versions of your polygon geometry, you can use toad geometries. 
-	
-## Office hour
-- Haru Ji's shard office location: 229 Goldfarb Centre for Fine Arts or 020 3D printing room.   
-- Hours: Tue - 1:30 to 4:30 & Wed - 1:30 to 3:30
+## Project 3 - free theme modeling & rendering.
+### Due date: Dec 15th midnight (11:59pm).
 
-__________________________________
 
 
 </div>
@@ -355,13 +343,13 @@ __________________________________
 				<a href="week03.html">3: NURBS modeling</a><br/>
 				<a href="week04.html">4: Polygon modeling</a><br/>
 				<a href="week05.html">5: Shading</a><br/>								
-				<a href="week06.html"></a>6: Texturing</a><br/>  
+				<a href="week06.html">6: Texturing</a><br/>  
 				<a href="week07.html">7: Cinematography</a><br/>
-				<a href="week08.html"></a>8: Global Illumination</a><br/>
-				<a href="week09.html"></a>9: 3D modeling I</a><br/>
-				<a href="week10.html"></a>10: 3D modeling II</a><br/>		
-				<a href="week11.html"></a>11: Basic animation I</a><br/>
-				<a href="week12.html"></a>12: Basic animation II</a><br/>	
+				<a href="week08.html">8: Modeling techniques</a><br/>
+				<a href="week09.html">9: Animation production</a><br/>
+				<a href="week10.html">10: Basic animation</a><br/>		
+				<a href="week11.html">11: Arnold: Physically Based Renderer</a><br/>
+				<a href="week12.html">12: Rendering</a><br/>
 	</div>
 	<div class="section">
 		<script type="text/javascript">

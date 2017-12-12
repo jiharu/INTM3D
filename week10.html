@@ -307,124 +307,6 @@ Animate > Motion Paths > Attach to Motion Path > [option](http://help.autodesk.c
 
 - Later, you can select the lattice and deform it.
 	
-<!--
-### Camera or airplane animation
-When you add a camera or airplane to a scene, you should imagine how the shot will be composed and whether the camera will be animated. 
-
-![path01](img/lab/motionpath03.png)
-![path02](img/lab/motionpath02.png)  
-
-- You can animate the camera using the 'Attach motion path' method, and keyframing on the 'aim vector' of the camera.  
-- Or you can animate the camera and use the 'Set motion path key' method to make a motion path animation. 
-
-### Using MEL (Maya Embedded Language) to create objects:
-
-```
-int $i;
-int $j;
-int $k;
-int $n = 8; // decide the iteration number
-int $d = 5; // control the distance
-float $r = 4; // change the random value
-
-for ($k = 0; $k < $n; $k++){ 
-    for ($j = 0; $j < $n; $j++){
-        for ($i = 0; $i < $n; $i++){
-           polyCube -w 1 -h 1 -d 1 -name "poly"; //polySphere -r 1
-           move -x ($i*$d+rand($r)) -y ($j*$d+rand($r)) -z ($k*$d+rand($r));
-        }
-    }
-}
-```
-
-How to apply: write the MEL in the script editor, select them, and 'command + enter' to execute. 
-
-### Using xpressions to control object's attributes:
-
-```
-// simple ball bounce expression (in the Expression editor)
-ball.translateX = time * 10;
-ball.translateY = 10 * abs(sin(time*6));
-ball.rotateZ = -(time*81);
-```
-
-```
-// applying a conditional statement
-
-ball.translateX = time * 10;
-ball.translateY = 10 * abs(cos(time*6));
-
-if (ball.translateY > 5.5){
-	ball.scaleX = 1.2;
-} else {
-	ball.scaleX = 0.8;
-}
-```
-
-```
-// set driven effect
-
-ball.translateX = time * 10;
-ball.translateY = 10 * abs(cos(time*6));
-
-if (ball.translateX < 20){ 
-	pCube1.translateY = 9;
-} else if (ball.translateX >= 20 && ball.translateX < 27){
-	pCube1.translateY = 9+5*time;
-} else {
-	pCube1.translateY = 9;
-}
-```
-- [SineBounce](http://www.cs.uni.edu/~jacobson/maya/mel/SineBounce.html)  
-- [Related expression](http://www.utdallas.edu/atec/midori/Handouts/expressions.htm)
-
-
-### Camera crane animation
-
-![crane](img/maya/deformer/crane.png) 
-
-### Criteria of evaluation
-1. Showing convincing physics relationships.  
-2. Aesthetically pleasing actions. 
-3. Presenting action to viewers effectively.
-
-______________
-## Digital Cinematography: optional
-### Hardware rendering options for Playblast
-
-![render](img/lab/hardwarerender.png)
-
-### Camera	
-
-![camera](img/maya/film/camera.png)
-
-### Camera animation video tutorial
-- [4 Tips for Camera Animation (for Maya or any other 3D software) by Bloop Animation](https://www.youtube.com/watch?v=b3PHRNvwl4A&t=3s) 
-
-
-- [Camera Shake by Henry Medhurst](https://www.youtube.com/watch?v=6AS1PJlcHAE)    
-	MEL expression for a simple shaking camera: 
-
-```	
-cameraShape1.horizontalShake = noise(frame*0.7)/30; 
-```
-	
-Or 
-
-```	
-	float $min = rand (-0.1, -0.3);  
-	float $max = rand (0.1, 0.3);  
-	if (frame <= 60){  
-		camera1.translateX = rand($min, $max);  
-		camera1.translateY = rand($min, $max);  
-		camera1.translateZ = rand($min, $max);  
-	} else {  
-		camera1.translateX = 0;  
-		camera1.translateY = 0;  
-		camera1.translateZ = 0;  
-	}  
-```
--->
 _______________________
 ## Announcement
 There will be no assignments from now. Please start early to work on your final project. 
@@ -478,7 +360,7 @@ Overall, work on it until you are pleased with your final render result.
 				<a href="week09.html">9: Animation production</a><br/>
 				<a href="week10.html">10: Basic animation</a><br/>		
 				<a href="week11.html">11: Arnold: Physically Based Renderer</a><br/>
-				<a href="week12.html"></a>12: Rendering</a><br/>
+				<a href="week12.html">12: Rendering</a><br/>
 	</div>
 	<div class="section">
 		<script type="text/javascript">

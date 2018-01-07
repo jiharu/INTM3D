@@ -20,153 +20,222 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Animation Production
-## Goal
-- Understand the 3D production pipeline.
+# 3D Modeling Techniques
+Reference: [digital] Modeling by William Vaughan, 2011
 
-___________________
-# Production pipeline
-Reference: [digital] Modeling Chapter 1 Introduction.
-## Stages of production
+William Vaughan is an award-winning artist, writer, director, and is currently the Academic Director at the Digital Animation and Visual Effects School at Universal Studios in Florida. Youtube channel: [link](https://www.youtube.com/user/TofuTheVeganZombie/about)  
 
-- 3 Stages: no matter the size of the team or project, you will need a strong production pipeline.   
-	
->  ![3 Stages](img/pipeline.png)    
 
-- __Pre-production:__ the pre-production stage is the process of preparing all the elements involved in a production and is the foundation of the project—the blueprint of the entire animation. The story and visual look of a project is developed at this stage, as well as the overall planning of the production.   
- 
-- __Production:__ the production phase of the project is where final elements of the animation are initially created based on the work developed by the pre-production crew. It is the production crew’s job to stay true to the blueprint in place and to maintain the director’s vision. It’s also where the digital modeler comes into play in most production pipelines.
+## No set way
 
-- __Post-production:__ the post-production is the part of the process that may take the longest due to the refinement of all of the aspects of the final product. Although this is the last step in the production of an animation, it is key to a project’s success. Images get enhanced by compositing, the sound track and dialogue get tighter, and the edit gets tweaked for the most effective presentation of story and pacing. This is the point of the project that can make or break it and should not be taken lightly. It is what the production team loses the most sleep over.  
-	
-## Video 
-- [Digital-Tutors video link: 3D production pipeline](https://www.youtube.com/watch?v=UlQVPbC5iJ0)
-_____________________
-## Pre-production
-- Story
-       
-- Visual design   
+> An interesting fact in the digital modeling world is that no two artists use the same techniques when creating a digital model, even when the two modelers are working from the same reference material, producing the same final mesh. Consider this example: When I had classes of thirty students working on the same robot model, I never saw any two working with the same method. This just goes to show that there is no set way to work, and that artists are free to work with whatever method(s) they feel most comfortable with.
 
-![vis](img/pipe/vis.png)
-      
-- Storyboard     
+## More methods
 
-![storyb](img/pipe/story.png)  
-![storyb01](img/pipe/storyboard.png)   
+> Don’t limit yourself to just a few modeling methods. Every professional digital modeler I know gravitates to a particular method of modeling for the majority of the meshes each is tasked with, but each modeler is quick to use other methods when needed. The more techniques you become proficient in, the more efficient you will become.
 
-- Animatics
+# 3D modeling methods
+## Build out
 
--------------            
-## Production
-- Modeling     
+### Point by point
+![point](img/meth/point.png)
 
-![model](img/pipe/character.png)
-![model01](img/pipe/character_concept.png)
-![model02](img/pipe/rig_cha.png)    
-    
-- Scene setup     
+### Edge extend
+![edge](img/meth/poy.png)
 
-![com](img/pipe/greenscreen.png)
-![com01](img/pipe/set.png)
-![com02](img/pipe/composite.png)   
-     
-- Texturing     
+## Primitive modeling
+![prim](img/meth/prim.png)
+![prim01](img/meth/primbox.png)
 
-![uv](img/pipe/uv.png)  
-     
-- Rigging     
+## Box modeling
+![box](img/meth/box.png)
+![box01](img/meth/boxchar.png)
 
-![rig](img/pipe/rig_char01.png)      
-![rig01](img/pipe/rig_face.png)    
-     
-- Animation        
-- Effects     
-
-![vfx](img/pipe/vfx.png)  
-        
-- Lighting       
-
-![light](img/pipe/light.png) 
+## Patch modeling
   
-- Rendering
+![curve](img/meth/curve.png)
+>Using curves, you can create a wire cage to define the surface of an object.   
 
-![light01](img/pipe/light01.png)
+![NURBS](img/meth/nurbs.png)
 
-------------
-## Post-production
-- Compositing
-- Final Delivery
+## Digtial sculpting
+![scup](img/meth/zbrush.png)    
+>No consideration to the layout of polygons is needed when digital sculpting, leaving the artist’s focus on the shapes, not the underlying geometry.  
+  
+![normal](img/meth/normal.png)    
+>The high-poly meshes are used as source material to enhance low-poly models used in real-time games with the use of normal maps.
 
-<!--
+### Video
+- [CG101: What is a Normal Map?](https://www.youtube.com/watch?v=yHzIx41eiD4)  
+
+### Reference
+- [Som Downs blog](http://somdowns.blogspot.ca/)
+- [Homrighausen: Game Art Thread blog](http://polycount.com/discussion/116222/homrighausen-game-art-thread)  
 ________________
 
-# Character modeling
-## Cinematic vs game model
-Models built for interactive 3D are primarily polygonal models that use controlled polygon counts to suit gaming engines. Some next-generation game engines already have support for Bezier geometry, and NURBS and Subdivision surfaces may soon follow. 
+## More on [normal maps](http://en.Wikipedia.org/wiki/Normal_mapping).
 
-![lod](img/lab/lod.png)  
-Cinematic model and game model. Image from the book Rigging for Games by Eyal Assaf.
+![nor01](img/800px-Normal_map_example_with_scene_and_result.png)
+![nor02](img/800px-Normal_map_example.png)
 
-________________________
+_________________
 
-## Good character design
-Reference: Creative character design by Bryan Tillman, 2011, Focal Press  
+## 3D Scanning
+### Contact scanners
+![cscan](img/meth/scan.png)
+### Non-contact scanners
+![ncscan](img/meth/scan01.png)
+![tomo](img/meth/tomo.png)
+![depthkit](img/depthkit.png)
+[DepthKit](http://www.depthkit.tv/): Depth Enabled Filmmaking Tool using a Kinect V2 and a high end SLR camera.
 
-- Archetypes: a hero, a beauty, a bad guy.., or part of yourself   
-	- Character bio: name, age, height, weight, build, nationality...   
-- Story and target audience: *the character is always in service to the story*   
-- Shapes: they can tell a story about the character visually.  
-- Reference    
-- Aesthetics & Details  
-- Originality  
+## Modeling with texture and animation tools
+### Texture Displacement
+![disp](img/meth/disp.png)
+![hair](img/meth/hair.png)
 
-__________________
-## Character design templete
-Reference: Creative character design by Bryan Tillman, 2011, Focal Press 
+### Bones, lattice, and deformers
+![bone](img/meth/bone.png)
 
-1. Gender
-2. Race
-3. Eye color
-4. Hair color
-5. Glasses or contact lenses
-6. Nationality
-7. Skin color
-8. Shape of face
-9. Distinguishing features
-10. Clothes: what/how does he/she wear?
-11. Mannerisms
-12. Habits
-13. Health
-14. Hobbies
+### Dynamics
+![dynamic](img/meth/mic.png)
+
+All copyright of images are in [digital] Modeling by William Vaughan, 2011
+
+
+------------------------------
+<!--# 3D modeling fundamental
+## Topology 
+- A surface, a two-dimensional manifold, looks flat in a local view, but it can have a more-interesting global structure.
+
+- Topological objects are categorized by their genus (number of holes).
+
+	![topo01](img/maya/polygon01/topo01.jpg)   
 	
+### Definition
+
+- **Topology is the mathematical study of *shapes* and *spaces*.** It is a major area of mathematics concerned with the most basic properties of space, such as *connectedness*, *continuity* and *boundary*. It is the study of properties that are preserved under continuous deformations including stretching and bending, but not tearing or gluing. Topology developed as a field of study out of geometry and set theory, through analysis of such concepts as space, dimension, and transformation. 
+
+	e.g. a Möbius strip is a kind of object studied in topology which has only one surface and one edge.  
+	
+	![mobius](img/mobius_escher.gif)
+	- The gif clip is from [Mobius from mathcurve.com](http://www.mathcurve.com/surfaces/mobius/mobius.shtml)
+	
+- The definition of topology leads to the following mathematical joke (Renteln and Dundes 2005)	
+	
+	***"What is a topologist?""***  
+	***"Someone who cannot distinguish between a doughnut and a coffee cup."*** [Wolfram mathworld](http://mathworld.wolfram.com/Topology.html) [위상이란 무엇인가?](http://mathnmath.tistory.com/39)   
+
+	 ![torus](img/Mug_and_Torus_morph.gif)    
+	- This gif clip is from [Wikipedia](http://en.Wikipedia.org/wiki/Topology)
+
+- [Mathworld](http://mathworld.wolfram.com/classroom/TopologicalSpace.html): (1) The mathematical study of object's properties that are preserved through **deformations**, **twistings**, and **stretchings** of objects. Tearing, however, is not allowed. (2) A set along with a collection of subsets that satisfy several defining properties. 
+
+### More examples
+
+There are many surfaces with a variety of looks that are topologically the same.
+  
+![topo02](img/maya/polygon01/topo.jpg)   
+- The image is from [Math Hangout](http://mathhangout.weebly.com/stuff.html)
+
+
+- Check out more about topology from [Annenberg Learner website](http://www.learner.org/courses/mathilluminated/units/4/textbook/03.php)  
+
+--------------------------------------------
+## Booleans 
+Three boolean operations let you combine objects to make shapes that would otherwise be difficult to model using other techniques. You can add, subtract, or intersect objects to create a new, complex shape. [Examples](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-7DADD144-6C29-4AE3-B877-A9947B2F26E0)
+
+### The example of Boolean process
+![boo01](img/maya/polygon/bl01.png) 
+
+### Different kinds of boolean operation 
+![boo01](img/maya/polygon/bl02.png)  -->
+
+# Smoothing Polygon surfaces
+- [Autodesk: Smoothing polygons](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2018/ENU/Maya/files/GUID-8A5D0FF0-9BA1-435F-A4CA-53183311B819-htm.html) 
+	- Smooth a mesh by adding new polygons
+	- Smooth mesh preview overview
+	- Subdiv proxy overview
+	- Smooth a mesh by averaging the distance between vertices
+	- Subdivision surface
+ 
+- Other than these methods, to see a smooth version of a model, you can soften the normals  too (Modeling // Mesh Display / Soften Edge).
+
+## Subdivision surface
+
+A subdivision surface lets you subdivide specific regions of a mesh, giving you the ability to finely tune or smooth certain areas without changing the entire mesh.
+
+Subdivision surfaces help you keep a lower polygon count because they only insert control points where you need them (instead of uniformly across the entire mesh). However, subdivision surfaces have the slowest performance of the three smoothing methods. 
+
+Note: Subdivision surfaces are largely unsupported in pipelines outside of Maya, so you need to convert them to polygons or NURBS before exporting to these pipelines. You can convert using either Modify > Convert Subdiv to Polygons or Modify > Convert Subdiv to NURBS.
+For more information on subdivision surfaces, see the [Subdivision Surfaces documentation archive](http://download.autodesk.com/us/support/files/subds.pdf).
+
+### OpenSubdiv 
+OpenSubdiv is an open-source subdivision method developed by Pixar that lets you work with a high-fidelity representation of your model with great accuracy and speed. As a professional standard in the animation industry, OpenSubdiv is implemented in a variety of software packages, improving interoperability by producing the same results when models are transferred between applications. In Maya, OpenSubdiv is the default subdivision method when you preview a smoothed mesh, smooth a mesh using Mesh > Smooth, or create a subdiv proxy.
+
+## Maya subdivision tutorial   
+- [Maya Subdivision Surfaces](https://www.youtube.com/watch?v=LpyJv8hhW_o&index=1&list=PL4fkBUcbgjGXSR7PUnjBuOSO3sDcLRF2F)  
+- [Intro to Maya and 3D Modeling - Lecture B: 5/13 - Subdivision and the Rule of 3](https://www.youtube.com/watch?v=70e-3bidL-w)
+
+------------------
+# More on NURBS modeling
+
+![aom_NURBS](img/lab/aom_nurbs.png)  
+
+Art of Maya. P 47.
+
 __________
-## Inspiration
-- [Oktapodi](https://en.wikipedia.org/wiki/Oktapodi) is a 2007 French computer-animated short film, directed by Julien Bocabeille, François-Xavier Chanioux, Olivier Delabarre, Thierry Marchand, Quentin Marmier, and Emud Mokhberi. Music was composed by Kenny Wood.
-	- [youtube link](https://www.youtube.com/watch?v=badHUNl2HXU)  
-	- [Webpage / Gallery](http://www.oktapodi.com/gallery/) 
+# Inspiration
+## Game of Thrones intro
+- [Official Show Open 1:41](https://www.youtube.com/watch?v=s7L2PVdrb_8)
+- [Extended Opening 4:27](https://www.youtube.com/watch?v=i9xKpUXbxfM&feature=iv&src_vid=B3vqcbJwgCI&annotation_id=annotation_96828)  
+- [Kirk Shintani from Elastic](http://www.artofvfx.com/?p=1659)
+- [Software used to create the intro of Game of Thrones , Quora](http://www.quora.com/What-software-was-used-to-create-the-intro-for-Game-of-Thrones-TV-series)
+
+## 3D artists
+- [Kenneth A. Huff](http://www.kennethahuff.com/) 
+- [Meats Meier](https://vimeo.com/53762767)   
+
+![meatsMeier](img/Incredible-3D-Art-02.jpg) 
+
+
+## Book
+- [Digital Art Masters](https://shop.3dtotal.com/books/digital-art-masters.html)  
+
+-----------------
+
+# Lab 
+## Lab practice: Polygon to subdivision
+- Organic modeling using the subdivision method.
+
+Reference image:
+
+![subd](img/lab/subd.png)  
+![subd02](img/lab/starfish01.png) 
+![subd01](img/lab/starfish.png) 
+
+## How to:
 	
-- Hyper realistic 3D modelling: [TERUYUKI AND YUKA](http://www.telyuka.com/)	
+- Create a starfish geometry:
+	
+	- Start from Create / Polygon primitives / Prism: From the polyPrism node, change Number of Sides to 5.
+	- Apply Edit Mesh / Extrude: You can turn off Keep Faces Together and change its attributes to make a star. 
+	- Using the shortcut 1, 2, 3 to check [smooth mesh preview overview](https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2018/ENU/Maya/files/GUID-4863E5AE-0EA0-4596-B1AE-10C19603838E-htm.html): you can edit the shape.  
+	
+- UV layout
+	
+	- Let's work on the **UV layout in the UV texture**.
+	
+- Finalize the geometry
+	
+	- You can apply Edit Mesh / Transform to add a bit of irregularity to the shape.
+	- If you like the shape, you can **Mesh / Smooth** the star.
 
-## Reference
+- Shading
+	
+	- You can work on shading. [starfish texture](obj/starfish_tex.zip)  
 
-[Maya 2016 online Help](http://help.autodesk.com/view/MAYAUL/2016/ENU//)    
 
-- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)  
-
-## Advanced tutorial
-- [Maya: Professor - Poly Model Timelapse by Andrew Silke (36:01)](https://www.youtube.com/watch?v=5u1MnuCp6fM)
-- [Maya: Cartoon Head Topology by Andrew Silke (5:12)](https://www.youtube.com/watch?v=trZ2zxpM150)
-- [Maya: Cartoon Head Topology - Hack 'n' Slash (10:01)](https://www.youtube.com/watch?v=c2ybQtNlduE)
-- [How to Model Lips & Mouth (9:37)](https://www.youtube.com/watch?v=CiBGrpAI1gk)
-- [Speed Modeling Anna (Frozen) - In Maya (15:39)](https://www.youtube.com/watch?v=NBrBQbwiDn4)
-- [Maya Character Modeling Tutorial - Cartoon Mouse (# 1~4)](https://www.youtube.com/watch?v=2dLMctUGKXw)
-- [Modeling a Cartoon Cat in Maya - Part 1](https://www.youtube.com/watch?v=8Weir5-38tA)  
-- [Polygon & Subdivision Surface Modeling in Maya: The Mouse Embryo](http://www.molecularmovies.com/img/pdf_tutorials/MouseEmbryoModeling.pdf) 
-
--->
-______________________________
-
-# Lab
 ## Lab practice: Retro spaceship
 ### Reference
 - [Retro Spaceship from shutterstock](https://www.shutterstock.com/search/retro+spaceship) 
@@ -245,376 +314,34 @@ ______________________________
 - [Collection Of Maya 3D Tutorials](https://www.smashingmagazine.com/2009/08/the-ultimate-collection-of-maya-3d-tutorials/)  
 - [Maya: How to trim NURBS surfaces | lynda.com tutorial by Lynda.com](https://www.youtube.com/watch?v=X2blYvA4NBY)
 
-__________________________	
-	
-## Animation Turntable
- - [Maya Animation Turntable Options](http://help.autodesk.com/view/MAYAUL/2018/ENU//index.html?guid=GUID-858ECD08-AB1D-4F25-8519-CDC19CEA7ACF)    
-- Under the *Animation* module set, let's add ***Visualize/Create Turntable..***
-- Let's change our *Workspace* into *Animation* where you can find the Graph Editor window. 
-
-### Creating a turntable camera
-
-![turntable](img/maya/turntable.png) 
-![turntable](img/maya/workspace.png) 
-
-### Understanding Graph editor
-
-![turntable](img/maya/grapheditor.png) 
-
-### Making an animation infinite
-
-![turntable](img/maya/infinity.png) 
-![turntable](img/maya/cycle.png) 
-
-### Making Playblast animation
-
-- [Maya: Playblast an animation](http://help.autodesk.com/view/MAYAUL/2018/ENU//index.html?guid=GUID-1C6EDC8D-DA67-490E-81F1-1205336DEBD9)  
-
-A Playblast is a quick preview that lets you make a "sketch" of your animation, providing a realistic idea of your final render result without requiring the time needed for a formal render. Playblasting gives you a fast way to evaluate your work on the fly, taking a screen grab of the animation in the viewport at each frame during playback, and then “blasting” those images to an image viewer.
-
-
-![turntable](img/maya/playblast01.png) 
-![turntable](img/maya/playblast02.png) 
-
-<!--
-
-- Lab practice: Chracter modeling & texturing - a Lego character.
-
-_________________________
-## Lab practice A: Hard modeling
-![lab01](img/maya/character/legoman.jpg)    
-![lab03](img/maya/character/legoman_front.png) ![lab04](img/maya/character/legoman_side.png)  
-![lab03_01](img/maya/character/legoman_front01.png) 
-![lab04_01](img/maya/character/legoman_side01.png)
-![lab05](img/maya/character/spiderman_front.jpg)  
-![lab06](img/maya/character/spiderman_back.jpg) 
-![lab07](img/maya/character/spiderman_side.jpg) 
-
-## What to do:
-- Preparation
-- Low polygon modeling
-- UV texturing
-- Shading, lighting, and rendering controls
-- Smoothing the polygon
-
-## Important commands and tips:
-- Commands:
-	- Extrude
-	- Booleans
-	- Selections
-	- Deformers
-- Tips:
-	- Spend some time to **analyze and plan** before beginning the modeling processes. 
-	- Well prepared blueprints are important to the modeling processes.	
-	- Switch often to check its position from the side, front, and perspective view.
-	- Menu / Select tools are useful and efficient.
-	- Naming: in the outline and layer editor, from time to time spend some time to name them properly. It will help a lot to work on more complex modeling tasks.   
-	- Using Layer editor and Shading options to control its **transparent/opaque views** and **templete/reference/object** view & selection modes.
-
-__________________________
-
-## Preparation
-- Prepare the front and side images of a Lego model.
-- Importing blueprints to a front camera and a side camera (View / Image Plane).
-
-![pre](img/maya/character/imageplane.png) 
-
-- You can adjust the image plane position: using the Image Center X, Y, or Z.   
-And check out the attributes of the image plane from its attribute editor. 
-	
-![pre01](img/maya/character/imageplane01.png) 
-
-__________________
-
-## Low polygon modeling
-### Head
-- Create from a cylinder polygon object and modify its position and scale. (subdiv: 12) 
-- From the front view, go to the component face selection mode and drag - select faces and from the menu Select / Shrink to select only top faces or neck faces and apply Edit Mesh / **Extrude**. Click its local / world switch and move & scale and apply Extrude to make the head-top or neck geometry: ***Be careful not to apply several extrude commands at once. It is easy to do so. Use Undo to make sure that you didn't multi-fully applied the same function.***
- 
- 
-![head](img/maya/character/ext.png)  
-
-### Body
-- Start from a box. Move & scale it and use its vertices to make the right shape.  
-
-![body](img/maya/character/body.png)  
-
-- Use Extrude to make the lower body.
-
-### Middle belt piece
-![belt](img/maya/character/belt.png)  
- 
-- From the side view, let's start a cylinder to make the lower part of belt. 
-- Create a box for a belt and apply Mesh / **Booleans / Union** to make an unified geometry.
-
-### Leg
-- Create a cylinder and go to the side view and locate it.
-
-![leg01](img/maya/character/leg01.png)  
-
-- In the component mode, select faces as the image below and delete them.
-
-![leg02](img/maya/character/leg02.png)  
-
-- Select the edge and extrude.
-
-![leg03](img/maya/character/leg03.png)  
-
-- Select the edge and extrude several times to make the faces of the leg as the image below using the front and side view.
-
-![leg04](img/maya/character/leg04.png)  
-![leg05](img/maya/character/leg05.png)  
-
-- Apply the **Mesh Tools / Append to Polygon** to create the bottom face of the leg. After this, apply the **Mesh / Fill Hole** to create the closed mesh.  
-
-![leg06](img/maya/character/leg06.png)  
-
-- Now create a box to prepare the Boolean operation. Create a box bigger than the leg we created and from the front view, rotate it as the image plane. Select the leg and the shift select the box and apply Mesh / **Booleans / Difference.** 
-
-![leg07](img/maya/character/leg07.png)  
-
-- This time create a cylinder which is a bit larger than the lower belt part and select the leg and the cylinder and apply Mesh / **Booleans / Difference.** 
-
-![leg08](img/maya/character/leg08.png) 
-
-- Now right leg is done. Before duplicating it, let's clean it. Go to Edit and **Delete by Type / History.** 
-  
-![leg09](img/maya/character/leg09.png)  
-
-- In order to use the duplicate special, let's **reset Transformation** to make the manipulator locate in the world center.
- 
-![leg10](img/maya/character/leg10.png)  
-
-- Let's duplicate special. Note that scale X value is -1. 
-
-![leg11](img/maya/character/leg11.png)  
-
-- Great! Now we completed the legs. 
-- Plus, we can duplicate legs and make them a bit larger and apply Booleans / Difference to the belt to complete the belt.
-
-![leg12](img/maya/character/leg12.png)  
-
-___________________
-
-### Arm
-- Let's create a sphere and delete its faces to fit the contour of the image plane. 
-- Then, extrude the edge three times (choose one edge and apply **Select / Contiguous Edges** to select the entire edge perimeter) to make a base arm mesh. (when you apply the second extrude, increase its Divisions to 4 to make more lines for its deformation later.)
-
-![arm01](img/maya/character/arm01.png)  
-
-- Now apply **Deform / Lattice** to shape the arm. You can control the grid complexity using S, T, U divisions and its components are the Lattice Point. Using the lattice points, you can control and shape the main geometry.   
-
-![arm02](img/maya/character/arm02.png)  
-![arm03](img/maya/character/arm03.png)  
-![arm04](img/maya/character/arm04.png)  
-
-- Once shaping the arm is done, apply Mesh / Fill Hole to close it. 
-
-![arm05](img/maya/character/arm05.png)  
-
-- You can use the sculpt tool to add more fine controls. 
-
-![arm06](img/maya/character/arm06.png) 
-
-### Hand
-- Preparation: let's start from a Polygon Pipe. Transform it and then in the component mode, delete faces to shape it. You can apply Mesh / Fill Hole to close the mesh. 
-
-- Once it's done, you can apply lattices not only to an object but also to selected faces to deform. I applied the lattice to inner faces once and to outer faces again.   
-
-![hand01](img/maya/character/hand01.png) 
-
-- When the hand is done, you can extrude the face from the arm to make a wrist. Then apply Booleans / Union to complete. 
- 
-![hand02](img/maya/character/hand02.png) 
-
-- Duplication: now delete its history and apply Reset Transformations and apply duplicate it with -1 scale X to complete both arms.  
-
-![hand03](img/maya/character/hand03.png)  
-![hand04](img/maya/character/hand04.png) 
-
-- *Congratulations!* The low polygon modeling is completed. Before starting the UV layout, please delete all histories and work on naming in the outliner and layer editor.
-
-![hand05](img/maya/character/hand05.png) 
-
-
-
-## UV layout & texturing
-![uv01](img/maya/character/uv01.png) 
-
-- You can download a Lego uv texture from [LEGO Universe Wiki is a Fandom Games Community](http://legouniverse.wikia.com/wiki/File:Torsos_NPC_VandaDarkflame_I5.png)
-Content is available under CC-BY-SA. 
-
-- For this tutorial, [Vanda Darkflame character](http://legouniverse.wikia.com/wiki/Vanda_Darkflame) texture is used.
-
-- [Custom Minifig Textures](http://nexusadventures.wikia.com/wiki/User_blog:Ferfature/Custom_Minifig_Textures) 
-
-### Preparation
-- Create 5 materials and apply each material to a head, a body, a belt, legs, and arms respectively.
-
-- Link the texture from the color attributes for all materials.
-
-- Work on panel layouts for a comfortable workflow.
-
-### Planar UV mapping
-- Let's apply planar uv mapping for each part and move the uv shells to proper parts. 
-- Then from a camera view, select the face which has a texture from the Lego geometry and apply **Select / Convert Selection / To Edge Perimeter.**  
-
-![uv02](img/maya/character/uv02.png)  
-
-- Move to the UV texture editor and apply UV Edtor / Polygon / Cut UV Edges.
-
-![uv03](img/maya/character/uv03.png)  
-
-- In the UV texture editor, choose Shell from the component mode, and select & move around to find the cut shell.
-  
-![uv04](img/maya/character/uv04.png)  
-
-- Move the shell and select UV from the component mode and move UVs to map the texture to the UV layout.
-- Repeat the same process to the head, body, belt, and legs.
-  
-![uv05](img/maya/character/uv05.png) 
-
-- For the arms, which have more geometry faces, you can select a few faces and use Select / Grow or Shrink and other commands to make the selection processes efficient.
- 
-![uv06](img/maya/character/uv06.png)  
-![uv07](img/maya/character/uv07.png)  
-
-
-
-## Shading, lighting, and rendering
-- Let's work on the cinematography. Create lights and soft shadows. 
-	- In the below rendering, one directional and one ambient light were used.
-- Make a rendering quality high.
-	- In the render settings, make the Anti-aliasing quality to the production quality.
-- Let's tweak the shading parameters to make it look good.
-- You can create an environment such as a ground and a sky too.
-
-![sh01](img/maya/character/lego.jpg)  
-
-- Let's switch to the Maya Vector render.
-	- Tweak the Fill Options and Edge Options in the render settings.
-
-![sh02](img/maya/character/lego_vec01.png)  
-![sh03](img/maya/character/lego_vec02.png)  
-
-
-
-## Smoothing
-
-- Let's apply Bevel to the Edge loop to add smoother lines.
- 
-![sm01](img/maya/character/sm01.png) 
-![sm02](img/maya/character/sm02.png) 
-
-- Optionally, you can apply Mesh / Smooth Proxy / Subdiv Proxy.
-From the option box, you can create layers which can divide the subdiv surfaces from its low polygon geometry.  
-
-![sd01](img/maya/character/sd01.png) 
-
-- To keep the boundary, you can use Mesh / Smooth Proxy / Crease Tool. When you apply, you need choose edges from the component mode and drag while holding a mouse middle button to decide its intensity.
-  
-![sd02](img/maya/character/sd02.png) 
-
-- Please compare the low poly, its exponential level is one or two in the PolySmoothProxy node.
-
-![sd03](img/maya/character/sd03.png) 
-![sd04](img/maya/character/sd04.png) 
-
-- ***Congratualtions! It's completed!***
-
-______________________________
-
-## Lego related reference
-- [Lego Man 3D Minifig Reference
-by Quandtum](http://quandtum.deviantart.com/art/Lego-Man-3D-Minifig-Reference-145171513) 
-- [Anatomy Of A Lego Minifig](http://wtf.thebizzare.com/offbeat/uncategorized/anatomy-of-a-lego-minifig/)  
-- [LEGO-Textures: Textures scanned from real LEGO bricks!](https://github.com/rioforce/LEGO-Textures)  
-- [CgTrader](https://www.cgtrader.com/3d-models/sport-hobby/toy/lego-man-collection-10-characters)  
-- [LEGO HEAD DECALS](http://fantasticpixcool.com/lego+head+decals)  
-- [Base Lego Model](https://3docean.net/item/base-lego-model/8762731)  
-- [Lego Minifig 3D Model](https://www.creativecrash.com/3d-model/lego-minifig-3d-model)  
-
-
-## Lab work to do
-- Review & practice based on today's lecture & lab class material.  
-- Let's prepare project 2 & 3 
-	- Project 2: the completion of project 1
-	- Project 3: free theme modeling & rendering. 
-	- [Project link](project.html)
-	
-
+____________________________
 
 ## Assignment
-- By Sunday Nov 13th midnight, please complete your lego modeling (up to what we have worked in the class) and prepare your customized lego texture for the next class (representing you as a lego character) and upload the **rendering image(s)** to the class Tumblr with simple descriptions: **"a09 by your name, date"**.	
--->
-
-______________________________
-
-## Assignment
-- By Sunday Nov 26th midnight (11:59 pm), please complete your customized retro spaceship modeling and upload a **rendering image** to the class Tumblr ([https://www.tumblr.com/blog/2017intm3d](https://www.tumblr.com/blog/2017intm3d)) or to Canvas with simple descriptions: **"a09 by your name, date"**.	
-
-
-
-________________________
-
-# Project 2 - completion of still life modeling (20%) 
-## Due date: Nov 26th midnight (11:59 pm).
-
-- Shading & rendering: Continuation and completion of project 1 applying proper shaders with textures and cinematographic set-up including camera, lights, and shadows. 
-- If you want to work further, you can alter and advance project 1 or completely redo it too. Usually if you make the same object more than once, you will find more efficient solutions.  
-
-- Please collect your final work and related files in one folder:
-
-	1. The name of files: ```your first name_schoolID_```   
-	
-	2. The name of folder: ```your last name_schoolID``` 
-	  
-	3. What to submit: 
-		1. Your final render image (HD 1024). 
-		2. Your Maya file with texture folder (Make sure that you have only a final scene and final textures. Please check the size before you submit.)
-		3. One page documentation PDF file, showing your reference image and a description of your choice and focus.   
-	4. Where to submit: please upload your project 2 (including three documents: one image file, one Maya file, one PDF file) to Canvas.
-	
-	5. Consider the technical and aesthetic challenges [link to evaluation criteria from the syllabus](index.html).
-	
-	6. Don't forget to organize your files: using layers and naming.   
-	
-		
-## General guide for the project
-
-- Cleaning the file: proper naming, and delete the history once it is ready.
-
-- Modeling details: Work on good proportion. Adding bevels to smooth edges. Apply smoothing if it is a smoothed and curved surface; if it is NURBS surface, increase number of spans in the tessellation tap or rebuild, or if it is polygon, either do smooth or smooth proxy, or by manually adding more divisions or edges.
-
-- Cinematography: redefine your camera set-up (film gate) and match it to the render setting (resolution gate). Check that your lighting shows good balance and overall contrast to help viewers to focus on the main objects, and to reveal important details in your scene. Don't forget to create good soft shadows.
-
-- Shading & rendering: define and reveal proper material characteristics. When you do render, properly apply ray tracing, direct or indirect illumination only if it fits. Don't forget to apply anti-aliasing. 
-
-Overall, keep working until you are pleased with your final render result. 
-
+- Please complete your retro spaceship and upload a **rendering image** to Canvas.
 
 
 </div>
 <div id="wrapper">
 	
 	<div class="header">
+		
 		<h1>INTM3D</h1>		
-		<a href="index.html">Class overview</a><br/>
-		<a href=http://2017intm3d.tumblr.com/>Tumblr class portfolio</a><br/><br/>
+		<a href="index.html">Class outline</a><br/><br/>
 	
 		<h3>Class schedule</h3>	
 				<a href="week01.html">1: Introduction</a><br/>
-				<a href="week02.html">2: 3D modeling I</a><br/>
+				<a href="week02.html">2: 3D modeling overview</a><br/>
 				<a href="week03.html">3: NURBS modeling</a><br/>
 				<a href="week04.html">4: Polygon modeling</a><br/>
-				<a href="week05.html">5: Shading</a><br/>								
-				<a href="week06.html">6: Texturing</a><br/>  
-				<a href="week07.html">7: Cinematography</a><br/>
-				<a href="week08.html">8: Modeling techniques</a><br/>
-				<a href="week09.html">9: Animation production</a><br/>
-				<a href="week10.html">10: Basic animation</a><br/>		
-				<a href="week11.html">11: Arnold: Physically Based Renderer</a><br/>
-				<a href="week12.html">12: Rendering</a><br/>
+				<a href="week05.html">5: Rendering</a><br/> 
+				<a href="week06.html">6: Shading</a><br/>								
+				<a href="week07.html">7: Texturing</a><br/>  
+				<a href="week08.html">8: Cinematography</a><br/>
+				<a href="week09.html">9: Modeling techniques</a><br/>
+				<a href="week10.html">10: Animation I</a><br/>	
+				<a href="week11.html">11: Animation II</a><br/>	
+				<a href="week12.html">12: Arnold: Physically Based Renderer</a><br/>
+	
 	</div>
 	<div class="section">
 		<script type="text/javascript">
@@ -624,7 +351,7 @@ Overall, keep working until you are pleased with your final render result.
 		</script>
 	</div>
 	
-	<div class="footer">Haru (Hyunkyung) Ji, 2017</div>
+	<div class="footer">Haru (Hyunkyung) Ji, 2018</div>
 	
 </div>
 </body>

@@ -28,19 +28,8 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 - Applying materials with proper textures onto different objects.
 - Create and edit shader networks in the Hypershade window.
 
-------------
-### Indirect (global) vs. direct illumination	
-![gl01](img/maya/shading/gl.png)
+____________________
 
-Indirect light is all the inter-reflected light in a scene. Global illumination is an approximation of real-world indirect light transmission.
-
-Direct (local) illumination is the light provided only directly from a light source (such as a spot light). Direct light is emitted from a light source and travels in a straight path to the illuminated point on a surface.
-
-![gl02](img/maya/shading/illum.png)
-
-Ray tracing is a technique for generating an image by tracing the path of light through pixels in an image plane and simulating the effects of its encounters with virtual objects. The technique is capable of producing a very high degree of visual realism, but at a greater computational cost. [-wikipedia](http://en.wikipedia.org/wiki/Ray_tracing_(graphics))
-
-----------------------------
 ## Shading
 **Shading** is the proper term for applying a renderable color, surface bumps, transparency, reflection, shine, or similar attributes to an object in Maya. It’s closely related to, but distinct from, **texturing**, which is what you do when you apply a map or other node to an attribute of a shader to create some sort of surface detail. Nevertheless, because textures are often applied to shaders, the entire process of shading is sometimes informally referred to as texturing. Applying textures to shaders is also called texture mapping or simply mapping. You map a texture to the color node of a shader that is assigned or applied to a Maya object.
 

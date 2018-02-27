@@ -23,7 +23,7 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 # Maya Texturing
 ## Goal
 - Understanding the processes of UV texturing in Maya.
-- Understanding 3D paint tool with Photoshop.
+- Understanding Maya's 3D Paint Tool along with Photoshop.
 
 Although the Hypershade window provides numerous ways to prepare materials, several important techniques outside this window are important to know. Preparing proper **UVs** for any model is a critical step in the texturing process. Using the **3D Paint tool** is an efficient way to prepare custom bitmaps. Maya's support for the **Photoshop PSD format** allows the use of layers. At the same time, the proper use of bump and displacement maps can add realism to a render. 
 
@@ -84,16 +84,22 @@ ________________________
 **NURBS surfaces have implicit UVs; this means that the coordinates are built into the parameterization of the surface. UV texture coordinates do not have to be created for NURBS surfaces; only polygon and subdivision surfaces require mapped UVs.**
 
 
-## Reference
+## Relavant references and tutorials:
 
 [Maya 2018 online Help](http://help.autodesk.com/view/MAYAUL/2018/ENU//)    
 
 - Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)    
 - [Maya 2018 UV editor overview](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-73BF7546-3BF2-44F3-9192-15A024CEC173)  
-- [Maya 2018: UV Toolkit Review, 13:27](https://www.youtube.com/watch?v=4gT3XAbOiV0)  
-- [UV mapping tips](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-1CEF8A5B-1051-40F1-ACFE-F29AD066F56F)  
+- [WHAT’S NEW WITH MAYA’S UV EDITING TOOLS by Steven Roselle, 13:27](http://lesterbanks.com/2017/08/watch-whats-new-mayas-uv-editing-tools/)  
+- [Maya Monday: The New UV Editor](https://www.toolfarm.com/blog/entry/maya_monday_the_new_uv_editor)   
 - [Layout UV shells](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-21CFF911-9C21-4019-B676-766ACA3BC889)  
+- [THE NEW UV EDITOR IN MAYA 2017 UPDATE 3](http://scythgames.com/blog/welcome-new-uv-editor-maya-2017-update-3-9/)   
+- [UV mapping tips](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-1CEF8A5B-1051-40F1-ACFE-F29AD066F56F) 
 
+## Maya bonus tool
+- Bonus Tools 2018 is a free collection of useful Maya scripts and plug-ins. After installing Bonus Tools, an additional pull-down menu will be added to the end of the main Maya menu. This new menu provides easy access to a variety of tools and utilities for daily use. 
+
+You can download it from Help / Maya Resources and Tools / Download Bonus Tools
 
 
 
@@ -161,15 +167,20 @@ The Blue Umbrella: a 2013 Pixar computer-animated short film that is directed by
 
 # Lab
 ## To do list
+- Team formation & mid-term announcement
 - Lab practice A: Creating UVs   
 - Lab practice B: Texturing a box; dice, cardboard box 
 - Lab practice C: 3D painting texture and using PSD network   
-- Lab practice D: Eye texturing  
-- Demonstration E: Alternate UV texturing   
+- Lab practice D: 3D Cut and Sew UV Tool  
+- Lab practice E (optional): Eye texturing    
 
 ## Example textures
-- Download textures from [here.](obj/textures.zip)
+- You can download textures from [here.](obj/textures.zip)
 ___________________________
+
+## Team formation & mid-term announcement
+- [google survey](https://goo.gl/forms/fsswcHUn2Uqt8FZR2)  
+- [Attendance/mid-term schedule](https://docs.google.com/spreadsheets/d/1VPL3abA7-uzQV2w0WQEGS01a1RxX789eK2WhvBePb9M/edit?usp=sharing)  
 
 ## Practice A: Creating & Selecting UVs
 - Planar UV mapping
@@ -213,7 +224,7 @@ ___________________________
 
 	![dice01](img/maya/shading/texturing/dice_snap.png)
 
------------------------------------------------------
+________________________________
 	
 ## Practice C: 3D painting texture 
 **Goal:** creating 3D painted textures.  
@@ -229,10 +240,22 @@ ___________________________
 1. Save UV texture (UV Editor // Image / UV Snapshot... )     
 2. Create PSD Nexwork... (UV Editor // Image / Create PSD Network...) and Update PSD Network...	
 
+________________________________
+	
+## Practice D: 3D Cut and Sew UV tool 
+**Goal:** controlling UVs in the viewport for more efficiency.  
+**Command location:** Modeling // UV / 3D Cut and Sew UV Tool   
 
+The 3D Cut and Sew UV Tool allows you to create or stitch seams on UV shells right in the viewport, instead of through the UV Editor. For more information on cutting and sewing edges, see [Separate and attach UVs](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-578193DB-7EE7-4C60-A26F-9187DF8614A3).
 
---------------------------
-## Lab practice D: Eye texturing 
+![texturing](img/maya/shading/texturing/3dcut.png)
+
+### Related tutorial for practice D:
+- [WORKING WITH THE NEW 3D CUT AND SEW UV TOOL IN MAYA 2018	by Malcom Andrieshyn](http://lesterbanks.com/2017/09/working-new-3d-cut-sew-uv-tool-maya-2018/)  
+
+_______________________
+
+## Lab practice E (optional): Eye texturing 
 ### Using textures and a projection utility
 
 ![eye01](img/maya/shading/texturing/eye.jpg)
@@ -296,10 +319,6 @@ Related tutorial:
 - An UV unwrap example screenshot using the monkey primitive mesh.
 - You can download the obj data [here](obj/monkey.obj) from the right button of a mouse do as Save Link As.   
 
-### Bonus Tools
-- Bonus Tools 2016 is a free collection of useful Maya scripts and plug-ins. After installing Bonus Tools, an additional pull-down menu will be added to the end of the main Maya menu. This new menu provides easy access to a variety of tools and utilities for daily use. The BonusTools menu sets have been reorganized to match that of the Maya 2016 UI overhaul.
-
-You can download it from Help / Maya Resources and Tools / Download Bonus Tools
 
 
 ## Lab work to do
@@ -311,8 +330,13 @@ You can download it from Help / Maya Resources and Tools / Download Bonus Tools
 -->
 
 ## Assignment
-- Please complete your UV mapping practicesand upload screenshots to Canvas.	
-	- Three images: one dice or box UV texturing result, one 3D paint texturing image, and one eye texturing image.  
+- Please complete your UV mapping practices and upload your screenshots to Canvas and Tumblr with a caption "UV texturing by *your name.*" Due: Mar 8 11:59 pm.
+	- Three images: 
+		- One dice or box UV texturing result   
+		- One 3D paint texturing image 
+		- One UV texturing image of an organic object such as human or animal. You can use a sculpting base mesh model from Content Browser. Create a new UV and work on your new UV unwrapping.
+	
+- Please keep working on your mid-term group project.	 
 
 
 </div>

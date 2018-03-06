@@ -23,7 +23,7 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 # Cinematography
 ## Goal
 
-- Understand and be able to create and control lighting & shadows, camera(s), and to render final images with a good aesthetic sense. 
+- Understand and be able to create and control lighting & shadows, camera(s), and to render final images with a good aesthetic sense and fine control of artist's intention and goals. 
 
 ------------
 # 1- , 2- , and 3-point lighting
@@ -32,14 +32,6 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 ![3pl00](img/maya/shading/lighting/threepointex.png)
 
 [Standard 3-point lighting applied to a mannequin, Image from Advanced Maya® Texturing and Lighting]
-
-![3pl01](img/maya/shading/lighting/threepoint.jpg) Image from Toth Edina's Blog.
-
-### More reference
-- [Rembrandt](http://en.wikipedia.org/wiki/Rembrandt)
-- [Caravaggio](http://en.wikipedia.org/wiki/Caravaggio)  
-- [MISE-EN-SCENE from College of Film & Media Studies Blog](http://collegefilmandmediastudies.com/mise-en-scene-2/) 
-- [Cinematographer Matthew Scott blog](http://mattscottvisuals.com/lighting/)
 
 **Key light**
 
@@ -56,7 +48,7 @@ A secondary light that is less intense than the key. This light "fills" in the d
 An intense light source placed behind a subject that strikes the subject along the edge. Rim lights are commonly known as backlights or hair lights.
 
 ![3pl03](img/maya/shading/lighting/ex.png)  	
-Image from Maya ® Professional Tips and Techniques
+Image from Maya ® Professional Tips and Techniques.
 
 ## Using 3-points lighting
 #### 1-Point Lighting
@@ -69,6 +61,14 @@ In the standard 3-point lighting scheme, a strong key is placed to one side of a
 #### 4-point Lighting
 Four-point lighting simply adds a fourth light to illuminate the background or set behind the subject.
 
+![3pl01](img/maya/shading/lighting/threepoint.jpg) Image from Toth Edina's Blog.
+
+### More reference
+- [Rembrandt](http://en.wikipedia.org/wiki/Rembrandt)
+- [Caravaggio](http://en.wikipedia.org/wiki/Caravaggio)  
+- [MISE-EN-SCENE from College of Film & Media Studies Blog](http://collegefilmandmediastudies.com/mise-en-scene-2/) 
+- [Cinematographer Matthew Scott blog](http://mattscottvisuals.com/lighting/)
+
 ______________________________
 
 ## Light sources in Maya		
@@ -79,21 +79,25 @@ With Maya, you have much more control over the placement, intensity, and charact
 ![light01](img/maya/shading/mayalight.png)
 ![light02](img/maya/shading/lights.png)
 
-## Light attribute editor
+
+## Spot light attribute editor
 
 ![light04](img/maya/shading/spotlight.png)
 
-### Absorption, reflection, and refraction of light (Lighting and Shading > Lighting > Basics of Lighting > [- Maya help](http://help.autodesk.com/view/MAYAUL/2018/ENU//) 
+### Spot light attributes  
+![test044](img/maya/shading/lighting/lightstructure.png)
+
+### Absorption, reflection, and refraction of light
 
 The color of the objects we see in the natural world is a result of the way objects interact with light. When a light wave strikes an object, it can be absorbed, reflected, or refracted by the object. All objects have a degree of reflection and absorption.
 
-![light05](img/maya/shading/lightwave.png)    
-[Image from TutorVista.com](http://physics.tutorvista.com/light.html)
+<!--![light05](img/maya/shading/lightwave.png)    
+[Image from TutorVista.com](http://physics.tutorvista.com/light.html)-->
 
 ![light06](img/maya/shading/diffuseplus.png)
 ![light07](img/maya/shading/refractionplus.png)
 
-### Light Decay (Lighting and Shading > Lighting > Basics of Lighting > Direct light sources > )
+### Light decay 
 
 In the real world, a light’s brightness is strongest at the light source and decreases or decays further away from the light source. In Maya, a light’s brightness decays only if decay is turned on (see Decay Rate). The light’s color, however, remains the same no matter how far it is from the light source.
 
@@ -102,16 +106,34 @@ In the real world, a light’s brightness is strongest at the light source and d
 You can also create decay effects not seen in the real world (only for a Spot light in Maya). For example, you can use a custom Intensity curve to make a spot light’s brightness increase further away from the light source, or you can use a custom Color curve to make the color of a spot light change with distance.
 
 ![decay02](img/maya/shading/decay01.png)
+
+
 ________________________________
 
-## Creating Shadows
+## Creating shadows
 - Define from light sources.
 ![shadow01](img/maya/shading/shadow.png)
 
-## Creating Soft Shadows
+## Controlling soft shadows
 ![shadow](img/maya/shading/softshadow.png)    
-Example of a depth map soft shadow: increase the filter size.
-Or you can turn on raytrace shadows (it is more computationally expensive). 
+In the case of a depth map shadow: increase the filter size to gain soft shadow ([Autodesk knowledge network: Shadow attributes](https://knowledge.autodesk.com/support/maya-lt/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/MayaLT/files/GUID-5C4A0775-AF52-42D3-A8D5-299C723D871D-htm.html) ).  
+
+- Filter Size:  
+Controls the softness of shadow edges. (The softness of shadow edges is also influenced by the size of the shadow and the Resolution.) Increasing Filter Size also increases rendering times, so set it to the lowest value that produces acceptable results. A Filter Size of 3 or less is usually sufficient. The valid range is 0 to infinity. The slider range is 0 to 5. The default value is 1.
+
+In the case of a raytrace shadow (it is more computationally expensive): 
+
+- Shadow Radius, Light Radius, Light Angle  
+Controls the softness of shadow edges by setting the size (Shadow Radius or Light Radius) or angle (Light Angle) of the light. For example, a large light produces softer shadows than a small light. The light radius is also used for light glows to determine the occlusion/visibility (for point and spot lights).
+
+	The Shadow Radius attribute is only available for ambient lights.
+
+	The Light Radius attribute is only available for point lights and spot lights. The slider range is 0 (hard shadows) to 1 (soft shadows). The default value is 0.
+
+	The Light Angle attribute is only available for directional lights. The slider range is 0 (hard shadows) to 180 (soft shadows). The default value is 0.
+
+- Shadow Rays:  
+Controls the graininess of soft shadow edges. Increasing the number of Shadow Rays also increases rendering times, so set it to the lowest value that produces acceptable results. The slider range is 1 to 40. The default setting is 1.
 
 _______________________________
 
@@ -120,20 +142,20 @@ Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier,
 
 Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
 
-You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab. 
-
-![dof00](img/maya/rendering/dof.png)    
-[View the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)   
+You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab.  
 
 ![dof01](img/maya/rendering/dof01.png)  
 
 The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
  
 ![dof02](img/maya/rendering/dof02.png)  
-The Distance tool used to determine the focus distance.
+The Distance tool used to determine the focus distance. Alternatively, you can turn on Display/Heads Up Display/Object Details to see the distance from the selected object to the camera.  
    
 ![dof03](img/maya/rendering/dof03.png)   
 An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
+
+![dof00](img/maya/rendering/dof.png)    
+Hardware DoF effect: [the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)  
 
 	
 __________
@@ -217,11 +239,6 @@ _____________________________
   
 ![test04](img/maya/shading/lighting/test04.png) Look Through Selected.
 
-#### Change more attributes in the spot light attribute editor.
-- Decay Rate, Dropoff, and more other than Cone Angle, Penumbra Angle. 
-
-![test044](img/maya/shading/lighting/lightstructure.jpg)
-
 #### Let's practice more!
 ![test02](img/maya/shading/lighting/test02.png)
 ![test01](img/maya/shading/lighting/test01.png)
@@ -287,10 +304,9 @@ Final render image. The ground is unlinked from the blue back light.
 
 ________________________
 ## Lab work to do
-- Review & practice based on today's lecture & lab class material. 
-	- Practice your lighting set-up to control the overall contrast, visible details, and dramatic mood of your scene.
-	- Apply soft shadows.
-	- Create better quality rendering by applying cinematography techniques.
+- Practice your lighting set-up to control the overall contrast, visible details, and dramatic mood of your scene.  
+- Apply soft shadows.  
+- Experiment your scene by applying cinematography techniques.
 ____________________________
 
 ## Assignment

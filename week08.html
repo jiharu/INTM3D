@@ -149,7 +149,7 @@ You can activate Maya's depth of field by checking the Depth Of Field attribute 
 The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
  
 ![dof02](img/maya/rendering/dof02.png)  
-The Distance tool used to determine the focus distance. Alternatively, you can turn on Display/Heads Up Display/Object Details to see the distance from the selected object to the camera.  
+The Distance tool is used to determine the focus distance. Alternatively, you can turn on Display/Heads Up Display/Object Details to see the distance from the selected object to the camera.  
    
 ![dof03](img/maya/rendering/dof03.png)   
 An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
@@ -210,6 +210,26 @@ _______________________
 >	2. **Export** (File / Export Selection..) as [obj file](http://en.wikipedia.org/wiki/Wavefront_OBJ) (if you can't find obj file format, you can load objExport.bundle from Windows / Settings / Preferences / Plug-In Manager)
 >	3. Save the obj file in the Data folder in your working Maya project folder.
 
+### Lighting practice tip
+#### Lighting by light attributes (using light Attribute Editor):
+- You can turn on or off *Illuminates by default*.
+- You can change the light Color to distinguish between different lights.
+- Position the key light using **Look Through Selected** from a view panel menu (Panels / Look Through Selected).
+
+![test03](img/maya/shading/lighting/test03.png) Changing colors.
+  
+![test04](img/maya/shading/lighting/test04.png) Look Through Selected.
+
+	
+### Creating your custom camera and render from it
+1. Create a camera with an aim (Create/Cameras/Camera and Aim). 
+2. To display objects, you can switch the camera from: (View panels: Panels / Perspective / or Panels / Orthographic /)  
+3. Adjust the position of the camera (View panels: Panels / Look through Selected)
+4. Move the camera and its aim separately. You can turn on snapping.
+5. Change the camera's attributes: (View panels: View / Camera Attribute Editor... or using the outliner window)	
+	- Angle of View, Near and Far clip, Film Gate..  
+6. From the Render View window, you can switch cameras (Render View: Render / Render / your custom camera)
+7. Render to check. 
 _____________________________
 		
 ## Lab practice B: Practicing lighting & cameras
@@ -222,22 +242,11 @@ _____________________________
 	- Render a test view to check. 
 	 
 2. Applying a fill light.
-	- You can start with ambient light.
 	
-3. Applying a back/rim light.
-	- You can start with directional light.    
+3. Applying a back/rim light.   
 	
 4. Experimentation to create your own style to fulfill your aesthetics and goal/intention.
 
-### Lighting practice tip
-#### Lighting by light attributes (using light Attribute Editor):
-- You can turn on or off *Illuminates by default*.
-- You can change the light Color to distinguish between different lights.
-- Position the key light using **Look Through Selected** from a view panel menu (Panels / Look Through Selected).
-
-![test03](img/maya/shading/lighting/test03.png) Changing colors.
-  
-![test04](img/maya/shading/lighting/test04.png) Look Through Selected.
 
 #### Let's practice more!
 ![test02](img/maya/shading/lighting/test02.png)
@@ -255,52 +264,34 @@ Where the light linking window is.
 View in the viewport. Check the blue back light. The ground has too much attention.
 
 ![linking](img/maya/shading/lighting/light01.png) 
-Final render image. The ground is unlinked from the blue back light.
-
-	
-### Creating your custom camera and render from it
-1. Create a camera with an aim (Create/Cameras/Camera and Aim). 
-2. To display objects, you can switch the camera from: (View panels: Panels / Perspective / or Panels / Orthographic /)  
-3. Adjust the position of the camera (View panels: Panels / Look through Selected)
-4. Move the camera and its aim separately. You can turn on snapping.
-5. Change the camera's attributes: (View panels: View / Camera Attribute Editor... or using the outliner window)	
-	- Angle of View, Near and Far clip, Film Gate..  
-6. From the Render View window, you can switch cameras (Render View: Render / Render / your custom camera)
-7. Render to check. 
-
+Final render image. The ground is unlinked from the blue back light.  
 
 ### Depth of Field (DoF) rendering
 
-#### Scene preparation
- 
-1. Create three planes and five balls on a Cylinder (Create/Polygon Primitives & Edit/Duplicate Special) and align them.
-2. Create a camera with an aim (Create/Cameras/Camera and Aim) and check it via the Outliner (two plane mode -> at the left panel or panels/Layouts/Two Panes Side by Side).
-3. Choose the camera and transform Snapping the Aim to the main focus point of the object). 
-4. Adjust the position of the camera (panels/Look through Selected)
 - Choosing Camera properties: (select Camera -> Attribute Editor)	
 	- Angle of View, Near and Far clip, Film Gate 	
 	    	
 	![sp03](img/maya/shading/camera.png)
 	
-5. Measure the distance between main object to the camera (Create/Measure Tools/Distance Tool)
-6. Use this distance for the Focus Distance in the Attribute Editor of the camera
+- Measure the distance between main object to the camera (Create/Measure Tools/Distance Tool) or you can find the distance information from Display/Heads Up Display/Object Details.
+- Use this distance for the Focus Distance in the Attribute Editor of the camera
 	- Check the Depth of Field (select Camera -> Attribute Editor), change the Focus Distance and F Stop
 
 	![sp04](img/maya/shading/dof.png)
-
-7. Render the scene. Do basic render settings:
-	- Choosing Rendering properties: (Window/Rendering Editors/Render Settings)
-	- Choose Common settings
-		- File name, Image format, Choose camera, Choose Image Size
-		![sp01](img/maya/shading/render_common.png)
-		
-	- Choose Specific settings -> Maya Software
-		- Quality, Anti-aliasing, Raytracing, Motion Blur
-		![sp02](img/maya/shading/render_maya.png)
-		
+			
 #### Using depth of field
 
 ![dof01](img/maya/shading/dof_render.png)
+
+### Render the scene. Do basic render settings:
+- Choosing Rendering properties: (Window/Rendering Editors/Render Settings)
+- Choose Common settings
+	- File name, Image format, Choose camera, Choose Image Size
+	![sp01](img/maya/shading/render_common.png)
+	
+- Choose Specific settings -> Maya Software
+	- Quality, Anti-aliasing, Raytracing, Motion Blur
+	![sp02](img/maya/shading/render_maya.png)
 
 ________________________
 ## Lab work to do

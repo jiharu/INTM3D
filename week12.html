@@ -79,7 +79,7 @@ Designing materials based on physical laws can tremendously simplify shading and
 	- 12: Render in Arnold  
 
 - [Arnold for maya user guide 4](https://support.solidangle.com/display/AFMUG/Understanding+Physically+Based+Rendering+in+Arnold)  
-	- [Learning seans](https://support.solidangle.com/display/AFMUG/Learning+Scenes)  
+	- [Learning sceans](https://support.solidangle.com/display/AFMUG/Learning+Scenes)  
 	- [Light](https://support.solidangle.com/display/AFMUG/Lights)  
 	- [Material library](https://support.solidangle.com/display/A5AFMUG/Material+Library)  
 	
@@ -109,7 +109,7 @@ __________________
 <!--
 - [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)-->
 - [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
-- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  
+<!--- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  -->
 
 ### Different Cornell box render images:
 ![goal](img/maya/shading/raytr.png)
@@ -135,7 +135,7 @@ Information stored in high-dynamic-range images typically corresponds to the phy
 
 HDR images often don't use fixed ranges per color channel—other than traditional images—to represent many more colors over a much wider dynamic range. For that purpose, they don't use integer values to represent the single color channels (e.g., 0-255 in an 8 bit per pixel interval for red, green and blue) but instead use a floating point representation. Common are 16-bit (half precision) or 32-bit floating point numbers to represent HDR pixels. 
 
-### Using Arnold SkyDome Light
+### Using Arnold SkyDome Light as IBL
 - To obtain HDRI   
 	- [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html)  
 Licence: All sIBL-sets on this page, including the images within, are licensed under the Creative Commons Attribution-Noncommercial-Share Alike 3.0 License.
@@ -145,14 +145,14 @@ Remember: always mention where you got them from.
 
  - [hdrihaven](https://hdrihaven.com/hdris/category/?c=all)  
 
-### Using Arnold Photometric Light
+### Using Arnold Photometric Light (IES)
+The IES (Illumination Engineering Society) standard format file stores information about the distribution of light from a real light source. Profiles are created by measuring light bulbs in the real world.
+
 - To obtain IES   
 	- [Visual Photometric Tool™](http://www.visual-3d.com/tools/photometricviewer/)
-	
-_________________________
-# Class evaluation
 
-Please participate in the class evaluation on Canvas for productive feedback. 
+### Arnold photometric light
+- [Arnold manual](https://support.solidangle.com/display/AFMUG/Ai+Photometric+Light)  	
 	
 _________________________
 

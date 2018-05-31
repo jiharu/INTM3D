@@ -20,300 +20,328 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 
 <div style="display: none" id="sourcetext">
 
-# Cinematography
+# Maya Texturing
 ## Goal
+- Understanding the processes of UV texturing in Maya.
+- Understanding Maya's 3D Paint Tool along with Photoshop.
 
-- Understand and be able to create and control lighting & shadows, camera(s), and to render final images with a good aesthetic sense and fine control of artist's intention and goals. 
+Although the Hypershade window provides numerous ways to prepare materials, several important techniques outside this window are important to know. Preparing proper **UVs** for any model is a critical step in the texturing process. Using the **3D Paint tool** is an efficient way to prepare custom bitmaps. Maya's support for the **Photoshop PSD format** allows the use of layers. At the same time, the proper use of bump and displacement maps can add realism to a render. 
 
-------------
-# 1- , 2- , and 3-point lighting
-Reference: Maya® Studio Projects Texturing and Lighting, Lee Lanier, Sybex, 2011
-## 3-point lighting components
-
-![3pl00](img/maya/shading/lighting/threepointex.png)
-
-[Standard 3-point lighting applied to a mannequin, Image from Advanced Maya® Texturing and Lighting]
-
-**Key light**
-
-The most intense light in a scene. The key light's source is generally identifiable (the sun, a lamp, and so on). The key light usually produces the strongest shadow in the scene.
+___________________
 
 
-**Fill light**
+## UV mapping
+>UV stands for the horizontal (U) and vertical (V) coordinates of the 2D coordinate map space that is applied to a 3D object.
 
-A secondary light that is less intense than the key. This light "fills" in the dark areas of a subject and the shadows produced by the key. Fill lights often represent light from a key that has bounced off a surface, such as a wall.
+UVs are 2D representations of a 3D object. There can be a problem with wrapping a 2D image (a texture) around a 3D object. UV mapping helps with this problem: UVs are directly related to vertices on a polygon and NURBS, but the UVs cannot be manipulated in 3D space; they are tied to a 2D coordinate plane and edited in a **UV editor**.
 
+> UVs are like a “where” — they are a coordinate system across the surface of polygons (think latitude and longitude across a globe). 
+> Understanding what UVs are and being able to manipulate them is incredibly powerful and allows any image to define the surface of a 3D form. ***Unfortunately, this power to manipulate UV is not a trivial task and can be very counterintuitive.*** 
 
-**Rim/Back/Hair light**
+![tex_01](img/maya/UVMapping.png)  
 
-An intense light source placed behind a subject that strikes the subject along the edge. Rim lights are commonly known as backlights or hair lights.
+The application of a texture in the UV space related to its effect in 3D. CC BY-SA 3.0 [wikipedia](https://en.wikipedia.org/wiki/UV_mapping)
 
-![3pl03](img/maya/shading/lighting/ex.png)  	
-Image from Maya ® Professional Tips and Techniques.
+![tex_02](img/maya/Cube_Representative_UV_Unwrapping.png)
 
-## Using 3-points lighting
-#### 1-Point Lighting
-The 1-point lighting scheme is dramatic, sometimes stark, and often foreboding. The lighting involves a single, easily identifiable key light source, with no significant supplemental sources. 
-#### 2-Point Lighting	
-The 2-point lighting scheme matches many of the lighting scenarios we encounter in our everyday lives. The scheme often involves a strong key and an extremely diffuse fill.
-#### 3-Point Lighting
-The most commonly discussed and applied lighting technique is 3-point lighting. 
-In the standard 3-point lighting scheme, a strong key is placed to one side of a subject (approximately 15 to 45 degrees off the camera axis). A fill light is placed on the opposite side and is at least half the intensity of the key. A rim light is placed behind the subject so that it grazes the subject's edge.
-#### 4-point Lighting
-Four-point lighting simply adds a fourth light to illuminate the background or set behind the subject.
+A representation of the UV mapping of a cube. The flattened cube net may then be textured to texture the cube. CC BY-SA 3.0 [wikipedia](https://en.wikipedia.org/wiki/UV_mapping)
 
-![3pl01](img/maya/shading/lighting/threepoint.jpg) Image from Toth Edina's Blog.
+## Video
+- [The Basics Of UV Mapping by The Guerrilla CG Project](https://vimeo.com/5017993)  
+- [“On the Run” Creative Process - Part One by the Rusted Pixel](https://vimeo.com/120644464)  
 
-### More reference
-- [Rembrandt](http://en.wikipedia.org/wiki/Rembrandt)
-- [Caravaggio](http://en.wikipedia.org/wiki/Caravaggio)  
-- [MISE-EN-SCENE from College of Film & Media Studies Blog](http://collegefilmandmediastudies.com/mise-en-scene-2/) 
-- [Cinematographer Matthew Scott blog](http://mattscottvisuals.com/lighting/)
+________________________
 
-______________________________
+## Create UVs for polygon surfaces (Modeling // UV /)
+### Using different mapping methods and check the UV Texture Editor.
 
-## Light sources in Maya		
-Maya has a number of light sources that let you achieve a wide variety of lighting effects.
-By default, Maya scenes do not contain light sources. However, Maya’s default lighting helps you to visualize objects via Shaded display in the scene view (press 5). If you turn default lighting off and have no lights in the scene, the scene appears black (see Default lighting in Maya for more information). By controlling its intensity, color and direction, light becomes a key factor in creating a scene in Maya.
-With Maya, you have much more control over the placement, intensity, and characteristics of lights than you do with real-world lights. Shadows, specular highlights, diffuse, and glow all contribute to how light affects a scene.
+![uv01](img/maya/shading/texturing/uv.png)
 
-![light01](img/maya/shading/mayalight.png)
-![light02](img/maya/shading/lights.png)
+### Example of a 3D human model with the UV map.
 
+![uv01](img/maya/shading/texturing/uv01.png)
 
-## Spot light attribute editor
+(a) Planar, (b) cylindrical, (c) spherical, and (d) automatic mapping of a human model.
 
-![light04](img/maya/shading/spotlight.png)
+![uv02](img/maya/shading/texturing/uv02.png)
 
-### Spot light attributes  
-![test044](img/maya/shading/lighting/lightstructure.png)
+## UV texture map
 
-### Absorption, reflection, and refraction of light
+### A human head model with a uniform UV map and a nonuniform UV map.
 
-The color of the objects we see in the natural world is a result of the way objects interact with light. When a light wave strikes an object, it can be absorbed, reflected, or refracted by the object. All objects have a degree of reflection and absorption.
+![uv03](img/maya/shading/texturing/uv03.png)
 
-<!--![light05](img/maya/shading/lightwave.png)    
-[Image from TutorVista.com](http://physics.tutorvista.com/light.html)-->
+### Examples of UV texture mapping
+![3dp01](img/maya/shading/texturing/texs.png)
 
-![light06](img/maya/shading/diffuseplus.png)
-![light07](img/maya/shading/refractionplus.png)
+### The bumps and folds of a sculpture are roughed in with the 3D Paint tool
+![3dp](img/maya/shading/texturing/3dpaint.png)
 
-### Light decay 
+----------
+## UV Texture editor
+3D software uses u- and v-coordinates to determine how textures should be applied to 3D objects. **UV mapping** refers to the process of determining these coordinates for polygon objects. **UV layout** is a term that refers to the 2D configuration of the UVs on a surface. In the **UV Texture Editor**, u-coordinates are plotted along the horizontal axis, and v-coordinates are plotted along the vertical axis. **UV maps** act as a guide for the placement of images. 
 
-In the real world, a light’s brightness is strongest at the light source and decreases or decays further away from the light source. In Maya, a light’s brightness decays only if decay is turned on (see Decay Rate). The light’s color, however, remains the same no matter how far it is from the light source.
-
-![decay01](img/maya/shading/decay.png)
-
-You can also create decay effects not seen in the real world (only for a Spot light in Maya). For example, you can use a custom Intensity curve to make a spot light’s brightness increase further away from the light source, or you can use a custom Color curve to make the color of a spot light change with distance.
-
-![decay02](img/maya/shading/decay01.png)
+**NURBS surfaces have implicit UVs; this means that the coordinates are built into the parameterization of the surface. UV texture coordinates do not have to be created for NURBS surfaces; only polygon and subdivision surfaces require mapped UVs.**
 
 
-________________________________
-
-## Creating shadows
-- Define from light sources.
-![shadow01](img/maya/shading/shadow.png)
-
-## Controlling soft shadows
-![shadow](img/maya/shading/softshadow.png)    
-In the case of a depth map shadow: increase the filter size to gain soft shadow ([Autodesk knowledge network: Shadow attributes](https://knowledge.autodesk.com/support/maya-lt/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/MayaLT/files/GUID-5C4A0775-AF52-42D3-A8D5-299C723D871D-htm.html) ).  
-
-- Filter Size:  
-Controls the softness of shadow edges. (The softness of shadow edges is also influenced by the size of the shadow and the Resolution.) Increasing Filter Size also increases rendering times, so set it to the lowest value that produces acceptable results. A Filter Size of 3 or less is usually sufficient. The valid range is 0 to infinity. The slider range is 0 to 5. The default value is 1.
-
-In the case of a raytrace shadow (it is more computationally expensive): 
-
-- Shadow Radius, Light Radius, Light Angle  
-Controls the softness of shadow edges by setting the size (Shadow Radius or Light Radius) or angle (Light Angle) of the light. For example, a large light produces softer shadows than a small light. The light radius is also used for light glows to determine the occlusion/visibility (for point and spot lights).
-
-	The Shadow Radius attribute is only available for ambient lights.
-
-	The Light Radius attribute is only available for point lights and spot lights. The slider range is 0 (hard shadows) to 1 (soft shadows). The default value is 0.
-
-	The Light Angle attribute is only available for directional lights. The slider range is 0 (hard shadows) to 180 (soft shadows). The default value is 0.
-
-- Shadow Rays:  
-Controls the graininess of soft shadow edges. Increasing the number of Shadow Rays also increases rendering times, so set it to the lowest value that produces acceptable results. The slider range is 1 to 40. The default setting is 1.
-
-_______________________________
-
-## Post processing: depth of field
-Reference: Advanced Maya® Texturing and Lighting, Second Edition by Lee Lanier, 2008
-
-Depth of field is the range of distances that encompass objects that appear acceptably sharp. Due to the optical nature of real-world lenses and the physical qualities of the atmosphere, photography and videography rarely produce images that are 100 percent in focus. In contrast, 3D renders are always in perfect focus unless artificial depth of field is used. 
-
-You can activate Maya's depth of field by checking the Depth Of Field attribute in the Depth Of Field section of the camera's Attribute Editor tab.  
-
-![dof01](img/maya/rendering/dof01.png)  
-
-The F Stop attribute roughly approximates the f-stop of real-world cameras. F-stop is a number that represents the ratio between the diameter of the lens aperture and the focal length of the lens. F-stops are scaled by an approximate factor of 1.4 (for example, f/1.4, f/2, f/2.8, and so on). Each increased f-stop halves the open area of the aperture, halves the amount of light striking the film, and increases the depth of field. The f-stop isn't the only factor to influence depth of field, however. Depth of field is inversely proportional to the focal length of the lens and directly proportional to the distance from the camera to the subject.
- 
-![dof02](img/maya/rendering/dof02.png)  
-The Distance tool is used to determine the focus distance. Alternatively, you can turn on Display/Heads Up Display/Object Details to see the distance from the selected object to the camera.  
-   
-![dof03](img/maya/rendering/dof03.png)   
-An artificial depth of field is constructed by masking multiple copies of a render and applying different strength Gaussian blurs.
-
-![dof00](img/maya/rendering/dof.png)    
-Hardware DoF effect: [the depth of field effect in Viewport 2.0](http://help.autodesk.com/view/MAYAUL/2016/ENU/?guid=GUID-93DFCF2E-1B24-4C4C-89FD-4C4C202746ED)  
-
-	
-__________
-## Reference
+## Relavant references and tutorials:
 
 [Maya 2018 online Help](http://help.autodesk.com/view/MAYAUL/2018/ENU//)    
 
-- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)
-	- Digital Cinematography. p.69~73.  
-	- Rendering. p.75~79.  
-- Book: Advanced Maya® Texturing and Lighting, Second Edition. 
-- Book: Mastering Autodesk Maya 2016.
+- Art of Maya [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf)    
+- [Maya 2018 UV editor overview](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-73BF7546-3BF2-44F3-9192-15A024CEC173)  
+- [WHAT’S NEW WITH MAYA’S UV EDITING TOOLS by Steven Roselle, 13:27](http://lesterbanks.com/2017/08/watch-whats-new-mayas-uv-editing-tools/)  
+- [Maya Monday: The New UV Editor](https://www.toolfarm.com/blog/entry/maya_monday_the_new_uv_editor)   
+- [Layout UV shells](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-21CFF911-9C21-4019-B676-766ACA3BC889)  
+- [THE NEW UV EDITOR IN MAYA 2017 UPDATE 3](http://scythgames.com/blog/welcome-new-uv-editor-maya-2017-update-3-9/)   
+- [UV mapping tips](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-1CEF8A5B-1051-40F1-ACFE-F29AD066F56F) 
 
-## Inspiration
-- [Limbo](http://playdead.com/games/limbo/)
+## Maya bonus tool
+- Bonus Tools 2018 is a free collection of useful Maya scripts and plug-ins. After installing Bonus Tools, an additional pull-down menu will be added to the end of the main Maya menu. This new menu provides easy access to a variety of tools and utilities for daily use. 
+
+You can download it from Help / Maya Resources and Tools / Download Bonus Tools
+
+
 
 <!--
 
-# Review
-## What is Polygon modeling?  
-- [digital-tutors video (1:51).](https://www.youtube.com/watch?v=lAf1HbnVESs)
+## Maya standard shaders and Mental Ray materials
+The most often used standard shaders are Blinn, Lambert, Phong, Phong E, and Anisotropic. You can use any of these shaders when rendering with Maya and mental ray.
+
+![mm01](img/maya/shading/texturing/my.png)
+
+The below shaders will work only when rendering with mental ray.
+
+![mm02](img/maya/shading/texturing/mr.png) 
+
+## Bump, displacement map
+- [Bump And Displacement Map: Overview, up to 1:36](https://www.youtube.com/watch?v=1mdR2imNeZI) 
+- [To adjust the displacement value](http://animation-ua.com/en/school-animation/studying-3d-animation/165-control-displacement-maps-in-maya-displacement-mapping)  
+
+
+## Layered texture vs. Layered shader
+There are two ways to layer textures in Maya: using the Layered Shader with the texture compositing flag (see Layered shaders), or with the Layered Texture Node. Though the workflow for using the Layered Texture node is similar to the Layered Shader, using the Layered Texture node is recommended because you can set many blend modes.
+
+## Double-sided shaded surfaces
+Double-sided shading lets you shade a surface with one material on one side and a different material on the other side. This is the only way you can apply more than one material to a NURBS surface. You use both the Condition and Sampler info utility to create this effect. 
+
+- [Use a layered texture](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-45A50E53-E47A-44EB-8A66-9856A4AFDA17)  
+- [Layered texture](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-770E22B9-E32A-4E14-A4DC-23656D885AEE)  
+- [Display layered textures in the hardware renderer with multiple UV sets](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-05C5824B-59AF-44E7-A164-091A3B15DA26)  
+- [Create double-sided shaded surfaces](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-E4CA98D6-ACF8-4B97-BE9D-4E69A2275A37)
+
+![sc01](img/maya/shading/texturing/double.png)
+
+## Background surface
+**Shadow catching:** You can render out shadows separately from everything else. This is important in many cases, for example, if you want to blur shadows. In a composition you can soften, blur, brighten or change the color of shadows to match whatever it is they are composited against.
+
+[Use Background](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-64EE93F1-E7D6-40B9-BDB4-2EECFCB7AD37)
+
+___________________________________	
+
+## Cleanup option
+Performs various operations on the selection to identify and remove extraneous and invalid polygon geometry.
+
+- [Clean up, simplify, or validate meshes](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-0E2A7B88-E5B4-4B2A-96D0-C1BCBF6D3C27)  
+- [Cleanup Options](http://help.autodesk.com/view/MAYAUL/2016/ENU//?guid=GUID-AB60C982-C96E-4947-8CF3-5152406B6A40)
+
+![sc02](img/maya/shading/texturing/clean.png)
+![sc03](img/maya/shading/texturing/cleang.png)
+
+![sc04](img/maya/shading/texturing/nonmani.png)
+**Non-Manifold geometry** 
 -->
+
+--------------------------
+	
+## Inspiration
+The Blue Umbrella: a 2013 Pixar computer-animated short film that is directed by Saschka Unseld of Pixar's technical department. The short featured new techniques in photorealistic lighting, shading, and compositing.    
+- [saschka, Dreamer & director of pixar's the blue umbrella, Vimeo channel](https://vimeo.com/user3018211)  
+- Portraits Of The 21st Century: The Most Photorealistic 3D Renderings Of Human Beings [link](http://www.cgtrader.com/blog/portraits-of-the-21st-century-the-most-photorealistic-3d-renderings-of-human-beings)  
+- [Texture showreel: Claudio Gasparollo](https://vimeo.com/claudiogasparollo)  
+- [R&D Showreel: Jose Arcadio Buendia](https://vimeo.com/17501406)  
+- [Texture/LookDev/Generalist Artist, Valentina Rosselli](https://vimeo.com/117526785)  
+- [Dan Roarty - Show reel](http://www.danroarty.com/show-reel)  
+
+-----------------
 
 # Lab
 ## To do list
-- Lab practice A: Scene preparation  
-- Lab practice B: Practicing lighting & cameras
+- Team formation & mid-term announcement
+- Lab practice A: Creating UVs   
+- Lab practice B: Texturing a box; dice, cardboard box 
+- Lab practice C: 3D painting texture and using PSD network   
+- Lab practice D: 3D Cut and Sew UV Tool  
+- Lab practice E (optional): Eye texturing    
 
--------------------------------
-## Lab practice A: Scene preparation
+## Example textures
+- You can download textures from [here.](obj/textures.zip)
+___________________________ 
 
-### Example studio
+## Practice A: Creating & Selecting UVs
+- Planar UV mapping
+- Cylindrical UV mapping
+- Spherical UV mapping
+- Camera UV mapping
+- Automatic UV mapping 
+ 
+![3dpaint01](img/lab/uvproj.png)  
+![3dpaint01](img/lab/uvproj01.png)
+
+### Maya help
+- [UV projection](http://help.autodesk.com/view/MAYAUL/2018/ENU//index.html?guid=GUID-B7E73748-5F8E-4E66-BE88-DF3C2A3DF438)  
+- [Displaying and Selecting UVs](http://help.autodesk.com/view/MAYAUL/2018/ENU//index.html?guid=GUID-764C4EB5-7050-477B-B866-76FE86758E7D)  
+
+
+## Practice B: Texturing a dice
+### Goal
+- To manipulate UV texture coordinate in the UV texture editor to apply texture properly.
+- To edit a texture in Photoshop.
+
+![dice](img/maya/shading/texturing/dice.jpg) 
+
+![box](img/maya/shading/texturing/box.png)
+
+- How to:
+	- Create a box and apply a material.  
+	- From the color in the attribute editor of the material, open it and click the file node. And from the file node, you can link to the chosen texture.
+	- Push the hotkey '6' from the keyboard to see the texture in the work space. 
+	- Choose UV editing from under Workspace menu.
+	- You can navigate this window in the same way as the viewport, and choose UVs or Shells, and  transform them. (With the right button of your mouse, you can choose the object's UV components)  
+
+	![uv](img/maya/shading/texturing/uveditor.png)
 	
-![3pl02](img/maya/shading/lighting/studio.png)
+	- Let's select UV shells (RMB) and apply Cut from UV Toolkit. Now you can move the individual shell.   
+	- Now you can move, sew, and align UVs for the texture mapping.  
+	
+	![uv](img/maya/shading/texturing/uveditor01.png)
 
-## Lab practice A: Scene preparation
-1. create a pedestal (a box or a cylinder). 
-2. create a suface back-wall (Create Curve & Loft). 
-3. **import an object** (you can download them from [GettingStarted2015LessonData](https://knowledge.autodesk.com/support/maya/getting-started/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-advance-techniques-html.html) or here ([low resolution toad](obj/toad_low.obj) and [high resolution toad](obj/toad.obj)) ). ***obj file is good to use when you export and import your polygon object in Maya.***  
-4. lay them out in your studio environment as you like. 
+	- You can save a UV texture (UV Texture Editor // Image / UV Snapshot or Create PSD Network). Then you can open the texture in Photoshop and edit it. 
+
+	![dice01](img/maya/shading/texturing/dice_snap.png)
+
+________________________________
+	
+## Practice C: 3D painting texture 
+**Goal:** creating 3D painted textures.  
+**Command location:** Rendering // Texturing / 3D Paint Tool   
+
+- Let's create 'color' and 'bump' textures using a brush and/or paint effect. 
+
+![3dpaint02](img/maya/shading/texturing/3dpaint00.png)
+![3dpaint02](img/maya/shading/texturing/3dpaint01.png)
+![3dpaint03](img/maya/shading/texturing/3dpaint02.png)
+
+### Using PSD network
+1. Save UV texture (UV Editor // Image / UV Snapshot... )     
+2. Create PSD Nexwork... (UV Editor // Image / Create PSD Network...) and Update PSD Network...	
+
+________________________________
+	
+## Practice D: 3D Cut and Sew UV tool 
+**Goal:** controlling UVs in the viewport for more efficiency.  
+**Command location:** Modeling // UV / 3D Cut and Sew UV Tool   
+
+The 3D Cut and Sew UV Tool allows you to create or stitch seams on UV shells right in the viewport, instead of through the UV Editor. For more information on cutting and sewing edges, see [Separate and attach UVs](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-578193DB-7EE7-4C60-A26F-9187DF8614A3).
+
+![texturing](img/maya/shading/texturing/3dcut.png)
+
+### Related tutorial for practice D:
+- [WORKING WITH THE NEW 3D CUT AND SEW UV TOOL IN MAYA 2018	by Malcom Andrieshyn](http://lesterbanks.com/2017/09/working-new-3d-cut-sew-uv-tool-maya-2018/)  
 
 _______________________
 
->-	tip: 
-	1. using grid snap (key x)
-	2. modify center pivot (using grid snap and key d)
-	3. using Modify / Freeze Transformations to create new local center (see what happens to the transformation info) 
-	
->- Obj file
+## Lab practice E (optional): Eye texturing 
+### Using textures and a projection utility
 
->	1. Open 'Toad_hi_res.mb' file from [GettingStarted2015LessonData / UVmapping](https://knowledge.autodesk.com/support/maya/getting-started/caas/CloudHelp/cloudhelp/ENU/123112/files/maya-advance-techniques-html.html) folder
->	2. **Export** (File / Export Selection..) as [obj file](http://en.wikipedia.org/wiki/Wavefront_OBJ) (if you can't find obj file format, you can load objExport.bundle from Windows / Settings / Preferences / Plug-In Manager)
->	3. Save the obj file in the Data folder in your working Maya project folder.
-
-### Lighting practice tip
-#### Lighting by light attributes (using light Attribute Editor):
-- You can turn on or off *Illuminates by default*.
-- You can change the light Color to distinguish between different lights.
-- Position the key light using **Look Through Selected** from a view panel menu (Panels / Look Through Selected).
-
-![test03](img/maya/shading/lighting/test03.png) Changing colors.
-  
-![test04](img/maya/shading/lighting/test04.png) Look Through Selected.
-
-	
-### Creating your custom camera and render from it
-1. Create a camera with an aim (Create/Cameras/Camera and Aim). 
-2. To display objects, you can switch the camera from: (View panels: Panels / Perspective / or Panels / Orthographic /)  
-3. Adjust the position of the camera (View panels: Panels / Look through Selected)
-4. Move the camera and its aim separately. You can turn on snapping.
-5. Change the camera's attributes: (View panels: View / Camera Attribute Editor... or using the outliner window)	
-	- Angle of View, Near and Far clip, Film Gate..  
-6. From the Render View window, you can switch cameras (Render View: Render / Render / your custom camera)
-7. Render to check. 
-_____________________________
-		
-## Lab practice B: Practicing lighting & cameras
-### Creating lights and rendering
-1. Applying a key light and make a shadow and render to verify the result.
-	- Once you make any light, the default Maya light will be turned off.   
-	- You can start with spot light.  
-	- In the attribute editor, change **Cone Angle** and **Penumbra values** to see the effect.
-	- Turn on **Depth Map Shadows** (Resolution: 512, Filter Size: 4) to create a shadow in the same attribute editor. 
-	- Render a test view to check. 
-	 
-2. Applying a fill light.
-	
-3. Applying a back/rim light.   
-	
-4. Experimentation to create your own style to fulfill your aesthetics and goal/intention.
+![eye01](img/maya/shading/texturing/eye.jpg)
 
 
-#### Let's practice more!
-![test02](img/maya/shading/lighting/test02.png)
-![test01](img/maya/shading/lighting/test01.png)
-![test05](img/maya/shading/lighting/test05.png)
+- How to:	
+ 	![eye00](img/maya/shading/texturing/stensil00.png)
+	- Create a NURBS sphere add isoparms (using Insert isoparms) to the iris area. 
+	- Duplicate it and make a second one a little bit bigger. Put it into a layer.  
+	- Shape the first one using Hulls to make the inner curve tino a iris. 
+	- For a pupil, choose the pupil size isoparm and detach it. 
+	- Delete the detached patch and create another sphere and make it small to fit to the pupil area and assign surface shader. 
+	 	 
+ 	![eye02](img/maya/shading/texturing/stensil01.png)
+ 	- Assign a material from the color attribute, call the texture window and assign a projection utility.  
+ 	
+ 	![eye03](img/maya/shading/texturing/stensil02.png)
+ 	 - From the projection node, call the texture image from the image node and then do Interactive Placement + Fit to BBox.
+ 	- You will see the projection placement node from the work space which you can control.
+ 	
+ 	 ![eye04](img/maya/shading/texturing/stensil03.png)
+ 	 - Now you can change the material attributes to make right  for you. 
 
-### Light linking
+![eye01_01](img/maya/shading/texturing/eye.png)
 
-You can link lights with surfaces so that only a specific light (or group of lights) illuminates a specific surface (or group of surfaces), or, conversely, only a specific object (or group of objects) receive illumination from a specific light (or group of lights). Light linking can help you render scenes more efficiently and quickly.
+- Slight differences in the textures can change the result a lot. Therefore, please go ahead to work on textures in Photoshop.
 
-![linking](img/maya/shading/lighting/light00.png) 
-Where the light linking window is. 
+## Reference
+- [High-Quality Capture of Eyes](https://www.youtube.com/watch?v=v3X5OmHXa4c)  
+- [Realistic poligon eye modeling](http://www.3dtotal.com/tutorial/948-realistic-eye-modeling-for-3d-characters-maya-by-krishnamurti-martins-costa-pupil-iris-texture)
+- [Procedural Eye](http://toddpilger.blogspot.ca/2012/10/procedural-eye.html)  
+- [Pinterest: realistic eye](https://www.pinterest.com/pin/472244710905510215/)  
 
-![linking](img/maya/shading/lighting/light02.png) 
-View in the viewport. Check the blue back light. The ground has too much attention.
+--------------------------
 
-![linking](img/maya/shading/lighting/light01.png) 
-Final render image. The ground is unlinked from the blue back light.  
+<!--	
+## Tutorial
+- [Coke can texturing](http://www.3dm3.com/tutorials/can/)
+- [UVing and Texturing for the very first time in Maya 2016](https://www.youtube.com/watch?v=yOVwT-KfsYs)  
+- [Box UV Mapping with the UV Editor in Maya 2016, 10:23](https://www.youtube.com/watch?v=Brh1JRL9OoY)  
+- [Maya tutorial : Bump Map vs Displacement Map](https://www.youtube.com/watch?v=xpEUdGoyTGI)  
+## Advanced tutorial
+- [Maya 2016 tutorial : How to UV Map ( more ) complex objects](https://www.youtube.com/watch?v=IrxPfMquK_U) 
+- [UV MAPPING for a human body by James Taylor, 15:20](https://www.youtube.com/watch?v=HLhazEa8wmw) 
+## Practice E: Alternate UV texturing   
+### Blender UV texturing
+Related tutorial: 
+- [Modeling, UVmapping And Texturing A Low Poly T-Rex In Blender](http://cgi.tutsplus.com/tutorials/modeling-uvmapping-and-texturing-a-low-poly-t-rex-in-blender-part-2--cg-12861)  
+1. Using Blender version 2.68
+- Download and install.
+- to use Maya navigation interface:  
+	- In the Blender interface, open File/User interface
+	- Go to Input and set the preset to 'Maya', and the hotkey option to 'Maya', and save user settings.
+- Import .obj modeling data.
+- Choose the object and go to the edit mode (tab key). With edge mode, select the edge which will become UV seams later. (Shift + Alt + edge to choose continous edges)  
+- Ctrl + E to open the window and choose 'Mark Seam'
+- With face mode, select all faces and push U key to open UV texture window and 'Unwrap'. 
+- You can check the result to open the UV Editing window. 
+- If you like the result, export the obj for import into Maya. Now your object will have good UV textures.
+![blender](img/lab/uv.png)  
+- An UV unwrap example screenshot using the monkey primitive mesh.
+- You can download the obj data [here](obj/monkey.obj) from the right button of a mouse do as Save Link As.   
 
-### Depth of Field (DoF) rendering
 
-- Choosing Camera properties: (select Camera -> Attribute Editor)	
-	- Angle of View, Near and Far clip, Film Gate 	
-	    	
-	![sp03](img/maya/shading/camera.png)
-	
-- Measure the distance between main object to the camera (Create/Measure Tools/Distance Tool) or you can find the distance information from Display/Heads Up Display/Object Details.
-- Use this distance for the Focus Distance in the Attribute Editor of the camera
-	- Check the Depth of Field (select Camera -> Attribute Editor), change the Focus Distance and F Stop
 
-	![sp04](img/maya/shading/dof.png)
-			
-#### Using depth of field
-
-![dof01](img/maya/shading/dof_render.png)  
-![dof01](img/maya/shading/dof_render01.png)
-
-### Render the scene. Do basic render settings:
-- Choosing Rendering properties: (Window/Rendering Editors/Render Settings)
-- Choose Common settings
-	- File name, Image format, Choose camera, Choose Image Size
-	![sp01](img/maya/shading/render_common.png)
-	
-- Choose Specific settings -> Maya Software
-	- Quality, Anti-aliasing, Raytracing, Motion Blur
-	![sp02](img/maya/shading/render_maya.png)
-
-________________________
 ## Lab work to do
-- Practice your lighting set-up to control the overall contrast, visible details, and dramatic mood of your scene.  
-- Apply soft shadows.  
-- Experiment your scene by applying cinematography techniques.
-____________________________
+- Review & practice based on today's lecture & lab class material.  
+- You can start to work on project 2: shading on the project 1.
+
+
+<!--
+-->
 
 ## Assignment
-- Please upload final rendering images of your lighting practice applying DoF to Canvas an d Tumblr.    
-	- Perform two lighting tests using a studio set up focused on your chosen model (including geometry environment, camera, lighting & shadow set-ups). What kind of mood or emotion did you try to bring in? Write a simple description to describe your intension.
-
+- Please complete your UV mapping practices and upload screenshots of your results to Canvas. 
+	- Two images: 
+		- One dice or box UV texturing result.     
+		- One 3D paint texturing image.   
+		<!--- One UV texturing image of an organic object such as human or animal. You can use a sculpting base mesh model from Content Browser. Create a new UV and work on your new UV unwrapping.
+	
+- Please keep working on your mid-term group project.	
+	- You can find our mid-term schedule from the [attendance link](https://docs.google.com/spreadsheets/d/1VPL3abA7-uzQV2w0WQEGS01a1RxX789eK2WhvBePb9M/edit#gid=580480766) at the second tab.-->
+	
 ________________________
 # Action items
-- Web tutorial: [Lynda.com: Maya 2018 essential training](https://www.lynda.com/Maya-tutorials/Maya-lights-lighting-types/604210/644616-4.htmll)  
-	- Render in Maya.
-		- Maya lights and lighting types.  
-		- Understanding cameras.  
-		- Use the Light Editor.  
-		
+- Web tutorial: [Lynda.com: Maya 2018 essential training](https://www.lynda.com/Maya-tutorials/Apply-multiple-materials-objects/604210/644608-4.html)  
+	- Apply Materials and Textures.
+	
+- Art of Maya p. 75 ~ 79 [pdf link](http://web.cse.ohio-state.edu/~parent/classes/682/MAYA/art_of_maya.pdf) 		
+
 
 </div>
 <div id="wrapper">
@@ -332,8 +360,8 @@ ________________________
 				<a href="week04.html">4: Polygon modeling</a><br/>
 				<a href="week05.html">5: Shading</a><br/> 
 				<a href="week06.html">6: Rendering</a><br/>								
-				<a href="week07.html">7: Texturing</a><br/>  
-				<a href="week08.html">8: Cinematography</a><br/>
+				<a href="week07.html">7: Cinematography</a><br/>  
+				<a href="week08.html">8: Texturing</a><br/>
 				<a href="week09.html">9: Modeling techniques</a><br/>
 				<a href="week10.html">10: Animation I</a><br/>	
 				<a href="week11.html">11: Animation II</a><br/>	

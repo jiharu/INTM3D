@@ -19,13 +19,13 @@ A guide to markdown syntax is at http://daringfireball.net/projects/markdown/
 -->
 
 <div style="display: none" id="sourcetext">
-
+<!--
 # Arnold: Physically Based Renderer
 ## Goals
 - Understanding concepts of physically based approaches including Global Illumination (GI), and use of the Arnold renderer including its workflow, often for a more photorealistic scene.
 
 ________________________
-<!---->
+
 ## Indirect (global) illumination
 
 In reality, when a ray of light hits an opaque surface, it is **either absorbed or reflected (or a little of both) by the surface**. If the light ray is reflected, it reenters the environment and continues to bounce off reflected surfaces until it is absorbed by another surface. Bounced light rays are **indirect illumination**.
@@ -47,20 +47,7 @@ For example, a bright red apple on a pure white table cloth ‘spills’ red ont
 
 ![gl06](img/maya/rendering/gl/colorbleed.png) 
 
-
 # Review
-## Comparison between direct (local) and indirect (global) illumination
-
-![glw01](img/maya/rendering/gl/Local_illumination.JPG)     
-
-- Rendering with local illumination (with raytracing). Areas that lie outside of the ceiling lamp's direct light lack definition. For example, the lamp's housing appears completely uniform. Without the ambient light added into the render, it would appear uniformly black.    
-
-![glw00](img/maya/rendering/gl/Global_illumination.JPG)    
-
-- Rendering with global illumination. Light is reflected by surfaces, and colored light transfers from one surface to another. Notice how color from the red wall and green wall (not visible) reflects onto other surfaces in the scene. Also notable is the caustic projected onto the red wall from light passing through the glass sphere.       
-
-The above examples are described in more detail here: [Global Illumination from wikipedia](http://en.wikipedia.org/wiki/Global_illumination)
-
 ## Physically Based Rendering
 
 Physically based techniques attempt to simulate reality by using principles of physics to model the interaction of light and matter. Rendered scenes are based on physically accurate lights, materials, and light transport (i.e., Global Illumination). 
@@ -99,22 +86,7 @@ The **Arnold Standard Surface** shader is a physically-based shader capable of p
 Three spheres II, M.C.Escher, lithograph, 1946. 
 
 - [link 1](http://www.butchgraphics.com/3d/3Spheres.html),    
-- [link 2](http://www.hdrlabs.com/cgi-bin/forum/YaBB.pl?num=1264525246). 
-
-__________________
-
-## Cornell Box
-
-**The Cornell box** is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box)
-
-![cl01](img/maya/shading/cornell.png) 
-<!--
-- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)-->
-- [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
-<!--- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  -->
-
-### Different Cornell box render images:
-![goal](img/maya/shading/raytr.png)
+- [link 2](http://www.hdrlabs.com/cgi-bin/forum/YaBB.pl?num=1264525246). 	
 
 _________________________________
 
@@ -158,7 +130,9 @@ The IES (Illumination Engineering Society) standard format file stores informati
 	
 _________________________
 
-# Lab: Rendering using Arnold
+-->
+	
+# Rendering using Arnold
 ## Practice A: Three sphere and Image Based Rendering using HDRI 
 ### Glass material
 
@@ -177,7 +151,32 @@ _________________________
 ![arnold](img/maya/rendering/arnold/threeSphere.png)	  
 HDRI image from sIBL Archive. H Ji.
 
-## Practice B: Cornell box and global illumination
+# Cornell Box
+
+**The Cornell box** is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box)
+
+![cl01](img/maya/shading/cornell.png) 
+<!--
+- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)-->
+- [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
+<!--- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  -->
+
+### Different Cornell box render images:
+![goal](img/maya/shading/raytr.png)
+	
+## Comparison between direct (local) and indirect (global) illumination
+
+![glw01](img/maya/rendering/gl/Local_illumination.JPG)     
+
+- Rendering with local illumination (with raytracing). Areas that lie outside of the ceiling lamp's direct light lack definition. For example, the lamp's housing appears completely uniform. Without the ambient light added into the render, it would appear uniformly black.    
+
+![glw00](img/maya/rendering/gl/Global_illumination.JPG)    
+
+- Rendering with global illumination. Light is reflected by surfaces, and colored light transfers from one surface to another. Notice how color from the red wall and green wall (not visible) reflects onto other surfaces in the scene. Also notable is the caustic projected onto the red wall from light passing through the glass sphere.       
+
+The above examples are described in more detail here: [Global Illumination from wikipedia](http://en.wikipedia.org/wiki/Global_illumination)
+	
+## Practice B: Cornell box and global illumination	
 ### Scene preparation
 - Modeling: Make a camera and a box for a room. Create a ball and a cylinder. Properly transform them to have the Cornell box setup.  
 - Shading: Apply AiStandardSurface to the faces of the box (room) respectively (especially at the side walls, apply strong contrasting color such as red/blue, red/green, orange/green or such. You can start from the Rubber preset. Apply AiStandardSurface materials to other objects and make one with a glassy look.    

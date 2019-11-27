@@ -131,35 +131,82 @@ The IES (Illumination Engineering Society) standard format file stores informati
 _________________________
 
 -->
+# Review
+## Batch rendering
+A batch file is a set of commands given to the computer to do, one after another. Using batch files, you can queue several rendering tasks at the same time, so that once one is finished, the next begins. Batch rendering often occurs as a different thread or process, as if it were a different program running in the background, so Maya allows you to keep working while the batch is rendering.
+
+Note that if you want to use Arnold batch rendering without watermarks in Maya, you need to purchase an Arnold license. Or alternatively you can render **a sequence in Maya with the Render > Render Sequence command in the Render setting window**; however you will not be able to use Maya while it is rendering.
+
+## Camera Animation
+
+![camera](img/lab/camera.jpg)
+
+- A simple camera setting for camera animation.
+
+# Smoothing Polygon surfaces
+- [Autodesk: Smoothing polygons](http://help.autodesk.com/view/MAYAUL/2018/ENU/?guid=GUID-8A5D0FF0-9BA1-435F-A4CA-53183311B819) 
+	- Smooth a mesh by adding new polygons
+	- Smooth mesh
+	- Subdiv proxy
+	- Smooth a mesh by averaging the distance between vertices
+	- Subdivision surface
+ 
+- Other than these methods, to see a smooth version of a model, you can soften the normals  too (Modeling // Mesh Display / Soften Edge).
+
+## Subdivision surface
+
+A subdivision surface lets you subdivide specific regions of a mesh, giving you the ability to finely tune or smooth certain areas without changing the entire mesh.
+
+Subdivision surfaces help you keep a lower polygon count because they only insert control points where you need them (instead of uniformly across the entire mesh). However, subdivision surfaces have the slowest performance of the three smoothing methods. 
+<!--
+Note: Subdivision surfaces are largely unsupported in pipelines outside of Maya, so you need to convert them to polygons or NURBS before exporting to these pipelines. You can convert using either Modify > Convert Subdiv to Polygons or Modify > Convert Subdiv to NURBS.
+For more information on subdivision surfaces, see the [Subdivision Surfaces documentation archive](http://download.autodesk.com/us/support/files/subds.pdf).-->
+
+### OpenSubdiv 
+OpenSubdiv is an open-source subdivision method developed by Pixar that lets you work with a high-fidelity representation of your model with great accuracy and speed. As a professional standard in the animation industry, OpenSubdiv is implemented in a variety of software packages, improving interoperability by producing the same results when models are transferred between applications. In Maya, OpenSubdiv is the default subdivision method when you preview a smoothed mesh, smooth a mesh using Mesh > Smooth, or create a subdiv proxy.
+
+![subproxy](img/maya/rendering/subproxi.png)
+
+- Check to make a layer for the subdiv proxy. 
+
+## Maya subdivision tutorial   
+- [Maya Subdivision Surfaces](https://www.youtube.com/watch?v=LpyJv8hhW_o&index=1&list=PL4fkBUcbgjGXSR7PUnjBuOSO3sDcLRF2F)  
+- [Intro to Maya and 3D Modeling - Lecture B: 5/13 - Subdivision and the Rule of 3](https://www.youtube.com/watch?v=70e-3bidL-w)
+
 	
 # Rendering using Arnold
-## Practice A: Three sphere and Image Based Rendering using HDRI 
-### Glass material
+## Practice: Three spheres and using HDRI or PhysicalSky
 
 ![glass01](img/maya/shading/teapotGlass.png)
 
 ### Scene preparation
-- Modeling: Creating three spheres and one plane - check sphere tessellation to obtain smooth curvature.   
-- Shading: Apply AiStandardSurface to each ball. From its attributes, start from Presets: Glass preset for two balls, Rubber preset for one ball and tweak them. For the glass, turn off Opaque from its geometry. [Arnold manual: Transmission](https://support.solidangle.com/display/A5AFMUG/Transmission)  
+- Modeling: Creating three spheres and one plane or box. <!--- check sphere tessellation to obtain smooth curvature.   -->
+- Shading: Apply AiStandardSurface to each ball. From its attributes, start from Presets: Glass preset for one ball, Chrome preset for another ball, and Rubber preset for one ball and tweak them. For the glass's transparency, change the weight value for its transmission attribute. [Arnold manual: Transmission](https://support.solidangle.com/display/A5AFMUG/Transmission)  
+
 - Rendering: In the Rendering setup, open Arnold/ArnoldRenderView. Run Render/Run IPR(Interactive Photorealistic Rendering).    
-- Lighting: Creating Arnold SkyDome Light. Arnold creates a sphere geometry as a SkyDome.
-	- From its color tab, link to a HDRI image you chose using the File utility. To obtain HDRI; [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html) 
-	- You can transform the SkyDome sphere to find the best background as well as light conditions.  
-	- You can change variable attributes (intensity for brightness, samples for smooth shadow, visibility for overall lighting effect) to find the best result.  
+
+- Lighting: Creating Arnold SkyDome Light or PhysicalSky Light. Arnold creates a sphere geometry as a SkyDome.
+	- If it is SkyDome Light, from its color tab, link to a HDRI image you chose using the File utility. 
+		- To obtain HDRI; [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html)  
+		- You can transform the SkyDome sphere to find the best background as well as light conditions.  
+		- You can change variable attributes (intensity for brightness, samples for smooth shadow, visibility for overall lighting effect) to find the best result.  
+	- If it is PhysicalSly light, you can tweak its aiPhysicalSky attributes.
+	
 - Render Setting: Balance render quality & computational time at Arnold Renderer/Sampling, and control ray depth. [Arnold manual: Samples](https://support.solidangle.com/display/AFMUG/Samples), [Arnold manual: Ray Depth](https://support.solidangle.com/display/AFMUG/Ray+Depth)  
 
 ![arnold](img/maya/rendering/arnold/threeSphere.png)	  
 HDRI image from sIBL Archive. H Ji.
 
+<!--
 # Cornell Box
 
 **The Cornell box** is a test aimed at determining the accuracy of rendering software by comparing the rendered scene with an actual photograph of the same scene, and has become a commonly used 3D test model. [-wikipedia](http://en.wikipedia.org/wiki/Cornell_Box)
 
 ![cl01](img/maya/shading/cornell.png) 
-<!--
-- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)-->
+
+- [Link: Cornell box in many different variations.](http://graphics.ucsd.edu/~henrik/images/cbox.html)
 - [Cornell Box Comparison](http://www.graphics.cornell.edu/online/box/compare.html)
-<!--- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/)  -->
+- [Cornell Box Physical Model by Richard Rosenman](http://richardrosenman.com/portfolio-items/cornell-box-physical-model/) 
 
 ### Different Cornell box render images:
 ![goal](img/maya/shading/raytr.png)
@@ -193,7 +240,12 @@ Arnold rendering. H Ji.
 ![gl00](img/maya/rendering/gl/gl.png)  
 ![gl04](img/maya/rendering/gl/fg.png)   
 
+
 ____________________________________
+
+-->
+	
+
 # Advance topic
 ## Ambient occlusion 
 
@@ -285,7 +337,7 @@ aiWireFrame + aiStandardSurface (Jade preset)
 
 - [Arnold manual: mix shader](https://support.solidangle.com/display/A5AFMUG/Mix+Shader)  
 - [Arnold manual: AOVs](https://support.solidangle.com/display/A5AFMUG/AOVs)  
-
+<!--
 ### AOVs
 
 AOVs (Arbitrary Output Variables) provide a way to render any arbitrary shading network component into different images. For example, an artist might find it convenient to separate direct and indirect lighting contributions and later recombine them during compositing. Arnold provides built-in AOVs for outputting depth, position, and motion vectors.   
@@ -293,6 +345,8 @@ AOVs (Arbitrary Output Variables) provide a way to render any arbitrary shading 
  ![aovs](https://support.solidangle.com/download/attachments/65111838/image2017-9-19%2012%3A23%3A32.png?version=1&modificationDate=1505816612000&api=v2)  
  
 - [Arnold manual: Light Path Expression AOVs](https://support.solidangle.com/display/A5ARP/Light+Path+Expression+AOVs)    
+
+
 
 ## Advanced topic: render layers and passes  
 
@@ -314,7 +368,7 @@ With **render layers**, you can assign any object to multiple layers with a diff
 Final realistic render image:
 
 ![ex01](img/maya/rendering/GUID-59AF3E15-AFFB-4ABE-BDCC-EED3B16B0B2F-low.png)
-
+-->
 _________________________
 # Visual effects
 
@@ -631,10 +685,10 @@ href="https://www.lynda.com/SharedPlaylist/26abee798b454bd48a61d5b40c66c919?org=
 				<a href="week06.html">6: Rendering</a><br/>								
 				<a href="week07.html">7: Cinematography</a><br/>  
 				<a href="week08.html">8: Texturing</a><br/>
-				<a href="week09.html">9: Modeling techniques</a><br/>
-				<a href="week10.html">10: Animation I</a><br/>	
-				<a href="week11.html">11: Animation II</a><br/>	
-				<a href="week12.html">12: Physically Based Renderer</a><br/>
+				<a href="week10.html">9: Animation I</a><br/>	
+				<a href="week11.html">10: Animation II</a><br/>
+				<a href="week12.html">11: Review & more</a><br/>
+                <!--<a href="week09.html">9: Modeling techniques</a><br/>-->
 	
 	</div>
 	<div class="section">
